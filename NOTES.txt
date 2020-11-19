@@ -1,0 +1,12 @@
+Components: 
+
+App
+    Restaurants (List Container)
+        Restaurant (List Item) 
+            Fav
+            Rating
+            Nav
+                Overview
+                Nearby
+                Reviews
+    Search 
