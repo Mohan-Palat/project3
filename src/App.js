@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Search from './Search';
+import { getAllRestaurantsByCity } from './api.js';
 
 class App extends Component {
   constructor(props) {
@@ -19,8 +20,12 @@ class App extends Component {
     );
   }
 
-  handleSearchCriteria = (searchValue) => {
+  handleSearchCriteria = async (searchValue) => {
     console.log('Search value in App.js', searchValue);
+
+    const results = await getAllRestaurantsByCity(searchValue);
+
+    console.log(results);
   }
 
 }
