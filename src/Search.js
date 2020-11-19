@@ -36,7 +36,7 @@ class Search extends Component {
         event.preventDefault();
         console.log('searchCity', event.target.value);
 
-        this.props.handleSearchCriteria(this.state.searchValue);
+        this.props.handleCitySearchCriteria(this.state.searchValue);
     }
 }
 

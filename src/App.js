@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import Search from './Search';
-import { getAllRestaurantsByCity } from './api.js';
+import RestaurantList from './RestaurantList';
+import { getCityID } from './api.js';
 
 class App extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      cityID: '',
+      cityName: '',
     }
   }
 
@@ -14,16 +17,24 @@ class App extends Component {
     return (
       <div>
         <h1>Easy Pickins</h1>
-        <Search handleSearchCriteria={this.handleSearchCriteria}/>
-
+        <h2>{this.state.cityName}</h2>
+        <Search handleCitySearchCriteria={this.handleCitySearchCriteria}/>
+        <RestaurantList cityID={this.state.cityID} cityName={this.state.cityName}/>
       </div>
     );
   }
 
-  handleSearchCriteria = async (searchValue) => {
+  handleCitySearchCriteria = async (searchValue) => {
     console.log('Search value in App.js', searchValue);
 
-    const results = await getAllRestaurantsByCity(searchValue);
+    const results = await getCityID(searchValue);
+    
+    console.log(results.data.location_suggestions[0].id);
+
+    this.setState({
+      cityID: results.data.location_suggestions[0].id,
+      cityName: results.data.location_suggestions[0].name,
+    });
 
     console.log(results);
   }
