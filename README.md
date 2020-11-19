@@ -4,26 +4,26 @@
 
 ## MVP
 
-As a user, I should be able to enter a city and receive a listing of restaurants that are in that city
-As a user, I should be able get a list of cuisines by city
-As a user, I should be able to view the rating in the list of results
-As a user I should be able to view the menu for the restaurant via a link
-As a user I should be presented with a link to the restaurant I am interested in
-As a user, I can get a random restaurant from the application
-As a user, I should be able to search by city and category
-As a user, I should be able to get the restaurant phone number
-As a user, I should be able to navigate between an overview, nearby restaurants and reviews of te selected restaurant 
-As a user, I should be able to favorite restaurants
+* As a user, I should be able to enter a city and receive a listing of restaurants that are in that city
+* As a user, I should be able get a list of cuisines by city
+* As a user, I should be able to view the rating in the list of results
+* As a user I should be able to view the menu for the restaurant via a link
+* As a user I should be presented with a link to the restaurant I am interested in
+* As a user, I can get a random restaurant from the application
+* As a user, I should be able to search by city and category
+* As a user, I should be able to get the restaurant phone number
+* As a user, I should be able to navigate between an overview, nearby restaurants and reviews of te selected restaurant 
+* As a user, I should be able to favorite restaurants
 
 ## Stretch Goals
 
-AS a user, I should be able to select my city from a validated drop down 
-As a user, I should be able to connect to GoogleMaps to get directions to a restaurant
-As a user, I should be presented with any available collections that are available for the city I have searched for
-As a user, I should be able to reload and not lose my favorites 
-As a user, I should experience portfolio-quality styling
-As a user, my location should be used to begin giving reccommendations 
-As a user, I should be able to connect through Uber for a ride share 
+* As a user, I should be able to select my city from a validated drop down 
+* As a user, I should be able to connect to GoogleMaps to get directions to a restaurant
+* As a user, I should be presented with any available collections that are available for the city I have searched for
+* As a user, I should be able to reload and not lose my favorites 
+* As a user, I should experience portfolio-quality styling
+* As a user, my location should be used to begin giving reccommendations 
+* As a user, I should be able to connect through Uber for a ride share 
 
 # Getting Started with Create React App
 
