@@ -6,7 +6,6 @@ class Search extends Component {
     
         this.state = {
           searchValue : '',
-
         }
       }
 
@@ -19,8 +18,6 @@ class Search extends Component {
     }
     setRandom = (event) => {
         event.preventDefault();
-        console.log('props', this.props)
-
         this.props.handleCitySearchCriteria(this.state.searchValue, true);
     }
     searchCity = (event) => {

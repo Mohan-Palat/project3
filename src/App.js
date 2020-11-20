@@ -15,11 +15,11 @@ class App extends Component {
   }
   randRestaurant = (restrauntArr) => {
     return restrauntArr[Math.floor(Math.random() * restrauntArr.length)]
-
   }
+
   handleCitySearchCriteria = async (searchValue, isRandom) => {
     console.log('Search value in App.js', searchValue);
-    console.log('isRandom value in App.js', isRandom);
+    // console.log('isRandom value in App.js', isRandom);
     const results = await getCityID(searchValue);
     
     console.log(results.data.location_suggestions[0].id);
