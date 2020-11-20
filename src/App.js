@@ -14,12 +14,20 @@ class App extends Component {
   }
 
   render() {
+    let restaurantComponent = '';
+    if (this.state.cityID != '') {
+      restaurantComponent = <RestaurantList cityID={this.state.cityID} cityName={this.state.cityName}/>
+    }
+    else {
+      restaurantComponent = <h3>No Restaurants Listed</h3>
+    }
+    
     return (
       <div>
         <h1>Easy Pickins</h1>
         <h2>{this.state.cityName}</h2>
         <Search handleCitySearchCriteria={this.handleCitySearchCriteria}/>
-        <RestaurantList cityID={this.state.cityID} cityName={this.state.cityName}/>
+        {restaurantComponent}
       </div>
     );
   }
