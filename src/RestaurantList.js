@@ -6,25 +6,15 @@ class RestaurantList extends Component {
     constructor(props) {
         super(props);
     
-        this.state = {
-          restaurantList : [],
-        }
+        // this.state = {
+        //   restaurantList : [],
+        // }
       }
 
-    componentDidMount() {
-        this.handleRestaurantSearchCriteria(this.props.cityID)
-            .then(() => {
-                console.log('restaurantList', this.state.restaurantList);
-            })
-            .catch((error) => {
-                console.log('API ERROR:', error);
-            });
-    };
-
     render() {
-        const restaurantList = this.state.restaurantList;
+        console.log("RestaurantList render this.props", this.props);
 
-        const allRestaurants = restaurantList.map((entry, index) => {
+        const allRestaurants = this.props.restaurantList.map((entry, index) => {
             console.log(index, entry.restaurant.name);
             return <RestaurantItem key={index} restaurant={entry.restaurant} />
         });
@@ -34,19 +24,6 @@ class RestaurantList extends Component {
                 {allRestaurants}
             </ul>
         );
-    }
-
-    handleRestaurantSearchCriteria = async (event) => {
-        console.log('Search value in Restaurant.js', this.props.cityID);
-
-        const results = await getRestaurantsByCityID(this.props.cityID);
-    
-        console.log("results", results);
-        // console.log("results.data.restaurants", results.data.restaurants);
-
-        this.setState({
-            restaurantList: results.data.restaurants,
-        });
     }
 }
 
