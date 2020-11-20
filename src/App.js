@@ -13,10 +13,13 @@ class App extends Component {
       restaurantList: [],
     }
   }
+  randRestaurant = (restrauntArr) => {
+    return restrauntArr[Math.floor(Math.random() * restrauntArr.length)]
 
-  handleCitySearchCriteria = async (searchValue) => {
+  }
+  handleCitySearchCriteria = async (searchValue, isRandom) => {
     console.log('Search value in App.js', searchValue);
-
+    console.log('isRandom value in App.js', isRandom);
     const results = await getCityID(searchValue);
     
     console.log(results.data.location_suggestions[0].id);
@@ -27,6 +30,7 @@ class App extends Component {
       cityID: results.data.location_suggestions[0].id,
       cityName: results.data.location_suggestions[0].name,
       restaurantList: restaurantResults.data.restaurants,
+      isRandom: isRandom
     });
 
     console.log(results);
@@ -36,10 +40,16 @@ class App extends Component {
   render() {
     console.log("App.js render");
     console.log("this.state", this.state);
+    console.log("App.js props", this.props);
 
     let restaurantComponent = '';
-    if (this.state.cityID != '') {
-      restaurantComponent = <RestaurantList restaurantList={this.state.restaurantList} cityID={this.state.cityID} cityName={this.state.cityName}/>
+    if (this.state.cityID !== '') {
+      if (this.state.isRandom) {
+        console.log('this.randRestaurant(this.state.restaurantList)', this.randRestaurant(this.state.restaurantList))
+        // restaurantComponent = <RestaurantDetails restaurantList={this.randRestaurant(this.state.restaurantList)} cityID={this.state.cityID} cityName={this.state.cityName} />
+      } else {
+        restaurantComponent = <RestaurantList restaurantList={this.state.restaurantList} cityID={this.state.cityID} cityName={this.state.cityName} />
+      }
     }
     else {
       restaurantComponent = <h3>No Restaurants Listed</h3>

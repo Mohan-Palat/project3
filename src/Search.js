@@ -6,6 +6,7 @@ class Search extends Component {
     
         this.state = {
           searchValue : '',
+
         }
       }
 
@@ -16,17 +17,24 @@ class Search extends Component {
             searchValue: event.target.value,
         });
     }
+    setRandom = (event) => {
+        event.preventDefault();
+        console.log('props', this.props)
 
+        this.props.handleCitySearchCriteria(this.state.searchValue, true);
+    }
     searchCity = (event) => {
         event.preventDefault();
         console.log('searchCity', event.target.value);
 
-        this.props.handleCitySearchCriteria(this.state.searchValue);
+        this.props.handleCitySearchCriteria(this.state.searchValue, false);
 
         this.setState({
             searchValue: '',
-        });
+        }); 
     }
+
+
 
     render() {
         return (
@@ -38,6 +46,7 @@ class Search extends Component {
                         onChange = {this.onTextBoxChange}
                     />
                     <button onClick={this.searchCity}>Search</button>
+                    <button onClick={this.setRandom}>I'm Feeling Lucky</button>
                 </form>
             </div>
         );
