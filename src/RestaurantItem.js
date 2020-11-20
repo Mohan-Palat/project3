@@ -1,18 +1,14 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class RestaurantItem extends Component {
-    render() {
+export default function RestaurantItem (props) {
         return (
             <div>
                 <li>
-                    <div>{this.props.restaurant.name}</div>
-                    <div>{this.props.restaurant.user_rating.aggregate_rating}</div>
-                    <div>{this.props.restaurant.user_rating.rating_text}</div>
+                    <div>{props.restaurant.name}</div>
+                    <div>{props.restaurant.user_rating.aggregate_rating}</div>
+                    <div>{props.restaurant.user_rating.rating_text}</div>
                 </li>
                 <br></br>
             </div>
         );
-    }
 }
-
-export default RestaurantItem;

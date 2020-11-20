@@ -9,21 +9,6 @@ class Search extends Component {
         }
       }
 
-    render() {
-        return (
-            <div>
-                <form>
-                    <input type = "text"
-                        value = {this.state.searchValue}
-                        placeholder = "Enter City:"
-                        onChange = {this.onTextBoxChange}
-                    />
-                    <button onClick={this.searchCity}>Search</button>
-                </form>
-            </div>
-        );
-    }
-
     onTextBoxChange = (event) => {
         console.log('onTextBoxChange', event.target.value);
 
@@ -37,6 +22,25 @@ class Search extends Component {
         console.log('searchCity', event.target.value);
 
         this.props.handleCitySearchCriteria(this.state.searchValue);
+
+        this.setState({
+            searchValue: '',
+        });
+    }
+
+    render() {
+        return (
+            <div>
+                <form>
+                    <input type = "text"
+                        value = {this.state.searchValue}
+                        placeholder = "Enter City:"
+                        onChange = {this.onTextBoxChange}
+                    />
+                    <button onClick={this.searchCity}>Search</button>
+                </form>
+            </div>
+        );
     }
 }
 
