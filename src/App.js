@@ -13,6 +13,7 @@ class App extends Component {
     }
   }
 
+  
   render() {
     let restaurantComponent = '';
     if (this.state.cityID != '') {
