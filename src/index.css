@@ -37,3 +37,23 @@ span {
   background: rgb(226,218,64);
   background: linear-gradient(90deg, rgba(226,218,64,1) 0%, rgba(255,230,195,1) 100%, rgba(231,96,96,0.6755077030812324) 100%);
 }
+
+.Excellent {
+  color: #3F7E00
+}
+
+.VeryGood {
+  color: #5BA829
+}
+
+.Good {
+  color: #5BA829
+}
+
+.Average {
+  color: #FFBA00
+}
+
+.Poor {
+  color: #FF7800
+}

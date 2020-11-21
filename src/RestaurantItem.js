@@ -12,10 +12,26 @@ class RestaurantItem extends Component {
         const searchRestaurantDetails = (e) =>{
             e.preventDefault()
             const restaurantID = this.props.restaurant.id
-
             console.log(restaurantID);
             
-            this.props.handleRestaurantSearch(this.props.restaurant.id)
+            this.props.handleRestaurantSearch(this.props.restaurant.id);
+
+            let rating = '';
+            if (this.props.restaurant.user_rating.rating_text == 'Excellent') {
+                rating = 'Excellent';
+            }
+            else if (this.props.restaurant.user_rating.rating_text == 'Very Good') {
+                rating = 'VeryGood';
+            }
+            else if (this.props.restaurant.user_rating.rating_text == 'Good') {
+                rating = 'Good';
+            }
+            else if (this.props.restaurant.user_rating.rating_text == 'Average') {
+                rating = 'Average';
+            }
+            else if (this.props.restaurant.user_rating.rating_text == 'Poor') {
+                rating = 'Poor';
+            }
 
     }
         return (
