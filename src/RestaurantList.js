@@ -5,10 +5,6 @@ import RestaurantItem from './RestaurantItem.js';
 class RestaurantList extends Component {
     constructor(props) {
         super(props);
-    
-        // this.state = {
-        //   restaurantList : [],
-        // }
       }
 
     render() {
