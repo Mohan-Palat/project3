@@ -82,14 +82,14 @@ class Search extends Component {
         return (
             <div>
 
-                <div class="row">
+                <div class="row search">
                     <div class="col s12 m6">
-                        <div class="card yellow lighten-1">
+                        <div class="card search">
                             <div class="card-content black-text">
                                 <form>
                                     <input type = "text"
                                         value = {this.state.searchValue}
-                                        placeholder = "Enter City:"
+                                        placeholder = "Enter City to Search Restaurants:"
                                         onChange = {this.onTextBoxChange}
                                     />
                                 </form>
@@ -105,7 +105,7 @@ class Search extends Component {
                 <br></br>
 
                 <div class="row s24 m12">
-                    <div class="col s12 m6">
+                    <div class="col s12 m6 categories">
                         <div class="card yellow lighten-1">
                             <div class="card-content black-text">
                                 {allCategories}

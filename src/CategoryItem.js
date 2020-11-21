@@ -8,7 +8,6 @@ export default function CategoryItem (props) {
                     <input type="checkbox" onClick={props.handleCategoryResultList} name={props.category.name} id={props.category.id} value={props.category.id} />
                     <span>{props.category.name}</span>
                 </label>
-                <br/>
             </>
         );
 }
