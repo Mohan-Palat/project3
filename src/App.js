@@ -148,8 +148,8 @@ class App extends Component {
     return (
       <>
       <div class="header">
-        <h1>Easy Pickins</h1>
-        <h2>{this.state.cityName}</h2>
+        <h1 className='site-header'>Easy Pickin's</h1>
+        <h3 className="subheader">Picking a restaurant, just got easy</h3>
          <Search handleCitySearchCriteria={this.handleCitySearchCriteria} handleCategorySearch={this.handleCategorySearch} 
           categoryList={this.state.categoryList} handleCategoryResultList={this.handleCategoryResultList}/>
         
@@ -162,5 +162,6 @@ class App extends Component {
   }
 
 }
+
 
 export default App;
