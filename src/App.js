@@ -49,7 +49,7 @@ class App extends Component {
 
     this.setState({
       restaurantID: restaurantID,
-      restaurantBody: results.data.id,
+      restaurantBody: results.data,
       restaurantName: results.data.name,
     });
 
@@ -155,7 +155,7 @@ class App extends Component {
         
       </div>
       <h3>{this.state.cityName}</h3>
-      <RestaurantDetail name={this.state.restaurantName}/> 
+      {(this.state.restaurantBody != null)?<RestaurantDetail name={this.state.restaurantName} restaurant={this.state.restaurantBody}/>:<h3></h3>}
       {restaurantComponent}
       </>
     );

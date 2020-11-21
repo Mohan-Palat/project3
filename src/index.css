@@ -25,6 +25,15 @@ h1, h2 {
   color: white;
 }
 
+.Detail-Header {
+  color: black;
+}
+
 span {
   color: black;
+}
+
+.btn-large {
+  background: rgb(226,218,64);
+  background: linear-gradient(90deg, rgba(226,218,64,1) 0%, rgba(255,230,195,1) 100%, rgba(231,96,96,0.6755077030812324) 100%);
 }

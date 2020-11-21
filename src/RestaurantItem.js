@@ -34,7 +34,8 @@ class RestaurantItem extends Component {
                             <div class="card-action">
                                 <a href="#">Restaurant Details</a>
                                 <a href="#">This is a link</a>
-                                <button onClick={searchRestaurantDetails}>Details</button>
+                                {/* <button onClick={searchRestaurantDetails}>Details</button> */}
+                                <a class="waves-effect waves-light btn-large" onClick={searchRestaurantDetails}>Details</a>
                             </div>
                         </div>
                     </div>
