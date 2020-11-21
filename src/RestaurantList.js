@@ -16,6 +16,7 @@ class RestaurantList extends Component {
             return <RestaurantItem  key={index} 
                                     restaurant={entry.restaurant} 
                                     onFaveToggle={() => this.props.onFaveToggle(entry.restaurant)}
+                                    handleRestaurantSearch={this.props.handleRestaurantSearch}
                                      />
         });
         
