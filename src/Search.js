@@ -19,16 +19,19 @@ class Search extends Component {
             searchValue: event.target.value,
         });
     }
-
+    setRandom = (event) => {
+        event.preventDefault();
+        this.props.handleCitySearchCriteria(this.state.searchValue, true);
+    }
     searchCity = (event) => {
         event.preventDefault();
         console.log('searchCity', event.target.value);
 
-        this.props.handleCitySearchCriteria(this.state.searchValue);
+        this.props.handleCitySearchCriteria(this.state.searchValue, false);
 
         this.setState({
             searchValue: '',
-        });
+        }); 
     }
 
     clearPanel = (event) => {
@@ -88,6 +91,7 @@ class Search extends Component {
                                 </form>
                                 <button onClick={this.searchCity}>Search</button>
                                 <button onClick={this.clearPanel}>Clear</button>
+                                <button onClick={this.setRandom}>I'm Feeling Lucky</button>
                             </div>
                         </div>
                     </div>
