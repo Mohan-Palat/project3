@@ -20,8 +20,13 @@ class App extends Component {
   }
 
   handleFaveToggle = (restaurant)=>{
+    if (typeof restaurant == 'object'){
+      let newRestaurant = {'restaurant':restaurant}
+      restaurant = newRestaurant
+    }
     const faves = this.state.favoriteRestaurants.slice();
     const restaurantIndex = faves.indexOf(restaurant);
+
 
     //If the restaurant is already in their favorites, take it out of the faves array.
     if (restaurantIndex >= 0) {

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Favorite from './Favorite'
 import RestaurantItem from './RestaurantItem';
 import {Route, Link } from 'react-router-dom';
 import Nav from './Nav';
@@ -34,6 +35,7 @@ class RestaurantDetail extends Component {
                             <div class="card-action">
                                 <a href={this.props.restaurant.menu_url} target="_blank">Restaurant Menu</a>
                             </div>
+                            <Favorite onFaveToggle={this.props.onFaveToggle} isFave={this.props.isFave}/>
                         </div>
                     </div>
                 </div>
