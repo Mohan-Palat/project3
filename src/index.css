@@ -1,13 +1,16 @@
-@import url('https://fonts.googleapis.com/css2?family=Handlee&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap');
+
 
 body {
   margin: 0;
   /* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif; */
-  font-family: 'Handlee', cursive;
+    font-family: 'Kaushan Script', cursive;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: rgb(166,166,164);
+background: linear-gradient(90deg, rgba(166,166,164,1) 0%, rgba(223,223,220,1) 25%, rgba(254,253,250,1) 50%, rgba(214,214,211,1) 75%, rgba(166,166,164,1) 100%);
 }
 
 code {
@@ -16,13 +19,19 @@ code {
 }
 
 .header {
-  background-image: url('restaurant-background-3.jpeg');
+  background-image: url('https://www.feast-magazine.co.uk/wp-content/uploads/2019/01/restaurant-meal-food-salad-eat-dinner-berlin-supper-brunch-kurf-rstendamm-italians-abendbrot-1066618.jpg');
   background-size: cover;
   background-position: center center;
+
 }
 
 h1, h2 {
   color: white;
+}
+
+.subheader {
+  color: white;
+  text-align: center;
 }
 
 .Detail-Header {
@@ -33,9 +42,10 @@ span {
   color: black;
 }
 
-.btn-large {
+/* .card {
   background: rgb(226,218,64);
   background: linear-gradient(90deg, rgba(226,218,64,1) 0%, rgba(255,230,195,1) 100%, rgba(231,96,96,0.6755077030812324) 100%);
+<<<<<<< HEAD
 }
 
 .Excellent {
@@ -57,3 +67,44 @@ span {
 .Poor {
   color: #FF7800
 }
+=======
+} */
+
+.site-header{
+    text-align: center;
+    font-size: 175px;
+}
+
+.search {
+  text-align: center;
+  background: none;
+  margin-top: 100px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80em
+}
+
+.categories {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.btn-large {
+  background: red;
+  margin-left: auto;
+  margin-right: auto;
+  opacity: .4;
+}
+
+.btn-large:hover {
+  background: gold;
+  opacity: 1;
+}
+
+input {
+  text-align: center;
+  color: white;
+}
+
+
+>>>>>>> 8ef8721bbb463006cd8a73802b6d2a1aec47aa80

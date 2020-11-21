@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { getRestaurantsByCityID } from './api.js';
+// import { getRestaurantsByCityID } from './api.js';
 import RestaurantItem from './RestaurantItem.js';
+// import Favorite from './Favorite'
 
 class RestaurantList extends Component {
     constructor(props) {
@@ -8,11 +9,19 @@ class RestaurantList extends Component {
       }
 
     render() {
-        console.log("RestaurantList render this.props", this.props);
-
+        // console.log("RestaurantList render this.props", this.props);
+        ///////
+        // console.log('Updated favorites this.state.favoriteRestaurants',this.state.favoriteRestaurants )
+    
         const allRestaurants = this.props.restaurantList.map((entry, index) => {
-            console.log(index, entry.restaurant.name);
-            return <RestaurantItem key={index} restaurant={entry.restaurant} handleRestaurantSearch={this.props.handleRestaurantSearch} />
+            // console.log('restaurant list props', this.props);
+            return <RestaurantItem  key={index} 
+                                    restaurant={entry.restaurant} 
+                                    isFave={this.props.favoriteRestaurants.includes(entry)}
+                                    onFaveToggle={() => this.props.onFaveToggle(entry)}
+                                    handleRestaurantSearch={this.props.handleRestaurantSearch}
+                                     />
+                                     
         });
         
         return (
