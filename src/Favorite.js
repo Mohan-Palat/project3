@@ -14,13 +14,21 @@ class Favorite extends Component {
     render() {
         // const isFave = (this.props.isFave) ? 'remove_from_queue' : 'add_to_queue'
         const isFave = (this.props.isFave)
+        if (isFave){
         return (
+                <div onClick={this.handleClick}>
+                remove from Favorites
+              </div>
+        )
+            } else {
+                return (
             <div onClick={this.handleClick}>
-                "{isFave}"
-                
+              Add to Favorites
             </div>
-        );
+                )
+            }
+
+        };
     }
-}
 
 export default Favorite;

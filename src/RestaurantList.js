@@ -9,15 +9,19 @@ class RestaurantList extends Component {
       }
 
     render() {
-        console.log("RestaurantList render this.props", this.props);
-
+        // console.log("RestaurantList render this.props", this.props);
+        ///////
+        // console.log('Updated favorites this.state.favoriteRestaurants',this.state.favoriteRestaurants )
+    
         const allRestaurants = this.props.restaurantList.map((entry, index) => {
-            // console.log(index, entry.restaurant.name);
+            // console.log('restaurant list props', this.props);
             return <RestaurantItem  key={index} 
                                     restaurant={entry.restaurant} 
-                                    onFaveToggle={() => this.props.onFaveToggle(entry.restaurant)}
+                                    isFave={this.props.favoriteRestaurants.includes(entry)}
+                                    onFaveToggle={() => this.props.onFaveToggle(entry)}
                                     handleRestaurantSearch={this.props.handleRestaurantSearch}
                                      />
+                                     
         });
         
         return (

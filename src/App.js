@@ -22,26 +22,25 @@ class App extends Component {
   handleFaveToggle = (restaurant)=>{
     const faves = this.state.favoriteRestaurants.slice();
     const restaurantIndex = faves.indexOf(restaurant);
-    console.log('favoriteRestaurants before', this.state.favoriteRestaurants)
 
     //If the restaurant is already in their favorites, take it out of the faves array.
     if (restaurantIndex >= 0) {
-      console.log(`Removing ${restaurant.name} from faves`);
+      // console.log(`Removing ${restaurant.name} from faves`);
       faves.splice(restaurantIndex, 1);
     } 
     //If the restaurant is not in their favorites, add it to the faves array.
     if (restaurantIndex === -1){
-      console.log(`Adding ${restaurant.name} to faves`);
+      // console.log(`Adding ${restaurant.name} to faves`);
       faves.push(restaurant);
     }
     this.setState({ 
       favoriteRestaurants: faves 
     })
-    console.log('favoriteRestaurants after', this.state.favoriteRestaurants)
   }
 
   randRestaurant = (restrauntArr) => {
-    return restrauntArr[Math.floor(Math.random() * restrauntArr.length)]
+    // console.log('randRestaurant',restrauntArr[Math.floor(Math.random() * restrauntArr.length)].restaurant )
+    return restrauntArr[Math.floor(Math.random() * restrauntArr.length)].restaurant
   }
 
   handleCitySearchCriteria = async (searchValue, isRandom) => {
@@ -99,27 +98,34 @@ class App extends Component {
     let restaurantResults = [];
     let cityID = '';
     let cityName = '';
-
-    if (searchValue != '') {
-      const results = await getCityID(searchValue);
-      console.log(results.data.location_suggestions[0].id);
-
-      if (Object.keys(this.state.categoryResultList) == null) {
-        const restaurantResultsOutput = await getRestaurantsByCityID(results.data.location_suggestions[0].id);
-        restaurantResults = restaurantResultsOutput.data.restaurants;
-        cityID = results.data.location_suggestions[0].id;
-        cityName = results.data.location_suggestions[0].name;
+    if (searchValue == 'viewFavorites') {
+      console.log('state in handlecitySearchcriteria', this.state)
+      restaurantResults = this.state.favoriteRestaurants;
+      cityID = 1;
+      cityName = 'My Favorites';
+      isRandom = false
+    } else {
+      if (searchValue !== '') {
+        const results = await getCityID(searchValue);
+        console.log(results.data.location_suggestions[0].id);
+  
+        if (Object.keys(this.state.categoryResultList) == null) {
+          const restaurantResultsOutput = await getRestaurantsByCityID(results.data.location_suggestions[0].id);
+          restaurantResults = restaurantResultsOutput.data.restaurants;
+          cityID = results.data.location_suggestions[0].id;
+          cityName = results.data.location_suggestions[0].name;
+        }
+        else {
+          let keylist = Object.keys(this.state.categoryResultList).join();
+          console.log("keylist", keylist);
+  
+          const restaurantResultsOutput = await getRestaurantsByCityIDAndCategories(results.data.location_suggestions[0].id, keylist);
+          restaurantResults = restaurantResultsOutput.data.restaurants;
+          cityID = results.data.location_suggestions[0].id;
+          cityName = results.data.location_suggestions[0].name;
+        }
+  
       }
-      else {
-        let keylist = Object.keys(this.state.categoryResultList).join();
-        console.log("keylist", keylist);
-
-        const restaurantResultsOutput = await getRestaurantsByCityIDAndCategories(results.data.location_suggestions[0].id, keylist);
-        restaurantResults = restaurantResultsOutput.data.restaurants;
-        cityID = results.data.location_suggestions[0].id;
-        cityName = results.data.location_suggestions[0].name;
-      }
-
     }
 
     this.setState({
@@ -159,9 +165,15 @@ class App extends Component {
     if (this.state.cityID !== '') {
       if (this.state.isRandom) {
         console.log('this.randRestaurant(this.state.restaurantList)', this.randRestaurant(this.state.restaurantList))
-        // restaurantComponent = <RestaurantDetails restaurantList={this.randRestaurant(this.state.restaurantList)} cityID={this.state.cityID} cityName={this.state.cityName} />
+        restaurantComponent = <RestaurantDetail restaurantList={this.randRestaurant(this.state.restaurantList)} cityID={this.state.cityID} cityName={this.state.cityName} onFaveToggle={this.handleFaveToggle}/>
       } else {
-        restaurantComponent = <RestaurantList restaurantList={this.state.restaurantList} cityID={this.state.cityID} cityName={this.state.cityName} handleRestaurantSearch={this.handleRestaurantSearch}  onFaveToggle={this.handleFaveToggle}/>
+        restaurantComponent = <RestaurantList restaurantList={this.state.restaurantList} 
+                                              cityID={this.state.cityID} 
+                                              cityName={this.state.cityName} 
+                                              favoriteRestaurants={this.state.favoriteRestaurants}
+                                              handleRestaurantSearch={this.handleRestaurantSearch}  
+                                              onFaveToggle={this.handleFaveToggle}
+                                              />
       }
     }
     else {
@@ -173,8 +185,10 @@ class App extends Component {
       <div class="header">
         <h1>Easy Pickins</h1>
         <h2>{this.state.cityName}</h2>
-         <Search handleCitySearchCriteria={this.handleCitySearchCriteria} handleCategorySearch={this.handleCategorySearch} 
-          categoryList={this.state.categoryList} handleCategoryResultList={this.handleCategoryResultList}/>
+         <Search  handleCitySearchCriteria={this.handleCitySearchCriteria} 
+                  handleCategorySearch={this.handleCategorySearch} 
+                  categoryList={this.state.categoryList} 
+                  handleCategoryResultList={this.handleCategoryResultList}/>
         
       </div>
       <h3>{this.state.cityName}</h3>

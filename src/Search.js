@@ -11,7 +11,11 @@ class Search extends Component {
           categoryList: [],
         }
       }
-
+    viewMyFavorites = (event) => {
+        event.preventDefault()
+        console.log(event)
+        this.props.handleCitySearchCriteria(event.target.className, true);
+    }
     onTextBoxChange = (event) => {
         // console.log('onTextBoxChange', event.target.value);
 
@@ -92,6 +96,7 @@ class Search extends Component {
                                 <button onClick={this.searchCity}>Search</button>
                                 <button onClick={this.clearPanel}>Clear</button>
                                 <button onClick={this.setRandom}>I'm Feeling Lucky</button>
+                                <button className="viewFavorites" onClick={this.viewMyFavorites}>View My Favorites</button>
                             </div>
                         </div>
                     </div>
