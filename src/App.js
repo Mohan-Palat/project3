@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import Search from './Search';
 import RestaurantList from './RestaurantList';
-import { getCityID, getRestaurantsByCityID, getRestaurantsDetails } from './api.js';
 import RestaurantDetail from './RestaurantDetail';
 import RestaurantItem from './RestaurantItem';
-
+import { getCityID, getRestaurantsByCityID, getCategories, getRestaurantsByCityIDAndCategories, getRestaurantsDetails } from './api.js';
+ 
 class App extends Component {
   constructor(props) {
     super(props);
@@ -13,6 +13,8 @@ class App extends Component {
       cityID: '',
       cityName: '',
       restaurantList: [],
+      categoryList: [],
+      categoryResultList: {},
     }
   }
   randRestaurant = (restrauntArr) => {
@@ -55,24 +57,75 @@ class App extends Component {
 
   }
 
-  handleCitySearchCriteria = async (searchValue) => {
-    console.log('Search value in App.js', searchValue);
+  handleCategorySearch = async () => {
+    console.log('handleCategorySearch');
 
-    const results = await getCityID(searchValue);
+    const results = await getCategories();
     
-    console.log(results.data.location_suggestions[0].id);
-
-    const restaurantResults = await getRestaurantsByCityID(results.data.location_suggestions[0].id);
+    console.log("results.data.categories", results.data.categories);
+    const categories = results.data.categories;
 
     this.setState({
-      cityID: results.data.location_suggestions[0].id,
-      cityName: results.data.location_suggestions[0].name,
-      restaurantList: restaurantResults.data.restaurants,
+      categoryList: categories,
     });
-
-    console.log(results);
   }
 
+  handleCitySearchCriteria = async (searchValue, isRandom) => {
+    console.log('Search value in App.js', searchValue);
+
+    let restaurantResults = [];
+    let cityID = '';
+    let cityName = '';
+
+    if (searchValue != '') {
+      const results = await getCityID(searchValue);
+      console.log(results.data.location_suggestions[0].id);
+
+      if (Object.keys(this.state.categoryResultList) == null) {
+        const restaurantResultsOutput = await getRestaurantsByCityID(results.data.location_suggestions[0].id);
+        restaurantResults = restaurantResultsOutput.data.restaurants;
+        cityID = results.data.location_suggestions[0].id;
+        cityName = results.data.location_suggestions[0].name;
+      }
+      else {
+        let keylist = Object.keys(this.state.categoryResultList).join();
+        console.log("keylist", keylist);
+
+        const restaurantResultsOutput = await getRestaurantsByCityIDAndCategories(results.data.location_suggestions[0].id, keylist);
+        restaurantResults = restaurantResultsOutput.data.restaurants;
+        cityID = results.data.location_suggestions[0].id;
+        cityName = results.data.location_suggestions[0].name;
+      }
+
+    }
+
+    this.setState({
+      cityID: cityID,
+      cityName: cityName,
+      restaurantList: restaurantResults,
+      isRandom: isRandom
+    });
+  }
+
+  handleCategoryResultList = (event) => {
+    console.log('handleCategoryResultList', event.target); 
+    console.log('handleCategoryResultList id', event.target.id);
+
+    let tempObject = this.state.categoryResultList;
+
+    if (tempObject[event.target.id] == true) {
+      delete tempObject[event.target.id];
+    }
+    else {
+      tempObject[event.target.id] = true;
+    }
+
+    this.setState({
+      categoryResultList: tempObject
+    });
+
+    console.log("tempObject", tempObject);
+  }
   
   render() {
     console.log("App.js render");
@@ -93,13 +146,18 @@ class App extends Component {
     }
     
     return (
-      <div>
+      <>
+      <div class="header">
         <h1>Easy Pickins</h1>
         <h2>{this.state.cityName}</h2>
-        <Search handleCitySearchCriteria={this.handleCitySearchCriteria}/>
-        <RestaurantDetail name={this.state.restaurantName}/>
-        {restaurantComponent}
+         <Search handleCitySearchCriteria={this.handleCitySearchCriteria} handleCategorySearch={this.handleCategorySearch} 
+          categoryList={this.state.categoryList} handleCategoryResultList={this.handleCategoryResultList}/>
+        
       </div>
+      <h3>{this.state.cityName}</h3>
+      <RestaurantDetail name={this.state.restaurantName}/> 
+      {restaurantComponent}
+      </>
     );
   }
 
