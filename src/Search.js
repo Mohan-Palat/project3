@@ -89,9 +89,12 @@ class Search extends Component {
                                         onChange = {this.onTextBoxChange}
                                     />
                                 </form>
-                                <button onClick={this.searchCity}>Search</button>
+                                {/* <button onClick={this.searchCity}>Search</button>
                                 <button onClick={this.clearPanel}>Clear</button>
-                                <button onClick={this.setRandom}>I'm Feeling Lucky</button>
+                                <button onClick={this.setRandom}>I'm Feeling Lucky</button> */}
+                                <a class="waves-effect waves-light btn-large" onClick={this.searchCity}>Search</a>
+                                <a class="waves-effect waves-light btn-large" onClick={this.clearPanel}>Clear</a>
+                                <a class="waves-effect waves-light btn-large" onClick={this.setRandom}>I'm Feeling Lucky</a>
                             </div>
                         </div>
                     </div>
