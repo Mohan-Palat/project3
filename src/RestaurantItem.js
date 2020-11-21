@@ -1,13 +1,14 @@
 import { render } from '@testing-library/react';
 import React, { Component } from 'react';
 import { getRestaurantByRestaurantID } from './api.js';
+import Favorite from './Favorite.js';
 
 
 class RestaurantItem extends Component {
 
-
-
+    
     render() {         
+        // console.log('RestaurantItem props', this.props)
         
         const searchRestaurantDetails = (e) =>{
             e.preventDefault()
@@ -36,6 +37,7 @@ class RestaurantItem extends Component {
                                 <a href="#">This is a link</a>
                                 {/* <button onClick={searchRestaurantDetails}>Details</button> */}
                                 <a class="waves-effect waves-light btn-large" onClick={searchRestaurantDetails}>Details</a>
+                                <Favorite onFaveToggle={this.props.onFaveToggle} isFave={this.props.isFave}/>
                             </div>
                         </div>
                     </div>
