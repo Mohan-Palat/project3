@@ -14,7 +14,7 @@ class Search extends Component {
     viewMyFavorites = (event) => {
         event.preventDefault()
         console.log(event)
-        this.props.handleCitySearchCriteria(event.target.className, true);
+        this.props.handleCitySearchCriteria('viewFavorites', true);
     }
     onTextBoxChange = (event) => {
         // console.log('onTextBoxChange', event.target.value);
@@ -93,10 +93,10 @@ class Search extends Component {
                                         onChange = {this.onTextBoxChange}
                                     />
                                 </form>
-                                <button onClick={this.searchCity}>Search</button>
-                                <button onClick={this.clearPanel}>Clear</button>
-                                <button onClick={this.setRandom}>I'm Feeling Lucky</button>
-                                <button className="viewFavorites" onClick={this.viewMyFavorites}>View My Favorites</button>
+                                <a class="waves-effect waves-light btn-large" onClick={this.searchCity}>Search</a>
+                                <a class="waves-effect waves-light btn-large" onClick={this.clearPanel}>Clear</a>
+                                <a class="waves-effect waves-light btn-large" onClick={this.setRandom}>I'm Feeling Lucky</a>
+                                <a class="waves-effect waves-light btn-large"  onClick={this.viewMyFavorites}>View My Favorites</a>
                             </div>
                         </div>
                     </div>

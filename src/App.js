@@ -71,7 +71,7 @@ class App extends Component {
 
     this.setState({
       restaurantID: restaurantID,
-      restaurantBody: results.data.id,
+      restaurantBody: results.data,
       restaurantName: results.data.name,
     });
 
@@ -165,7 +165,10 @@ class App extends Component {
     if (this.state.cityID !== '') {
       if (this.state.isRandom) {
         console.log('this.randRestaurant(this.state.restaurantList)', this.randRestaurant(this.state.restaurantList))
-        restaurantComponent = <RestaurantDetail restaurantList={this.randRestaurant(this.state.restaurantList)} cityID={this.state.cityID} cityName={this.state.cityName} onFaveToggle={this.handleFaveToggle}/>
+        restaurantComponent = <RestaurantDetail restaurant={this.randRestaurant(this.state.restaurantList)} 
+                                                cityID={this.state.cityID} 
+                                                cityName={this.state.cityName} 
+                                                onFaveToggle={this.handleFaveToggle}/>
       } else {
         restaurantComponent = <RestaurantList restaurantList={this.state.restaurantList} 
                                               cityID={this.state.cityID} 
@@ -192,7 +195,7 @@ class App extends Component {
         
       </div>
       <h3>{this.state.cityName}</h3>
-      <RestaurantDetail name={this.state.restaurantName}/> 
+      {(this.state.restaurantBody != null)?<RestaurantDetail name={this.state.restaurantName} restaurant={this.state.restaurantBody}/>:<h3></h3>}
       {restaurantComponent}
       </>
     );
