@@ -5,10 +5,6 @@ import RestaurantItem from './RestaurantItem.js';
 class RestaurantList extends Component {
     constructor(props) {
         super(props);
-    
-        // this.state = {
-        //   restaurantList : [],
-        // }
       }
 
     render() {
@@ -16,7 +12,7 @@ class RestaurantList extends Component {
 
         const allRestaurants = this.props.restaurantList.map((entry, index) => {
             console.log(index, entry.restaurant.name);
-            return <RestaurantItem key={index} restaurant={entry.restaurant} />
+            return <RestaurantItem key={index} restaurant={entry.restaurant} handleRestaurantSearch={this.props.handleRestaurantSearch} />
         });
         
         return (
