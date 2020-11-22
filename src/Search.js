@@ -81,13 +81,14 @@ class Search extends Component {
 
         return (
             <div>
-
                 <div class="row search">
                     <div class="col s12 m6">
                         <div class="card search">
-                            <div class="card-content black-text search-box">
-                                <form>
+                            <div class="card-content black-text">
+                                <form onSubmit={this.searchCity}>
+                                    {/* <i class="material-icons">location_city</i> */}
                                     <input type = "text"
+                                        id="inputCity"
                                         value = {this.state.searchValue}
                                         placeholder = "Enter City to Search Restaurants:"
                                         onChange = {this.onTextBoxChange}
@@ -98,22 +99,23 @@ class Search extends Component {
                                 <a class="waves-effect waves-light btn-large" onClick={this.clearPanel}>Clear</a>
                                 <a class="waves-effect waves-light btn-large" onClick={this.setRandom}>I'm Feeling Lucky</a>
                                 <a class="waves-effect waves-light btn-large"  onClick={this.viewMyFavorites}>View My Favorites</a>
-                            </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
                 <br></br>
-                        <div className="categories">
+                <div class="row s24 m12">
+                    <div class="col s24 m12 categories">
+                        <div class="card yellow lighten-1">
                             <div class="card-content black-text">
                                 {allCategories}
                             </div>
                         </div>
-                        <br></br>
+                    </div>
+                </div>
             </div>
         );
     }
 }
-
 export default Search;
