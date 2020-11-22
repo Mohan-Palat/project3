@@ -14,12 +14,13 @@ class RestaurantList extends Component {
         // console.log('Updated favorites this.state.favoriteRestaurants',this.state.favoriteRestaurants )
     
         const allRestaurants = this.props.restaurantList.map((entry, index) => {
-            // console.log('restaurant list props', this.props);
+            console.log('restaurant list props', this.props);
             return <RestaurantItem  key={index} 
                                     restaurant={entry.restaurant} 
                                     isFave={this.props.favoriteRestaurants.includes(entry)}
                                     onFaveToggle={() => this.props.onFaveToggle(entry)}
                                     handleRestaurantSearch={this.props.handleRestaurantSearch}
+                                    favoriteRestaurants={this.props.favoriteRestaurants}
                                      />
                                      
         });

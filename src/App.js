@@ -17,6 +17,8 @@ class App extends Component {
       categoryList: [],
       categoryResultList: {},
     }
+   
+    // console.log("myFavoriteRestaurants from local storage: ",localStorage.getItem('myFavoriteRestaurants') )
   }
 
   handleFaveToggle = (restaurant)=>{
@@ -29,12 +31,12 @@ class App extends Component {
     const restaurantIndex = faves.indexOf(restaurant);
 
 
-    //If the restaurant is already in their favorites, take it out of the faves array.
+// remove restaurant from Favorites
     if (restaurantIndex >= 0) {
       // console.log(`Removing ${restaurant.name} from faves`);
       faves.splice(restaurantIndex, 1);
     } 
-    //If the restaurant is not in their favorites, add it to the faves array.
+// add restaurant to favorites
     if (restaurantIndex === -1){
       // console.log(`Adding ${restaurant.name} to faves`);
       faves.push(restaurant);

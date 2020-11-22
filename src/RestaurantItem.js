@@ -37,7 +37,7 @@ class RestaurantItem extends Component {
                                 <a href="#">This is a link</a>
                                 {/* <button onClick={searchRestaurantDetails}>Details</button> */}
                                 <a class="waves-effect waves-light btn-large" onClick={searchRestaurantDetails}>Details</a>
-                                <Favorite onFaveToggle={this.props.onFaveToggle} isFave={this.props.isFave}/>
+                                <Favorite onFaveToggle={this.props.onFaveToggle} isFave={this.props.isFave} favoriteRestaurants={this.props.favoriteRestaurants} />
                             </div>
                         </div>
                     </div>
