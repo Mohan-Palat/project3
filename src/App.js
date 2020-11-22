@@ -20,10 +20,11 @@ class App extends Component {
   }
 
   handleFaveToggle = (restaurant)=>{
-    if (typeof restaurant == 'object'){
-      let newRestaurant = {'restaurant':restaurant}
-      restaurant = newRestaurant
-    }
+    console.log('typeof restaurant', typeof restaurant)
+    // if (typeof restaurant == 'object'){
+    //   let newRestaurant = {'restaurant':restaurant}
+    //   restaurant = newRestaurant
+    // }
     const faves = this.state.favoriteRestaurants.slice();
     const restaurantIndex = faves.indexOf(restaurant);
 

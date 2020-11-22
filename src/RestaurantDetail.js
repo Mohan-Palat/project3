@@ -16,7 +16,7 @@ class RestaurantDetail extends Component {
 
 
     render() {
-        console.log("this.props.restaurant", this.props.restaurant);
+        console.log("this.props.restaurant", this.props);
 
         return (
             <div>
@@ -35,7 +35,6 @@ class RestaurantDetail extends Component {
                             <div class="card-action">
                                 <a href={this.props.restaurant.menu_url} target="_blank">Restaurant Menu</a>
                             </div>
-                            <Favorite onFaveToggle={this.props.onFaveToggle} isFave={this.props.isFave}/>
                         </div>
                     </div>
                 </div>
