@@ -16,6 +16,7 @@ class App extends Component {
       favoriteRestaurants: [],
       categoryList: [],
       categoryResultList: {},
+      restaurantBody: null,
     }
   }
 
@@ -155,6 +156,14 @@ class App extends Component {
 
     console.log("tempObject", tempObject);
   }
+
+  closeRestaurantDetail = (event) => {
+    console.log('handleCategoryResultList', event.target); 
+
+    this.setState({
+      restaurantBody: null,
+    });
+  }
   
   render() {
     console.log("App.js render");
@@ -178,6 +187,11 @@ class App extends Component {
                                               onFaveToggle={this.handleFaveToggle}
                                               />
       }
+
+      if (this.state.restaurantBody != null) {
+        restaurantComponent = <h3></h3>
+      }
+      
     }
     else {
       restaurantComponent = <h3>No Restaurants Listed</h3>
@@ -194,7 +208,7 @@ class App extends Component {
                   handleCategoryResultList={this.handleCategoryResultList}/>
         <h2>{this.state.cityName}</h2>
       </div>
-      {(this.state.restaurantBody != null)?<RestaurantDetail name={this.state.restaurantName} restaurant={this.state.restaurantBody}/>:<h3></h3>}
+      {(this.state.restaurantBody != null)?<RestaurantDetail name={this.state.restaurantName} restaurant={this.state.restaurantBody} closeRestaurantDetail={this.closeRestaurantDetail}/>:<h3></h3>}
       {restaurantComponent}
       </>
     );

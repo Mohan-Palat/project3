@@ -22,7 +22,6 @@ code {
   background-image: url('https://www.feast-magazine.co.uk/wp-content/uploads/2019/01/restaurant-meal-food-salad-eat-dinner-berlin-supper-brunch-kurf-rstendamm-italians-abendbrot-1066618.jpg');
   background-size: cover;
   background-position: center center;
-
 }
 
 h1, h2 {
@@ -42,33 +41,54 @@ span {
   color: black;
 }
 
-/* .card {
-  background: rgb(226,218,64);
-  background: linear-gradient(90deg, rgba(226,218,64,1) 0%, rgba(255,230,195,1) 100%, rgba(231,96,96,0.6755077030812324) 100%);
-<<<<<<< HEAD
+.card {
+  /* background: rgb(140, 182, 244); */
+  /* background: rgb(32, 55, 230); */
+  /* background: rgb(169, 40, 169); */
+  /* background: rgb(99, 8, 99); */
+  background: rgb(113, 164, 240);
+  background: linear-gradient(90deg, rgb(113, 164, 240) 0%, rgba(255,230,195,1) 100%, rgba(231,96,96,0.6755077030812324) 100%);
 }
 
 .Excellent {
-  color: #3F7E00
+  color: #3F7E00;
 }
 
 .VeryGood {
-  color: #5BA829
+  color: #5BA829;
 }
 
 .Good {
-  color: #5BA829
+  color: #5BA829;
 }
 
 .Average {
-  color: #FFBA00
+  color: #FFBA00;
 }
 
 .Poor {
-  color: #FF7800
+  color: #FF7800;
 }
-=======
-} */
+
+.Lovedit {
+  color: #3F7E00
+}
+
+.Great {
+  color: #5BA829;
+}
+
+.Avoid {
+  color: #CB202D;
+}
+
+.Insane {
+  color: #305D02
+}
+
+.Notrated {
+  color: #CBCBCB;
+}
 
 .site-header{
     text-align: center;
@@ -103,8 +123,17 @@ span {
 
 input {
   text-align: center;
-  color: white;
+  background-color: white;
+  color: black;
+}
+
+#inputCity {
+  font-size: x-large;
+  background-color: white;
+}
+
+.category-label {
+  margin-right: 30px;
 }
 
 
->>>>>>> 8ef8721bbb463006cd8a73802b6d2a1aec47aa80
