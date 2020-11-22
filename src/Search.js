@@ -85,7 +85,7 @@ class Search extends Component {
                 <div class="row search">
                     <div class="col s12 m6">
                         <div class="card search">
-                            <div class="card-content black-text">
+                            <div class="card-content black-text search-box">
                                 <form>
                                     <input type = "text"
                                         value = {this.state.searchValue}
@@ -93,27 +93,24 @@ class Search extends Component {
                                         onChange = {this.onTextBoxChange}
                                     />
                                 </form>
+                                <div className='button-container'>
                                 <a class="waves-effect waves-light btn-large" onClick={this.searchCity}>Search</a>
                                 <a class="waves-effect waves-light btn-large" onClick={this.clearPanel}>Clear</a>
                                 <a class="waves-effect waves-light btn-large" onClick={this.setRandom}>I'm Feeling Lucky</a>
                                 <a class="waves-effect waves-light btn-large"  onClick={this.viewMyFavorites}>View My Favorites</a>
+                            </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <br></br>
-
-                <div class="row s24 m12">
-                    <div class="col s12 m6 categories">
-                        <div class="card yellow lighten-1">
+                        <div className="categories">
                             <div class="card-content black-text">
                                 {allCategories}
                             </div>
                         </div>
-                    </div>
-                </div>
-
+                        <br></br>
             </div>
         );
     }

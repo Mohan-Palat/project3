@@ -1,3 +1,4 @@
+
 import { render } from '@testing-library/react';
 import React, { Component } from 'react';
 import { getRestaurantByRestaurantID } from './api.js';
@@ -25,7 +26,7 @@ class RestaurantItem extends Component {
 
                 <div class="row">
                     <div class="col s12 m6">
-                        <div class="card yellow lighten-1">
+                        <div class="card yellow lighten-1 list-card">
                             <div class="card-content black-text">
                                 <span class="card-title">{this.props.restaurant.name}</span>
                                 <div>{this.props.restaurant.user_rating.aggregate_rating}</div>

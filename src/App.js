@@ -192,7 +192,7 @@ class App extends Component {
                   handleCategorySearch={this.handleCategorySearch} 
                   categoryList={this.state.categoryList} 
                   handleCategoryResultList={this.handleCategoryResultList}/>
-        <h2>{this.state.cityName}</h2>
+        <h2 className="city-header">{this.state.cityName}</h2>
       </div>
       {(this.state.restaurantBody != null)?<RestaurantDetail name={this.state.restaurantName} restaurant={this.state.restaurantBody}/>:<h3></h3>}
       {restaurantComponent}

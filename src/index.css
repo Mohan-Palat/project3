@@ -9,8 +9,9 @@ body {
     font-family: 'Kaushan Script', cursive;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: rgb(166,166,164);
-background: linear-gradient(90deg, rgba(166,166,164,1) 0%, rgba(223,223,220,1) 25%, rgba(254,253,250,1) 50%, rgba(214,214,211,1) 75%, rgba(166,166,164,1) 100%);
+  /* background: rgb(166,166,164);
+background: linear-gradient(90deg, rgba(166,166,164,1) 0%, rgba(223,223,220,1) 25%, rgba(254,253,250,1) 50%, rgba(214,214,211,1) 75%, rgba(166,166,164,1) 100%); */
+  background: #ffae42;
 }
 
 code {
@@ -50,6 +51,7 @@ span {
 .site-header{
     text-align: center;
     font-size: 175px;
+    margin-bottom: 50px;
 }
 
 .search {
@@ -58,7 +60,7 @@ span {
   margin-top: 100px;
   margin-left: auto;
   margin-right: auto;
-  width: 80em
+  width: 80em;
 }
 
 .categories {
@@ -81,6 +83,44 @@ span {
 input {
   text-align: center;
   color: white;
+  text-emphasis: bold;
 }
 
+.categories {
+  background-color: white;
+  opacity: .7;
+  text-align: center;
+  
+}
+
+.category-label {
+  background-color: none;
+  color: white;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+input.value {
+  font-size: 100px;
+  text-emphasis: none;
+}
+
+.button-container{ 
+  display: flex;
+  justify-content: space-evenly;
+
+}
+
+form {
+  font-size: 100px;
+}
+
+.city-header {
+  text-align: center;
+}
+
+
+.list-card {
+  border: red 2px solid;
+}
 

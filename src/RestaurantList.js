@@ -25,6 +25,7 @@ class RestaurantList extends Component {
         });
         
         return (
+            
             <ul>
                 {allRestaurants}
             </ul>
