@@ -16,29 +16,39 @@ class App extends Component {
       favoriteRestaurants: [],
       categoryList: [],
       categoryResultList: {},
+      restaurantBody: null,
     }
    
     // console.log("myFavoriteRestaurants from local storage: ",localStorage.getItem('myFavoriteRestaurants') )
   }
-
+  viewMyFavorites = (event) => {
+    event.preventDefault()
+    // console.log(event)
+    this.handleCitySearchCriteria('viewFavorites', true);
+}
   handleFaveToggle = (restaurant)=>{
-    console.log('typeof restaurant', typeof restaurant)
+    console.log('restaurant.hasOwnProperty', restaurant.hasOwnProperty('restaurant'))
+    console.log(restaurant)
+    if (restaurant.hasOwnProperty('cuisines')){
     // if (typeof restaurant == 'object'){
-    //   let newRestaurant = {'restaurant':restaurant}
-    //   restaurant = newRestaurant
-    // }
+      let newRestaurant = {'restaurant':restaurant}
+      restaurant = newRestaurant
+    }
+    console.log('newRestaurant', restaurant)
     const faves = this.state.favoriteRestaurants.slice();
+    console.log('faves', faves)
     const restaurantIndex = faves.indexOf(restaurant);
+    console.log('restaurantIndex',restaurantIndex )
 
 
 // remove restaurant from Favorites
     if (restaurantIndex >= 0) {
-      // console.log(`Removing ${restaurant.name} from faves`);
+      console.log(`Removing ${restaurant.restaurant.name} from faves`);
       faves.splice(restaurantIndex, 1);
     } 
 // add restaurant to favorites
     if (restaurantIndex === -1){
-      // console.log(`Adding ${restaurant.name} to faves`);
+      console.log(`Adding ${restaurant.restaurant.name} to faves`);
       faves.push(restaurant);
     }
     this.setState({ 
@@ -81,9 +91,10 @@ class App extends Component {
       restaurantID: restaurantID,
       restaurantBody: results.data,
       restaurantName: results.data.name,
+      // restaurantFave: {"restaurant": results.data}
     });
 
-    console.log(results);
+    console.log("handleRestaurantSearch results",results);
 
   }
 
@@ -163,6 +174,28 @@ class App extends Component {
 
     console.log("tempObject", tempObject);
   }
+
+  closeRestaurantDetail = (event) => {
+    console.log('handleCategoryResultList', event.target); 
+
+    this.setState({
+      restaurantBody: null,
+    });
+  }
+
+  searchForFave(restaurantBody) {
+    var found = false;
+    for (var i = 0; i < this.state.favoriteRestaurants.length; i++) {
+      // console.log('searchForFave' )
+      // console.log('this.state.favoriteRestaurants[i].restaurant.id', this.state.favoriteRestaurants[i].restaurant.id)
+      // console.log('restaurantBody.id', restaurantBody.id)
+      if (this.state.favoriteRestaurants[i].restaurant.id == restaurantBody.id) {
+        found = true;
+        break;
+      }
+    }
+    return found
+  }
   
   render() {
     console.log("App.js render");
@@ -184,13 +217,20 @@ class App extends Component {
                                               favoriteRestaurants={this.state.favoriteRestaurants}
                                               handleRestaurantSearch={this.handleRestaurantSearch}  
                                               onFaveToggle={this.handleFaveToggle}
+                                              
                                               />
       }
+
+      if (this.state.restaurantBody != null) {
+        restaurantComponent = <h3></h3>
+      }
+      
     }
     else {
       restaurantComponent = <h3>No Restaurants Listed</h3>
     }
-    
+    console.log("this.props", this.props)
+    console.log("this.state", this.state)
     return (
       <>
       <div class="header">
@@ -200,9 +240,22 @@ class App extends Component {
                   handleCategorySearch={this.handleCategorySearch} 
                   categoryList={this.state.categoryList} 
                   handleCategoryResultList={this.handleCategoryResultList}/>
-        <h2>{this.state.cityName}</h2>
+        <h2 className="city-header">{this.state.cityName}</h2>
+
+
       </div>
-      {(this.state.restaurantBody != null)?<RestaurantDetail name={this.state.restaurantName} restaurant={this.state.restaurantBody}/>:<h3></h3>}
+        <a class="waves-effect waves-light btn-large" id="viewFavorites"  onClick={this.viewMyFavorites}>View My Favorites</a>
+      {(this.state.restaurantBody != null)?<RestaurantDetail name={this.state.restaurantName} 
+                                                            restaurant={this.state.restaurantBody} 
+                                                            closeRestaurantDetail={this.closeRestaurantDetail} 
+                                                            favoriteRestaurants={this.state.favoriteRestaurants}
+                                                            // onFaveToggle={this.handleFaveToggle}
+                                                            onFaveToggle={() => this.handleFaveToggle(this.state.restaurantBody)}
+                                                            isFave={this.searchForFave(this.state.restaurantBody)}
+                                                            // isFave={this.state.favoriteRestaurants.includes({"restaurant": this.state.restaurantBody})}
+                                                            // onFaveToggle={() => this.handleFaveToggle(this.state.restaurantFave)}
+                                                            // favoriteRestaurants={this.props.favoriteRestaurants}
+                                                            />:<h3></h3>}
       {restaurantComponent}
       </>
     );

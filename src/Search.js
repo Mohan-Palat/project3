@@ -11,11 +11,7 @@ class Search extends Component {
           categoryList: [],
         }
       }
-    viewMyFavorites = (event) => {
-        event.preventDefault()
-        console.log(event)
-        this.props.handleCitySearchCriteria('viewFavorites', true);
-    }
+
     onTextBoxChange = (event) => {
         // console.log('onTextBoxChange', event.target.value);
 
@@ -81,31 +77,31 @@ class Search extends Component {
 
         return (
             <div>
-
                 <div class="row search">
                     <div class="col s12 m6">
                         <div class="card search">
                             <div class="card-content black-text">
-                                <form>
+                                <form onSubmit={this.searchCity}>
+                                    {/* <i class="material-icons">location_city</i> */}
                                     <input type = "text"
+                                        id="inputCity"
                                         value = {this.state.searchValue}
                                         placeholder = "Enter City to Search Restaurants:"
                                         onChange = {this.onTextBoxChange}
                                     />
                                 </form>
+                                <div className='button-container'>
                                 <a class="waves-effect waves-light btn-large" onClick={this.searchCity}>Search</a>
                                 <a class="waves-effect waves-light btn-large" onClick={this.clearPanel}>Clear</a>
                                 <a class="waves-effect waves-light btn-large" onClick={this.setRandom}>I'm Feeling Lucky</a>
-                                <a class="waves-effect waves-light btn-large"  onClick={this.viewMyFavorites}>View My Favorites</a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
                 <br></br>
-
                 <div class="row s24 m12">
-                    <div class="col s12 m6 categories">
+                    <div class="col s24 m12 categories">
                         <div class="card yellow lighten-1">
                             <div class="card-content black-text">
                                 {allCategories}
@@ -113,10 +109,8 @@ class Search extends Component {
                         </div>
                     </div>
                 </div>
-
             </div>
         );
     }
 }
-
 export default Search;

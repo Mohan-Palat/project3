@@ -9,8 +9,9 @@ body {
     font-family: 'Kaushan Script', cursive;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: rgb(166,166,164);
-background: linear-gradient(90deg, rgba(166,166,164,1) 0%, rgba(223,223,220,1) 25%, rgba(254,253,250,1) 50%, rgba(214,214,211,1) 75%, rgba(166,166,164,1) 100%);
+  /* background: rgb(166,166,164);
+background: linear-gradient(90deg, rgba(166,166,164,1) 0%, rgba(223,223,220,1) 25%, rgba(254,253,250,1) 50%, rgba(214,214,211,1) 75%, rgba(166,166,164,1) 100%); */
+  background: #ffae42;
 }
 
 code {
@@ -22,7 +23,6 @@ code {
   background-image: url('https://www.feast-magazine.co.uk/wp-content/uploads/2019/01/restaurant-meal-food-salad-eat-dinner-berlin-supper-brunch-kurf-rstendamm-italians-abendbrot-1066618.jpg');
   background-size: cover;
   background-position: center center;
-
 }
 
 h1, h2 {
@@ -42,14 +42,59 @@ span {
   color: black;
 }
 
-/* .card {
-  background: rgb(226,218,64);
-  background: linear-gradient(90deg, rgba(226,218,64,1) 0%, rgba(255,230,195,1) 100%, rgba(231,96,96,0.6755077030812324) 100%);
-} */
+.card {
+  /* background: rgb(140, 182, 244); */
+  /* background: rgb(32, 55, 230); */
+  /* background: rgb(169, 40, 169); */
+  /* background: rgb(99, 8, 99); */
+  background: rgb(113, 164, 240);
+  background: linear-gradient(90deg, rgb(113, 164, 240) 0%, rgba(255,230,195,1) 100%, rgba(231,96,96,0.6755077030812324) 100%);
+}
+
+.Excellent {
+  color: #3F7E00;
+}
+
+.VeryGood {
+  color: #5BA829;
+}
+
+.Good {
+  color: #5BA829;
+}
+
+.Average {
+  color: #FFBA00;
+}
+
+.Poor {
+  color: #FF7800;
+}
+
+.Lovedit {
+  color: #3F7E00
+}
+
+.Great {
+  color: #5BA829;
+}
+
+.Avoid {
+  color: #CB202D;
+}
+
+.Insane {
+  color: #305D02
+}
+
+.Notrated {
+  color: #CBCBCB;
+}
 
 .site-header{
     text-align: center;
     font-size: 175px;
+    margin-bottom: 50px;
 }
 
 .search {
@@ -58,7 +103,7 @@ span {
   margin-top: 100px;
   margin-left: auto;
   margin-right: auto;
-  width: 80em
+  width: 80em;
 }
 
 .categories {
@@ -81,4 +126,64 @@ span {
 input {
   text-align: center;
   color: white;
+  text-emphasis: bold;
+  background-color: white;
+  color: black;
+}
+
+#inputCity {
+  font-size: x-large;
+  background-color: white;
+}
+
+.category-label {
+  margin-right: 30px;
+}
+
+.categories {
+  background-color: white;
+  opacity: .7;
+  text-align: center;
+  
+}
+
+.category-label {
+  background-color: none;
+  color: white;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+input.value {
+  font-size: 100px;
+  text-emphasis: none;
+}
+
+.button-container{ 
+  display: flex;
+  justify-content: space-evenly;
+
+}
+
+form {
+  font-size: 100px;
+}
+
+.city-header {
+  text-align: center;
+}
+
+
+.list-card {
+  border: red 2px solid;
+}
+
+#viewFavorites {
+  margin: 10px;
+  align-self: flex-end;
+  opacity: .4;
+}
+
+#favoritesBtn {
+  opacity: .4;
 }

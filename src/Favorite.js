@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class Favorite extends Component {
     handleClick = (e) => {
         e.stopPropagation()
-        // console.log('Handling Fave click!', this.props)
+        console.log('Handling Fave click!', this.props)
         this.props.onFaveToggle()
         
 
@@ -17,15 +17,20 @@ class Favorite extends Component {
         if (isFave) {
             return (
                 <div onClick={this.handleClick}>
-                <p>My Favorites:</p> 
-                    <span class="btn deep-orange accent-3">Remove</span>
+                <p>Remove from Favorites:</p> 
+                <span id="favoritesBtn" class="btn indigo darken-4">
+                    
+                    <i class="large material-icons">highlight_off</i>
+                    </span>
                 </div>
             )
         } else {
             return (
             <div onClick={this.handleClick}>
-            <p>My Favorites:</p> 
-                <span class="btn light-blue lighten-2">Add</span>
+            <p>Add to Favorites:</p> 
+            <span id="favoritesBtn" class="btn red accent-3">
+                   <i class="large material-icons">add_circle</i>
+                </span>
             </div>
             )
         }
