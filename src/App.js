@@ -194,8 +194,9 @@ class App extends Component {
       
     }
     else {
-      restaurantComponent = <h3>No Restaurants Listed</h3>
+      restaurantComponent = <h3 className="city-header">Search a City to View Restaurants!</h3>
     }
+
     
     return (
       <>
@@ -206,7 +207,7 @@ class App extends Component {
                   handleCategorySearch={this.handleCategorySearch} 
                   categoryList={this.state.categoryList} 
                   handleCategoryResultList={this.handleCategoryResultList}/>
-        <h2 className="city-header">{this.state.cityName}</h2>
+      {(this.state.cityName != '')?<h2 className="city-header">Viewing restaurants in {this.state.cityName}</h2>:<h2></h2>}
       </div>
       {(this.state.restaurantBody != null)?<RestaurantDetail name={this.state.restaurantName} restaurant={this.state.restaurantBody} closeRestaurantDetail={this.closeRestaurantDetail}/>:<h3></h3>}
       {restaurantComponent}

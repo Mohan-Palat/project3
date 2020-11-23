@@ -42,7 +42,7 @@ class RestaurantDetail extends Component {
                 console.log(index, "review.review.review_text", review.review.review_text);
                 let indextemp = index + 1;
                 return (
-                <div class="card blue lighten-1">
+                <div class="card lighten-1">
                     <ReviewItem key={index} index={indextemp} review={review} />
                 </div>)
             });
@@ -60,10 +60,10 @@ class RestaurantDetail extends Component {
                 
                 <div class="row">
                     <div class="col s24 m12 l7">
-                        <div class="card blue lighten-1">
+                        <div class="card lighten-1 display-card">
                             <div class="card-content black-text">
-                                <span class="card-title">{this.props.restaurant.name}</span>
-                                {(this.props.restaurant.thumb)?<img border="0" src={this.props.restaurant.thumb} alt="name"/>:<h3></h3>}
+                                <span class="card-title display-name">{this.props.restaurant.name}</span>
+                                {(this.props.restaurant.thumb)?<img border="0" src={this.props.restaurant.thumb} alt="name" className='display-thumb'/>:<img border="0" src='https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png' alt="name" className='display-thumb-unavail'/>}
                             </div>
                             <div>{this.props.restaurant.location.address}</div>
                             {(!this.props.restaurant.location.address.includes(this.props.restaurant.location.city))?<div>{this.props.restaurant.location.city}</div>:<div></div>}
@@ -78,9 +78,9 @@ class RestaurantDetail extends Component {
                                 src={googleString}
                                 >
                             </iframe>
-                            <div class="card-action">
-                                {(this.props.restaurant.menu_url)?<a class ="white-text" href={this.props.restaurant.menu_url} target="_blank">Restaurant Menu</a>:<h3></h3>}
-                                {(this.props.restaurant.photos_url)?<a class ="white-text" href={this.props.restaurant.photos_url} target="_blank">Photos</a>:<h3></h3>}
+                            <div class="card-action display-links">
+                                {(this.props.restaurant.menu_url)?<a class ="black-text" href={this.props.restaurant.menu_url} target="_blank">Restaurant Menu</a>:<h3></h3>}
+                                {(this.props.restaurant.photos_url)?<a class ="black-text" href={this.props.restaurant.photos_url} target="_blank">Photos</a>:<h3></h3>}
                                 <a class="waves-effect waves-light btn-large" onClick={this.props.closeRestaurantDetail}>Close</a>
                             </div>
                         </div>

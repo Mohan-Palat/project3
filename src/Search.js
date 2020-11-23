@@ -106,8 +106,8 @@ class Search extends Component {
                 </div>
                 <br></br>
                 <div class="row s24 m12">
-                    <div class="col s24 m12 categories">
-                        <div class="card yellow lighten-1">
+                    <div class="col s24 m12 categories category-checkboxes">
+                        <div class="card lighten-1">
                             <div class="card-content black-text">
                                 {allCategories}
                             </div>
