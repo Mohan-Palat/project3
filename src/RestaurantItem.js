@@ -27,10 +27,15 @@ class RestaurantItem extends Component {
                         <div class="card blue lighten-1">
                             <div class="card-content black-text">
                                 <span class="card-title">{this.props.restaurant.name}</span>
+                                <div class="card-action" class="cuisines">
+                                    <div>Cuisines: {this.props.restaurant.cuisines}</div>
+                                </div>
+                                <br/>
                                 <div class="card-action" class={this.props.restaurant.user_rating.rating_text}>
                                     <div>Aggregate Rating: {this.props.restaurant.user_rating.aggregate_rating}</div>
                                     <div>Rating Text: {this.props.restaurant.user_rating.rating_text}</div>
                                 </div>
+                                <br/>
                             </div>
                             {(this.props.restaurant.thumb)?<img border="0" src={this.props.restaurant.thumb} alt="name"/>:<h3></h3>}
                             <div class="card-action">

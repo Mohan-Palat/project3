@@ -3,7 +3,9 @@ import Search from './Search';
 import RestaurantList from './RestaurantList';
 import RestaurantDetail from './RestaurantDetail';
 import RestaurantItem from './RestaurantItem';
-import { getCityID, getRestaurantsByCityID, getCategories, getRestaurantsByCityIDAndCategories, getRestaurantsDetails } from './api.js';
+import Cuisine from './Cuisine';
+import { getCityID, getRestaurantsByCityID, getCategories, 
+  getRestaurantsByCityIDAndCategories, getRestaurantsDetails, getRestaurantsByCityIDAndCuisines } from './api.js';
  
 class App extends Component {
   constructor(props) {
@@ -16,6 +18,7 @@ class App extends Component {
       favoriteRestaurants: [],
       categoryList: [],
       categoryResultList: {},
+      cuisineResultList: {},
       restaurantBody: null,
     }
   }
@@ -46,6 +49,7 @@ class App extends Component {
 
   handleCitySearchCriteria = async (searchValue, isRandom) => {
     console.log('Search value in App.js', searchValue);
+    
     // console.log('isRandom value in App.js', isRandom);
     const results = await getCityID(searchValue);
     
@@ -157,6 +161,40 @@ class App extends Component {
     console.log("tempObject", tempObject);
   }
 
+
+  handleCuisineResultList = async (event) => {
+    console.log('handleCuisineResultList', event.target); 
+    console.log('handleCuisineResultList value', event.target.value);
+
+    let tempObjectCuisineResultsList = this.state.cuisineResultList;
+    let restaurantResults = [];
+
+    if (tempObjectCuisineResultsList[event.target.value] == true) {
+      delete tempObjectCuisineResultsList[event.target.value];
+    }
+    else {
+      tempObjectCuisineResultsList[event.target.value] = true;
+    }
+
+    if (Object.keys(tempObjectCuisineResultsList) != null) {
+      let keylist = Object.keys(tempObjectCuisineResultsList).join();
+      console.log("keylist", keylist);
+
+      const restaurantResultsOutput = await getRestaurantsByCityIDAndCuisines(this.state.cityID, keylist);
+      restaurantResults = restaurantResultsOutput.data.restaurants;
+    }
+
+    console.log("restaurantResults", restaurantResults);
+
+    this.setState({
+      cuisineResultList: tempObjectCuisineResultsList,
+      restaurantList: restaurantResults,
+    });
+
+    console.log("tempObjectCuisineResultsList", tempObjectCuisineResultsList);
+  }
+
+
   closeRestaurantDetail = (event) => {
     console.log('handleCategoryResultList', event.target); 
 
@@ -191,10 +229,19 @@ class App extends Component {
       if (this.state.restaurantBody != null) {
         restaurantComponent = <h3></h3>
       }
-      
+
     }
     else {
       restaurantComponent = <h3>No Restaurants Listed</h3>
+    }
+
+    let cuisine = '';
+    console.log('App.js this.state.cityID', this.state.cityID);
+    if (this.state.cityID != '') {
+      cuisine = <Cuisine cityID={this.state.cityID} handleCuisineResultList={this.handleCuisineResultList} />
+    }
+    else {
+      cuisine = <h3></h3>;
     }
     
     return (
@@ -206,9 +253,18 @@ class App extends Component {
                   handleCategorySearch={this.handleCategorySearch} 
                   categoryList={this.state.categoryList} 
                   handleCategoryResultList={this.handleCategoryResultList}/>
+
+        {cuisine}
+
         <h2 className="city-header">{this.state.cityName}</h2>
       </div>
-      {(this.state.restaurantBody != null)?<RestaurantDetail name={this.state.restaurantName} restaurant={this.state.restaurantBody} closeRestaurantDetail={this.closeRestaurantDetail}/>:<h3></h3>}
+      {(this.state.restaurantBody != null)?<RestaurantDetail  name={this.state.restaurantName} 
+                                                              restaurant={this.state.restaurantBody} 
+                                                              closeRestaurantDetail={this.closeRestaurantDetail}
+                                                              favoriteRestaurants={this.state.favoriteRestaurants}
+                                                              handleRestaurantSearch={this.handleRestaurantSearch}  
+                                                              onFaveToggle={this.handleFaveToggle} />
+                                          :<h3></h3>}
       {restaurantComponent}
       </>
     );
