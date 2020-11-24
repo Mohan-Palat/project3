@@ -224,9 +224,9 @@ class RestaurantDetail extends Component {
                                 >
                             </iframe>
                             <div class="card-action flex-container">
-                                {(this.props.restaurant.menu_url)?<a class ="black-text" href={this.props.restaurant.menu_url} target="_blank">Restaurant Menu</a>:<h3></h3>}
-                                {(this.props.restaurant.photos_url)?<a class ="black-text" href={this.props.restaurant.photos_url} target="_blank">Photos</a>:<h3></h3>}
-                                {(this.props.restaurant.events_url)?<a class ="black-text" href={this.props.restaurant.events_url} target="_blank">Events</a>:<h3></h3>}
+                                {(this.props.restaurant.menu_url)?<a class ="red-text" href={this.props.restaurant.menu_url} target="_blank">Restaurant Menu</a>:<h3></h3>}
+                                {(this.props.restaurant.photos_url)?<a class ="red-text" href={this.props.restaurant.photos_url} target="_blank">Photos</a>:<h3></h3>}
+                                {(this.props.restaurant.events_url)?<a class ="red-text" href={this.props.restaurant.events_url} target="_blank">Events</a>:<h3></h3>}
                             </div>
                             <div class="card-action flex-container">
                                 <a class="waves-effect waves-light btn-large" onClick={this.getReviewsToggle}>{(this.state.toggleShowReviews)?"Hide Reviews":"Show Reviews"}</a>
