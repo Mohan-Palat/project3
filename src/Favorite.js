@@ -3,16 +3,12 @@ import React, { Component } from 'react';
 class Favorite extends Component {
     handleClick = (e) => {
         e.stopPropagation()
-        console.log('Handling Fave click!', this.props)
-        this.props.onFaveToggle()
-        
 
+        this.props.onFaveToggle()
     }
     
     render() {
-        console.log('fave props', this.props)
-        // localStorage.set('myFavoriteRestaurants', this.props.favoriteRestaurants)
-        // const isFave = (this.props.isFave) ? 'remove_from_queue' : 'add_to_queue'
+
         const isFave = (this.props.isFave)
         if (isFave) {
             return (

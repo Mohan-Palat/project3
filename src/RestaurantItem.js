@@ -1,19 +1,15 @@
-
-import { render } from '@testing-library/react';
 import React, { Component } from 'react';
-import { getRestaurantByRestaurantID } from './api.js';
 import Favorite from './Favorite.js';
 
 
 class RestaurantItem extends Component {
     
     render() {         
-        console.log('RestaurantItem props', this.props)
         
         const searchRestaurantDetails = (e) =>{
             e.preventDefault()
             const restaurantID = this.props.restaurant.id
-            console.log(restaurantID);
+
             
             this.props.handleRestaurantSearch(this.props.restaurant.id);
 
@@ -43,9 +39,7 @@ class RestaurantItem extends Component {
                                 {(this.props.restaurant.menu_url)?<a class="red-text" id='links' href={this.props.restaurant.menu_url} target="_blank">Restaurant Menu</a>:<h3></h3>}
                                 {(this.props.restaurant.photos_url)?<a class="red-text" href={this.props.restaurant.photos_url} target="_blank">Photos</a>:<h3></h3>}
                                 {(this.props.restaurant.events_url)?<a class="red-text" href={this.props.restaurant.events_url} target="_blank">Events</a>:<h3></h3>}
-                                <a class="waves-effect waves-light btn-large" onClick={searchRestaurantDetails}>Details</a>
-                                {/* <button onClick={searchRestaurantDetails}>Details</button> */}
-                                
+                                <a class="waves-effect waves-light btn-large" onClick={searchRestaurantDetails}>Details</a>                                
                                 <Favorite onFaveToggle={this.props.onFaveToggle} isFave={this.props.isFave} favoriteRestaurants={this.props.favoriteRestaurants} />
                             </div>
                         </div>

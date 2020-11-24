@@ -13,13 +13,9 @@ class Category extends Component {
       }
 
     componentDidMount() {
-        console.log("componentDidMount executed");
-
-        // this.props.handleCategorySearch();
 
         getCategories()
             .then((response) => {
-                console.log('allCategories', response);
                 let categoryList = response.data.categories;
                 categoryList.unshift({categories: {id: 0, name: "None"}});
 
@@ -34,13 +30,12 @@ class Category extends Component {
 
     render() {
         let allCategories = [];
-        console.log("this.state.categoryList", this.state.categoryList);
+        
         if (this.state.categoryList.length != 0) {
             allCategories = this.state.categoryList.map((category, index) => {
-                // console.log(index, category.categories.name);
-                // console.log(index, category.categories.id);
-                // console.log("category.categories", category.categories);
+    
                 return <CategoryItem key={index} category={category.categories} handleCategoryResultList={this.props.handleCategoryResultList}/>
+            
             });
         }
         else {

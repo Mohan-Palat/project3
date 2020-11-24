@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import Favorite from './Favorite'
 import RestaurantItem from './RestaurantItem';
-import {Route, Link } from 'react-router-dom';
-import Nav from './Nav';
 import { getReviewsByRestaurantID, getGeoCodeByLatLong } from './api';
 import ReviewItem from './ReviewItem';
 
@@ -24,7 +22,6 @@ class RestaurantDetail extends Component {
 
         getReviewsByRestaurantID(this.props.restaurant.id)
             .then((response) => {
-                // console.log('allReviews', response);
                 this.setState({
                     reviewList: response.data.user_reviews,
                 });
@@ -35,7 +32,6 @@ class RestaurantDetail extends Component {
 
         getGeoCodeByLatLong(this.props.restaurant.location.latitude, this.props.restaurant.location.longitude)
             .then((response) => {
-                console.log('allNearbyRestaurants', response);
                 this.setState({
                     nearbyRestaurantList: response.data.nearby_restaurants,
                 });
@@ -61,7 +57,6 @@ class RestaurantDetail extends Component {
         if (showReviewsValue) {
             getReviewsByRestaurantID(this.props.restaurant.id)
             .then((response) => {
-                console.log('allReviews', response);
                 this.setState({
                     reviewList: response.data.user_reviews,
                 });
@@ -93,7 +88,6 @@ class RestaurantDetail extends Component {
         if (showNearbyRestaurants) {
             getGeoCodeByLatLong(this.props.restaurant.location.latitude, this.props.restaurant.location.longitude)
             .then((response) => {
-                console.log('allNearbyRestaurants', response);
                 this.setState({
                     nearbyRestaurantList: response.data.nearby_restaurants,
                 });
@@ -109,7 +103,6 @@ class RestaurantDetail extends Component {
         });
     }
     isInFavorites = (restaurant) => {
-        console.log('restaurant', restaurant)
         let isFave = false
         let faves = this.props.favoriteRestaurants;
         let myKeys = faves.filter(key => key.restaurant.id === restaurant.id);
@@ -119,7 +112,6 @@ class RestaurantDetail extends Component {
         return isFave
       }
     render() {
-        console.log("this.props.restaurant", this.props);
 
         if (this.state.name != this.props.name) {
             this.setState({
@@ -131,12 +123,9 @@ class RestaurantDetail extends Component {
         }
 
         let allReviews = [];
-        // console.log("this.state.reviewList", this.state.reviewList);
 
         if ((this.state.reviewList != null) && (this.state.toggleShowReviews)) {
             allReviews = this.state.reviewList.map((review, index) => {
-                // console.log(index, "review", review);
-                // console.log(index, "review.review.review_text", review.review.review_text);
                 let indextemp = index + 1;
                 return (
                 <div class="card lighten-1">
@@ -149,12 +138,9 @@ class RestaurantDetail extends Component {
         }
 
         let allNearbyRestaurants = [];
-        console.log("this.state.nearbyRestaurantList", this.state.nearbyRestaurantList);
 
         if ((this.state.nearbyRestaurantList != null) && (this.state.toggleShowNearbyRestaurants)) {
             allNearbyRestaurants = this.state.nearbyRestaurantList.map((nearbyRestaurant, index) => {
-                console.log(index, "nearbyRestaurant", nearbyRestaurant);
-                console.log(index, "nearbyRestaurant.restaurant", nearbyRestaurant.restaurant);
                 let indextemp = index + 1;
                 
                 return (
@@ -183,12 +169,8 @@ class RestaurantDetail extends Component {
         let queryString = restaurantName + ' ' + (this.props.restaurant.location.city);
         let googleString = `https://www.google.com/maps/embed/v1/search?key=AIzaSyCLbDPkMfZuxUVZ3L3-_fxsE6t3g86CaO8&q=${queryString} allowfullscreen`
         
-        console.log('all props', this.props)
         return (
             <div>
-                {/* <h1 className="Detail-Header">{this.props.name}</h1> */}
-                {/* <Route path='/details' component={Nav} /> */}
-                
                 <div class="row">
                     <div class="col s24 m12 l7">
                         <div class="card lighten-1 display-card">
@@ -219,7 +201,6 @@ class RestaurantDetail extends Component {
                                 <ul>
                                     {allHighlights}
                                 </ul>
-                                {/* <p>{this.props.restaurant.highlights.join().replace(/,/g,", ")}</p> */}
                             </div>
                             <br/>
                             <iframe

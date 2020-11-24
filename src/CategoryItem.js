@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default function CategoryItem (props) { 
-    // console.log("props", props);  
+
     return (
             <>
                 <label className="category-label" htmlFor={props.category.name} for={props.category.id}>

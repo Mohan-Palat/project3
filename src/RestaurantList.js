@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-// import { getRestaurantsByCityID } from './api.js';
 import RestaurantItem from './RestaurantItem.js';
-// import Favorite from './Favorite'
 
 class RestaurantList extends Component {
     constructor(props) {
@@ -17,10 +15,6 @@ class RestaurantList extends Component {
         return isFave
       }
     render() {
-        // console.log("RestaurantList render this.props", this.props);
-        ///////
-        // console.log('Updated favorites this.state.favoriteRestaurants',this.state.favoriteRestaurants )
-        console.log("handleRestaurantSearch ", this.props.handleRestaurantSearch);
         const allRestaurants = this.props.restaurantList.map((entry, index) => {
                 return <RestaurantItem  key={index} 
                                         restaurant={entry.restaurant} 
