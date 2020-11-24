@@ -94,7 +94,7 @@ class Search extends Component {
                                 <a class="waves-effect waves-light btn-large" onClick={this.searchCity}>Search</a>
                                 <a class="waves-effect waves-light btn-large" onClick={this.clearPanel}>Clear</a>
                                 <a class="waves-effect waves-light btn-large" onClick={this.setRandom}>I'm Feeling Lucky</a>
-                                <a class="waves-effect waves-light btn-large" onClick={this.viewMyFavorites}>View My Favorites</a>
+                                {/* <a class="waves-effect waves-light btn-large" onClick={this.viewMyFavorites}>View My Favorites</a> */}
                                 </div>
                             </div>
                         </div>

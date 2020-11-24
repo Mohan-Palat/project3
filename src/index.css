@@ -213,6 +213,8 @@ span {
 
 #favoritesBtn {
   opacity: .4;
+  margin: 20px;
+  
 }
 .display-thumb-unavail{
   display: block;
