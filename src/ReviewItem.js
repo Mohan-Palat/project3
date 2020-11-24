@@ -1,7 +1,6 @@
 import React from 'react';
 
 export default function ReviewItem (props) { 
-    // console.log("props", props);
     const rating = props.review.review.rating_text.replace(/!/,'').replace(/ /,'');
     return (
             <div class={rating}>

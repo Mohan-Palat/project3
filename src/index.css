@@ -3,14 +3,8 @@
 
 body {
   margin: 0;
-  /* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif; */
-    
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* background: rgb(166,166,164);
-background: linear-gradient(90deg, rgba(166,166,164,1) 0%, rgba(223,223,220,1) 25%, rgba(254,253,250,1) 50%, rgba(214,214,211,1) 75%, rgba(166,166,164,1) 100%); */
   background: #FFFAFA;
   font-family: 'Patrick Hand', cursive;
 }
@@ -42,15 +36,6 @@ h1, h2 {
 
 span {
   color: black;
-}
-
-.card {
-  /* background: rgb(140, 182, 244); */
-  /* background: rgb(32, 55, 230); */
-  /* background: rgb(169, 40, 169); */
-  /* background: rgb(99, 8, 99); */
-  /* background: rgb(113, 164, 240);
-  background: linear-gradient(90deg, rgb(113, 164, 240) 0%, rgba(255,230,195,1) 100%, rgba(231,96,96,0.6755077030812324) 100%); */
 }
 
 .Excellent {
@@ -165,7 +150,6 @@ span {
 .item-card {
   border: red 2px solid;
   width: 700px;
-  /* margin-left: 75%; */
   border-radius: 10%;
   align-items: center;
 

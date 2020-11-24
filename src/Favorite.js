@@ -7,7 +7,6 @@ class Favorite extends Component {
     }
 
     render() {
-        // handle the color of the buttons and send click event to App.js
         const isFave = (this.props.isFave)
         if (isFave) {
             return (

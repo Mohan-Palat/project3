@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 
-// export default function CuisineItem (props) {
 class CuisineItem extends Component {
-    // console.log("props", props);
     render () {
 
         const id = "cuisine" + this.props.cuisine.cuisine_id;
