@@ -437,6 +437,7 @@ class App extends Component {
           favoriteRestaurants={this.state.favoriteRestaurants}
           onFaveToggle={() => this.handleFaveToggle(this.state.restaurantBody)}
           isFave={this.searchForFave(this.state.restaurantBody)}
+          handleRestaurantSearch={this.handleRestaurantSearch}
         />
           : <h3></h3>}
         {restaurantComponent}
