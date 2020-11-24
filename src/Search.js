@@ -67,6 +67,11 @@ class Search extends Component {
     render() {
         let allCategories = [];
         console.log("this.state.categoryList", this.state.categoryList);
+
+        if (this.props.currentCity != '') {
+            this.state.searchValue = this.props.currentCity
+        }
+
         if (this.state.categoryList.length != 0) {
             allCategories = this.state.categoryList.map((category, index) => {
                 // console.log(index, category.categories.name);

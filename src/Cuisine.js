@@ -74,8 +74,8 @@ class Cuisine extends Component {
         return (
             <div>
                 <div class="row s24 m12">
-                    <div class="col s24 m12 categories">
-                        <div class="card yellow lighten-1">
+                    <div class="col s24 m12 category-checkboxes">
+                        <div class="card lighten-1">
                             <div class="card-content black-text">
                                 <h5>Cuisines</h5>
                                 {allCuisines}

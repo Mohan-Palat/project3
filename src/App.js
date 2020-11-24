@@ -4,9 +4,10 @@ import RestaurantList from './RestaurantList';
 import RestaurantDetail from './RestaurantDetail';
 import RestaurantItem from './RestaurantItem';
 import Cuisine from './Cuisine';
-import { getCityID, getRestaurantsByCityID, getCategories, 
+import { getGeoCodeByLatLong, getCityID, getRestaurantsByCityID, getCategories, 
   getRestaurantsByCityIDAndCategories, getRestaurantsDetails, getRestaurantsByCityIDAndCuisines } from './api.js';
- 
+
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -14,6 +15,7 @@ class App extends Component {
     this.state = {
       cityID: '',
       cityName: '',
+      currentCity: '',
       restaurantList: [],
       favoriteRestaurants: [],
       categoryList: [],
@@ -21,7 +23,12 @@ class App extends Component {
       cuisineResultList: {},
       restaurantBody: null,
     }
+    //this.delta = this.delta.bind(this);
+    this.getGeoCodeByLatLong = getGeoCodeByLatLong.bind(this)
+
   }
+
+ 
 
   handleFaveToggle = (restaurant)=>{
     const faves = this.state.favoriteRestaurants.slice();
@@ -137,7 +144,8 @@ class App extends Component {
       cityID: cityID,
       cityName: cityName,
       restaurantList: restaurantResults,
-      isRandom: isRandom
+      isRandom: isRandom,
+      currentCity: '',
     });
   }
 
@@ -202,6 +210,44 @@ class App extends Component {
       restaurantBody: null,
     });
   }
+
+  componentDidMount() {
+
+    let currentComponent = this;
+
+      navigator.geolocation.getCurrentPosition(function(position) {
+        console.log("Latitude is :", position.coords.latitude);
+        console.log("Longitude is :", position.coords.longitude);
+  
+        let userLat = position.coords.latitude
+        let userLong = position.coords.longitude
+        
+        console.log(this);
+
+        getGeoCodeByLatLong(userLat, userLong)
+        .then( (response) => {
+            console.log('my location is', response.data.location.city_id, response.data.location.city_name);
+  
+            const userLocation = response.data.location.city_id;
+            const userCity = response.data.location.city_name
+
+
+            console.log(currentComponent);
+            currentComponent.setState({
+              cityID: userLocation,
+              currentCity: userCity,
+            });
+        })
+        .catch((error) => {
+            console.log('API ERROR:', error);
+        });
+  
+  
+      });
+
+  }
+
+    
   
   render() {
     console.log("App.js render");
@@ -252,9 +298,10 @@ class App extends Component {
          <Search  handleCitySearchCriteria={this.handleCitySearchCriteria} 
                   handleCategorySearch={this.handleCategorySearch} 
                   categoryList={this.state.categoryList} 
-                  handleCategoryResultList={this.handleCategoryResultList}/>
+                  handleCategoryResultList={this.handleCategoryResultList}
+                  currentCity={this.state.currentCity}/>
         {cuisine}
-        {(this.state.cityName != '')?<h2 className="city-header">Viewing restaurants in {this.state.cityName}</h2>:<h2></h2>}
+        {(this.state.cityName != '')?<h2 className="city-header">Viewing restaurants around {this.state.cityName}</h2>:<h2></h2>}
       </div>
       {(this.state.restaurantBody != null)?<RestaurantDetail  name={this.state.restaurantName} 
                                                               restaurant={this.state.restaurantBody} 

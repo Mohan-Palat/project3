@@ -25,7 +25,7 @@ class RestaurantItem extends Component {
 
                         <div class="card lighten-1 item-card">
                             <div class="card-content black-text center-details">
-                                <span class="card-title">{this.props.restaurant.name}</span>
+                                <span class="card-title restaurant-title">{this.props.restaurant.name}</span>
                                 <div class="card-action" class="cuisines">
                                     <div>Cuisines: {this.props.restaurant.cuisines}</div>
                                 </div>

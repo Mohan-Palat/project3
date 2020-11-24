@@ -99,5 +99,6 @@ const getRestaurantsByCityIDAndCuisines = (cityID, cuisineList) => {
     return instance.get(`${process.env.REACT_APP_ZOMATO_BASE_URL}/search?entity_id=${cityID}&entity_type=city&cuisines=${cuisineList}&order=desc`);
 }
 
+
 export {getCityID, getRestaurantsByCityID, getCategories, getRestaurantsByCityIDAndCategories, 
     getRestaurantsDetails, getReviewsByRestaurantID, getGeoCodeByLatLong, getCuisines, getRestaurantsByCityIDAndCuisines};

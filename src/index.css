@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap');
 
 body {
   margin: 0;
@@ -12,7 +12,7 @@ body {
   /* background: rgb(166,166,164);
 background: linear-gradient(90deg, rgba(166,166,164,1) 0%, rgba(223,223,220,1) 25%, rgba(254,253,250,1) 50%, rgba(214,214,211,1) 75%, rgba(166,166,164,1) 100%); */
   background: #FFFAFA;
-  font-family: "Lucida Console", Courier, monospace;
+  font-family: 'Patrick Hand', cursive;
 }
 
 code {
@@ -136,7 +136,7 @@ span {
   background-color: white;
   opacity: .8;
   text-align: center;
-  font-family: "Lucida Console", Courier, monospace;
+  font-family: 'Patrick Hand', cursive;
 }
 
 .category-label {
@@ -188,7 +188,7 @@ span {
   margin-right: auto;
 }
 
-.display-name {
+.display-name, .restaurant-title {
   font-family: 'Kaushan Script', cursive;
   text-align: center;
   text-emphasis: bold;
@@ -213,4 +213,7 @@ span {
   height: 200px;
 }
 
+.display-card {
+  text-align: center;
+}
 
