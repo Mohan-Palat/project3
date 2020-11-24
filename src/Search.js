@@ -32,10 +32,6 @@ class Search extends Component {
         console.log('searchCity', event.target.value);
 
         this.props.handleCitySearchCriteria(this.state.searchValue, false);
-
-        this.setState({
-            searchValue: '',
-        }); 
     }
 
     clearPanel = (event) => {
@@ -52,32 +48,32 @@ class Search extends Component {
     componentDidMount() {
         console.log("componentDidMount executed");
 
-        getCategories()
-            .then((response) => {
-                console.log('allCategories', response);
-                this.setState({
-                    categoryList: response.data.categories,
-                });
-            })
-            .catch((error) => {
-                console.log('API ERROR:', error);
-            });
+        // getCategories()
+        //     .then((response) => {
+        //         console.log('allCategories', response);
+        //         this.setState({
+        //             categoryList: response.data.categories,
+        //         });
+        //     })
+        //     .catch((error) => {
+        //         console.log('API ERROR:', error);
+        //     });
     };
 
     render() {
-        let allCategories = [];
-        console.log("this.state.categoryList", this.state.categoryList);
-        if (this.state.categoryList.length != 0) {
-            allCategories = this.state.categoryList.map((category, index) => {
-                // console.log(index, category.categories.name);
-                // console.log(index, category.categories.id);
-                // console.log("category.categories", category.categories);
-                return <CategoryItem key={index} category={category.categories} handleCategoryResultList={this.props.handleCategoryResultList}/>
-            });
-        }
-        else {
-            allCategories = <h3></h3>
-        }
+        // let allCategories = [];
+        // console.log("this.state.categoryList", this.state.categoryList);
+        // if (this.state.categoryList.length != 0) {
+        //     allCategories = this.state.categoryList.map((category, index) => {
+        //         // console.log(index, category.categories.name);
+        //         // console.log(index, category.categories.id);
+        //         // console.log("category.categories", category.categories);
+        //         return <CategoryItem key={index} category={category.categories} handleCategoryResultList={this.props.handleCategoryResultList}/>
+        //     });
+        // }
+        // else {
+        //     allCategories = <h3></h3>
+        // }
 
         return (
             <div>
@@ -105,7 +101,8 @@ class Search extends Component {
                     </div>
                 </div>
                 <br></br>
-                <div class="row s24 m12">
+
+                {/* <div class="row s24 m12">
                     <div class="col s24 m12 categories category-checkboxes">
                         <div class="card lighten-1">
                             <div class="card-content black-text">
@@ -114,7 +111,8 @@ class Search extends Component {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> */}
+                
             </div>
         );
     }

@@ -4,9 +4,11 @@ import RestaurantList from './RestaurantList';
 import RestaurantDetail from './RestaurantDetail';
 import RestaurantItem from './RestaurantItem';
 import Cuisine from './Cuisine';
+import Category from './Category';
 import { getCityID, getRestaurantsByCityID, getCategories, 
-  getRestaurantsByCityIDAndCategories, getRestaurantsDetails, getRestaurantsByCityIDAndCuisines } from './api.js';
- 
+  getRestaurantsByCityIDAndCategories, getRestaurantsDetails, 
+  getRestaurantsByCityIDAndCuisines, getRestaurantsByCityIDAndCategoriesAndCuisines } from './api.js';
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -17,9 +19,10 @@ class App extends Component {
       restaurantList: [],
       favoriteRestaurants: [],
       categoryList: [],
-      categoryResultList: {},
+      categoryResultValue: {},
       cuisineResultList: {},
       restaurantBody: null,
+      restaurantID: '',
     }
   }
 
@@ -84,18 +87,18 @@ class App extends Component {
 
   }
 
-  handleCategorySearch = async () => {
-    console.log('handleCategorySearch');
+  // handleCategorySearch = async () => {
+  //   console.log('handleCategorySearch');
 
-    const results = await getCategories();
+  //   const results = await getCategories();
     
-    console.log("results.data.categories", results.data.categories);
-    const categories = results.data.categories;
+  //   console.log("results.data.categories", results.data.categories);
+  //   let categories = results.data.categories;
 
-    this.setState({
-      categoryList: categories,
-    });
-  }
+  //   this.setState({
+  //     categoryList: categories,
+  //   });
+  // }
 
   handleCitySearchCriteria = async (searchValue, isRandom) => {
     console.log('Search value in App.js', searchValue);
@@ -114,21 +117,21 @@ class App extends Component {
         const results = await getCityID(searchValue);
         console.log(results.data.location_suggestions[0].id);
   
-        if (Object.keys(this.state.categoryResultList) == null) {
+        // if (Object.keys(this.state.categoryResultList) == null) {
           const restaurantResultsOutput = await getRestaurantsByCityID(results.data.location_suggestions[0].id);
           restaurantResults = restaurantResultsOutput.data.restaurants;
           cityID = results.data.location_suggestions[0].id;
           cityName = results.data.location_suggestions[0].name;
-        }
-        else {
-          let keylist = Object.keys(this.state.categoryResultList).join();
-          console.log("keylist", keylist);
+        // }
+        // else {
+        //   let keylist = Object.keys(this.state.categoryResultList).join();
+        //   console.log("keylist", keylist);
   
-          const restaurantResultsOutput = await getRestaurantsByCityIDAndCategories(results.data.location_suggestions[0].id, keylist);
-          restaurantResults = restaurantResultsOutput.data.restaurants;
-          cityID = results.data.location_suggestions[0].id;
-          cityName = results.data.location_suggestions[0].name;
-        }
+        //   const restaurantResultsOutput = await getRestaurantsByCityIDAndCategories(results.data.location_suggestions[0].id, keylist);
+        //   restaurantResults = restaurantResultsOutput.data.restaurants;
+        //   cityID = results.data.location_suggestions[0].id;
+        //   cityName = results.data.location_suggestions[0].name;
+        // }
   
       }
     }
@@ -137,38 +140,94 @@ class App extends Component {
       cityID: cityID,
       cityName: cityName,
       restaurantList: restaurantResults,
-      isRandom: isRandom
+      cuisineResultList: {}, 
+      isRandom: isRandom,
     });
   }
 
-  handleCategoryResultList = (event) => {
-    console.log('handleCategoryResultList', event.target); 
-    console.log('handleCategoryResultList id', event.target.id);
+  // handleCategoryResultList = (event) => {
+  //   console.log('handleCategoryResultList', event.target); 
+  //   console.log('handleCategoryResultList id', event.target.id);
 
-    let tempObject = this.state.categoryResultList;
+  //   let tempObject = this.state.categoryResultList;
 
-    if (tempObject[event.target.id] == true) {
-      delete tempObject[event.target.id];
-    }
-    else {
-      tempObject[event.target.id] = true;
-    }
+  //   if (tempObject[event.target.id] == true) {
+  //     delete tempObject[event.target.id];
+  //   }
+  //   else {
+  //     tempObject[event.target.id] = true;
+  //   }
 
-    this.setState({
-      categoryResultList: tempObject
-    });
+  //   this.setState({
+  //     categoryResultList: tempObject
+  //   });
 
-    console.log("tempObject", tempObject);
+  //   console.log("tempObject", tempObject);
+  // }
+
+    handleCategoryResultList = async (event) => {
+      console.log('handleCuisineResultList event', event); 
+
+      // let tempObjectCuisineResultsList = this.state.cuisineResultList;
+      let tempObjectCategoryResultsValue = this.state.categoryResultValue;
+      let tempObjectCuisineResultsList = this.clone(this.state.cuisineResultList);
+
+      console.log("tempObjectCategoryResultsValue handleCategoryResultList", tempObjectCategoryResultsValue);
+      console.log("tempObjectCuisineResultsList handleCategoryResultList", tempObjectCuisineResultsList);
+  
+      let restaurantResults = [];
+      if (event.target.value == '0') {
+        tempObjectCategoryResultsValue = '';
+      }
+      else {
+        tempObjectCategoryResultsValue = event.target.value;
+      }
+  
+      if (Object.keys(tempObjectCuisineResultsList) == {}) {
+        let categoryKeyList = tempObjectCategoryResultsValue;
+        console.log("categoryKeyList single", categoryKeyList);
+  
+        const restaurantResultsOutput = await getRestaurantsByCityIDAndCategories(this.state.cityID, categoryKeyList);
+        restaurantResults = restaurantResultsOutput.data.restaurants;
+      }
+      else if (Object.keys(tempObjectCuisineResultsList) != {}) {
+        let cuisineKeyList = Object.keys(tempObjectCuisineResultsList).join();
+        console.log("cuisineKeyList double", cuisineKeyList);
+  
+        let categoryKeyList = tempObjectCategoryResultsValue;
+        console.log("categoryKeyList double", categoryKeyList);
+  
+        const restaurantResultsOutput = await getRestaurantsByCityIDAndCategoriesAndCuisines(this.state.cityID, categoryKeyList, cuisineKeyList);
+        restaurantResults = restaurantResultsOutput.data.restaurants;
+      }
+  
+      console.log("restaurantResults", restaurantResults);
+  
+      this.setState({
+        categoryResultValue: tempObjectCategoryResultsValue,
+        restaurantList: restaurantResults,
+      });
+  
+      console.log("tempObjectCategoryResultsValue", tempObjectCategoryResultsValue);
   }
 
+  clone = (obj) => {
+    if (null == obj || "object" != typeof obj) return obj;
+    var copy = obj.constructor();
+    for (var attr in obj) {
+        if (obj.hasOwnProperty(attr)) copy[attr] = obj[attr];
+    }
+    return copy;
+}
 
   handleCuisineResultList = async (event) => {
-    console.log('handleCuisineResultList', event.target); 
-    console.log('handleCuisineResultList value', event.target.value);
+    console.log('handleCuisineResultList event', event); 
 
-    let tempObjectCuisineResultsList = this.state.cuisineResultList;
+    // let tempObjectCuisineResultsList = this.state.cuisineResultList;
+    let tempObjectCuisineResultsList = this.clone(this.state.cuisineResultList);
+    let tempObjectCategoryResultsValue = this.state.categoryResultValue;
+
     let restaurantResults = [];
-
     if (tempObjectCuisineResultsList[event.target.value] == true) {
       delete tempObjectCuisineResultsList[event.target.value];
     }
@@ -176,11 +235,21 @@ class App extends Component {
       tempObjectCuisineResultsList[event.target.value] = true;
     }
 
-    if (Object.keys(tempObjectCuisineResultsList) != null) {
-      let keylist = Object.keys(tempObjectCuisineResultsList).join();
-      console.log("keylist", keylist);
+    if ((Object.keys(tempObjectCuisineResultsList) != {}) && (Object.keys(tempObjectCategoryResultsValue) == '')) {
+      let cuisineKeyList = Object.keys(tempObjectCuisineResultsList).join();
+      console.log("cuisineKeyList", cuisineKeyList);
 
-      const restaurantResultsOutput = await getRestaurantsByCityIDAndCuisines(this.state.cityID, keylist);
+      const restaurantResultsOutput = await getRestaurantsByCityIDAndCuisines(this.state.cityID, cuisineKeyList);
+      restaurantResults = restaurantResultsOutput.data.restaurants;
+    }
+    else if ((Object.keys(tempObjectCuisineResultsList) != {}) && (tempObjectCategoryResultsValue != '')) {
+      let cuisineKeyList = Object.keys(tempObjectCuisineResultsList).join();
+      console.log("cuisineKeyList", cuisineKeyList);
+
+      let categoryKeyList = tempObjectCategoryResultsValue;
+      console.log("categoryKeyList", categoryKeyList);
+
+      const restaurantResultsOutput = await getRestaurantsByCityIDAndCategoriesAndCuisines(this.state.cityID, categoryKeyList, cuisineKeyList);
       restaurantResults = restaurantResultsOutput.data.restaurants;
     }
 
@@ -236,12 +305,23 @@ class App extends Component {
     }
 
     let cuisine = '';
+    let category = '';
     console.log('App.js this.state.cityID', this.state.cityID);
+
     if (this.state.cityID != '') {
       cuisine = <Cuisine cityID={this.state.cityID} handleCuisineResultList={this.handleCuisineResultList} />
     }
     else {
       cuisine = <h3></h3>;
+    }
+
+    if (this.state.cityID != '') {
+      category = <Category  cityID={this.state.cityID} 
+                            handleCategoryResultList={this.handleCategoryResultList}
+                            handleCategorySearch={this.handleCategorySearch} />
+    }
+    else {
+      category = <h3></h3>;
     }
     
     return (
@@ -253,10 +333,13 @@ class App extends Component {
                   handleCategorySearch={this.handleCategorySearch} 
                   categoryList={this.state.categoryList} 
                   handleCategoryResultList={this.handleCategoryResultList}/>
+        {category}
         {cuisine}
+
         {(this.state.cityName != '')?<h2 className="city-header">Viewing restaurants in {this.state.cityName}</h2>:<h2></h2>}
       </div>
-      {(this.state.restaurantBody != null)?<RestaurantDetail  name={this.state.restaurantName} 
+      {(this.state.restaurantBody != null)?<RestaurantDetail  key={this.state.restaurantID}
+                                                              name={this.state.restaurantName} 
                                                               restaurant={this.state.restaurantBody} 
                                                               closeRestaurantDetail={this.closeRestaurantDetail}
                                                               favoriteRestaurants={this.state.favoriteRestaurants}

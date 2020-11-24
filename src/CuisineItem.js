@@ -1,15 +1,27 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-export default function CuisineItem (props) { 
+// export default function CuisineItem (props) {
+class CuisineItem extends Component {
     // console.log("props", props);
-    const id = "cuisine" + props.cuisine.cuisine_id;
-    const name = "cuisine" + props.cuisine.cuisine_name;
-    return (
-            <>
-                <label className="category-label" htmlFor={props.cuisine.cuisine_name} for={id}>
-                    <input type="checkbox" onClick={props.handleCuisineResultList} name={name} id={id} value={props.cuisine.cuisine_id} />
-                    <span>{props.cuisine.cuisine_name}</span>
-                </label>
-            </>
+    render () {
+
+        const id = "cuisine" + this.props.cuisine.cuisine_id;
+        const name = "cuisine" + this.props.cuisine.cuisine_name;
+
+        const ref = 'ref_' + this.props.cuisine.cuisine_id;
+        if (this.props.changeCityFlag) {
+            this.refs['ref_' + id].checked = false;
+        }
+
+        return (
+                <>
+                    <label className="category-label" htmlFor={this.props.cuisine.cuisine_name} for={id}>
+                        <input type="checkbox" onClick={this.props.handleCuisineResultList} name={name} id={id} value={this.props.cuisine.cuisine_id} ref={'ref_' + id}/>
+                        <span>{this.props.cuisine.cuisine_name}</span>
+                    </label>
+                </>
         );
+    }
 }
+
+export default CuisineItem;
