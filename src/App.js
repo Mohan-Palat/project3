@@ -24,30 +24,45 @@ class App extends Component {
       restaurantBody: null,
       restaurantID: '',
     }
+   
   }
-
+  viewMyFavorites = (event) => {
+    event.preventDefault()
+    // console.log(event)
+    this.handleCitySearchCriteria('viewFavorites', true);
+}
   handleFaveToggle = (restaurant)=>{
-    const faves = this.state.favoriteRestaurants.slice();
-    const restaurantIndex = faves.indexOf(restaurant);
-
-    //If the restaurant is already in their favorites, take it out of the faves array.
-    if (restaurantIndex >= 0) {
-      // console.log(`Removing ${restaurant.name} from faves`);
-      faves.splice(restaurantIndex, 1);
-    } 
-    //If the restaurant is not in their favorites, add it to the faves array.
-    if (restaurantIndex === -1){
-      // console.log(`Adding ${restaurant.name} to faves`);
+    console.log('favorites',this.state.favoriteRestaurants)
+    console.log('restaurant', restaurant)
+    if (restaurant.hasOwnProperty('cuisines')){
+      let newRestaurant = {'restaurant': restaurant}
+      restaurant = newRestaurant
+    }
+    let faves = this.state.favoriteRestaurants;
+    console.log('faves', faves)
+    let myKeys = faves.filter(key => key.restaurant.id === restaurant.restaurant.id);
+    console.log('mykeys', myKeys)
+    if (myKeys.length > 0){
+      console.log('removing restaurant',restaurant.restaurant.name)
+      faves = faves.filter(key => key.restaurant.id !== restaurant.restaurant.id);
+    } else {
+      console.log('adding restaurant', restaurant.restaurant.name)
       faves.push(restaurant);
     }
     this.setState({ 
-      favoriteRestaurants: faves 
+      favoriteRestaurants: faves,
     })
   }
 
+
   randRestaurant = (restrauntArr) => {
     // console.log('randRestaurant',restrauntArr[Math.floor(Math.random() * restrauntArr.length)].restaurant )
-    return restrauntArr[Math.floor(Math.random() * restrauntArr.length)].restaurant
+    // return restrauntArr[Math.floor(Math.random() * restrauntArr.length)].restaurant
+    let randRest = restrauntArr[Math.floor(Math.random() * restrauntArr.length)].restaurant
+    // this.setState({
+    //   randRestaurant: randRest,
+    // })
+    return randRest
   }
 
   handleCitySearchCriteria = async (searchValue, isRandom) => {
@@ -81,9 +96,10 @@ class App extends Component {
       restaurantID: restaurantID,
       restaurantBody: results.data,
       restaurantName: results.data.name,
+      // restaurantFave: {"restaurant": results.data}
     });
 
-    console.log(results);
+    console.log("handleRestaurantSearch results",results);
 
   }
 
@@ -265,26 +281,51 @@ class App extends Component {
 
 
   closeRestaurantDetail = (event) => {
-    console.log('handleCategoryResultList', event.target); 
+    console.log('handleCategoryResultList props', this.props); 
+    console.log('handleCategoryResultList state', this.state);
 
     this.setState({
       restaurantBody: null,
     });
   }
+
+  searchForFave(restaurantBody) {
+    var isFave = false;
+    if (!restaurantBody.hasOwnProperty('cuisines')) {
+      let newRestaurant = restaurantBody.restaurant
+      restaurantBody = newRestaurant
+    }
+    for (var i = 0; i < this.state.favoriteRestaurants.length; i++) {
+      if (this.state.favoriteRestaurants[i].restaurant.id == restaurantBody.id) {
+        isFave = true;
+        break;
+      }
+    }
+
+    return isFave
+  }
+
+
   
   render() {
     console.log("App.js render");
     console.log("this.state", this.state);
-    console.log("App.js props", this.props);
+    // console.log("App.js props", this.props);
 
     let restaurantComponent = '';
     if (this.state.cityID !== '') {
       if (this.state.isRandom) {
-        console.log('this.randRestaurant(this.state.restaurantList)', this.randRestaurant(this.state.restaurantList))
-        restaurantComponent = <RestaurantDetail restaurant={this.randRestaurant(this.state.restaurantList)} 
+        // console.log('this.randRestaurant(this.state.restaurantList)', this.randRestaurant(this.state.restaurantList))
+        const randRest = this.randRestaurant(this.state.restaurantList)
+        restaurantComponent = <RestaurantDetail restaurant={randRest}
+        // restaurant={this.randRestaurant(this.state.restaurantList)} 
                                                 cityID={this.state.cityID} 
                                                 cityName={this.state.cityName} 
-                                                onFaveToggle={this.handleFaveToggle}/>
+                                                favoriteRestaurants={this.state.favoriteRestaurants}
+                                                // onFaveToggle={this.handleFaveToggle}
+                                                onFaveToggle={() => this.handleFaveToggle(randRest)}
+                                                isFave={this.searchForFave(randRest)}
+                                                />
       } else {
         restaurantComponent = <RestaurantList restaurantList={this.state.restaurantList} 
                                               cityID={this.state.cityID} 
@@ -292,6 +333,7 @@ class App extends Component {
                                               favoriteRestaurants={this.state.favoriteRestaurants}
                                               handleRestaurantSearch={this.handleRestaurantSearch}  
                                               onFaveToggle={this.handleFaveToggle}
+                                              // isFave={this.findInFave}
                                               />
       }
 
@@ -335,16 +377,22 @@ class App extends Component {
                   handleCategoryResultList={this.handleCategoryResultList}/>
         {category}
         {cuisine}
+        <h2 className="city-header">{this.state.cityName}</h2>
 
-        {(this.state.cityName != '')?<h2 className="city-header">Viewing restaurants in {this.state.cityName}</h2>:<h2></h2>}
+
       </div>
+        <a class="waves-effect waves-light btn-large" id="viewFavorites"  onClick={this.viewMyFavorites}>View My Favorites</a>
+        
+        {(this.state.cityName != '')?<h2 className="city-header">Viewing restaurants in {this.state.cityName}</h2>:<h2></h2>}
+
       {(this.state.restaurantBody != null)?<RestaurantDetail  key={this.state.restaurantID}
                                                               name={this.state.restaurantName} 
                                                               restaurant={this.state.restaurantBody} 
-                                                              closeRestaurantDetail={this.closeRestaurantDetail}
+                                                              closeRestaurantDetail={this.closeRestaurantDetail} 
                                                               favoriteRestaurants={this.state.favoriteRestaurants}
-                                                              handleRestaurantSearch={this.handleRestaurantSearch}  
-                                                              onFaveToggle={this.handleFaveToggle} />
+                                                              onFaveToggle={() => this.handleFaveToggle(this.state.restaurantBody)}
+                                                              isFave={this.searchForFave(this.state.restaurantBody)}
+                                                              />
                                           :<h3></h3>}
       {restaurantComponent}
       </>

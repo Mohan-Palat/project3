@@ -8,7 +8,7 @@ import Favorite from './Favorite.js';
 class RestaurantItem extends Component {
     
     render() {         
-        // console.log('RestaurantItem props', this.props)
+        console.log('RestaurantItem props', this.props)
         
         const searchRestaurantDetails = (e) =>{
             e.preventDefault()
@@ -46,7 +46,7 @@ class RestaurantItem extends Component {
                                 <a class="waves-effect waves-light btn-large" onClick={searchRestaurantDetails}>Details</a>
                                 {/* <button onClick={searchRestaurantDetails}>Details</button> */}
                                 
-                                <Favorite onFaveToggle={this.props.onFaveToggle} isFave={this.props.isFave}/>
+                                <Favorite onFaveToggle={this.props.onFaveToggle} isFave={this.props.isFave} favoriteRestaurants={this.props.favoriteRestaurants} />
                             </div>
                         </div>
 

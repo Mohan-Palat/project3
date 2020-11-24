@@ -18,7 +18,7 @@ class Cuisine extends Component {
 
         getCuisines(this.props.cityID)
             .then((response) => {
-                console.log('allCuisines', response);
+                // console.log('allCuisines', response);
                 this.setState({
                     cuisineList: response.data.cuisines,
                 });
@@ -33,7 +33,7 @@ class Cuisine extends Component {
 
         getCuisines(this.props.cityID)
             .then((response) => {
-                console.log('allCuisines', response);
+                // console.log('allCuisines', response);
                 this.setState({
                     cuisineList: response.data.cuisines,
                 });
@@ -59,7 +59,7 @@ class Cuisine extends Component {
         }
         
         let allCuisines = [];
-        console.log("this.state.cuisineList", this.state.cuisineList);
+        // console.log("this.state.cuisineList", this.state.cuisineList);
         if (this.state.cuisineList.length != 0) {
             allCuisines = this.state.cuisineList.map((cuisine, index) => {
                 // console.log(index, cuisine);

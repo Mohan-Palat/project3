@@ -205,6 +205,17 @@ span {
   text-align: center;
 }
 
+#viewFavorites {
+  margin: 10px;
+  align-self: flex-end;
+  opacity: .4;
+}
+
+#favoritesBtn {
+  opacity: .4;
+  margin: 20px;
+  
+}
 .display-thumb-unavail{
   display: block;
   margin-left: auto;

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Favorite from './Favorite'
 import RestaurantItem from './RestaurantItem';
 import {Route, Link } from 'react-router-dom';
 import Nav from './Nav';
@@ -23,7 +24,7 @@ class RestaurantDetail extends Component {
 
         getReviewsByRestaurantID(this.props.restaurant.id)
             .then((response) => {
-                console.log('allReviews', response);
+                // console.log('allReviews', response);
                 this.setState({
                     reviewList: response.data.user_reviews,
                 });
@@ -107,25 +108,35 @@ class RestaurantDetail extends Component {
             toggleShowReviews: showReviewsValue
         });
     }
-
+    isInFavorites = (restaurant) => {
+        console.log('restaurant', restaurant)
+        let isFave = false
+        let faves = this.props.favoriteRestaurants;
+        let myKeys = faves.filter(key => key.restaurant.id === restaurant.id);
+        if (myKeys.length > 0){
+          isFave = true
+        }
+        return isFave
+      }
     render() {
-        console.log("this.props.restaurant", this.props.restaurant);
+        console.log("this.props.restaurant", this.props);
 
         if (this.state.name != this.props.name) {
             this.setState({
                 toggleShowReviews: false,
                 toggleShowNearbyRestaurants: false,
                 name: this.props.name,
+                
             });
         }
 
         let allReviews = [];
-        console.log("this.state.reviewList", this.state.reviewList);
+        // console.log("this.state.reviewList", this.state.reviewList);
 
         if ((this.state.reviewList != null) && (this.state.toggleShowReviews)) {
             allReviews = this.state.reviewList.map((review, index) => {
-                console.log(index, "review", review);
-                console.log(index, "review.review.review_text", review.review.review_text);
+                // console.log(index, "review", review);
+                // console.log(index, "review.review.review_text", review.review.review_text);
                 let indextemp = index + 1;
                 return (
                 <div class="card lighten-1">
@@ -169,7 +180,7 @@ class RestaurantDetail extends Component {
         }
 
         let googleString = `https://www.google.com/maps/embed/v1/search?key=AIzaSyCLbDPkMfZuxUVZ3L3-_fxsE6t3g86CaO8&q=${this.props.restaurant.name} allowfullscreen`
-
+        console.log('all props', this.props)
         return (
             <div>
                 {/* <h1 className="Detail-Header">{this.props.name}</h1> */}
@@ -221,6 +232,7 @@ class RestaurantDetail extends Component {
                                 <a class="waves-effect waves-light btn-large" onClick={this.getReviewsToggle}>{(this.state.toggleShowReviews)?"Hide Reviews":"Show Reviews"}</a>
                                 <a class="waves-effect waves-light btn-large" onClick={this.getNearbyRestaurantsToggle}>{(this.state.toggleShowNearbyRestaurants)?"Hide Nearby Restaurants":"Show Nearby Restaurants"}</a>
                                 <a class="waves-effect waves-light btn-large" onClick={this.props.closeRestaurantDetail}>Close</a>
+                                <Favorite onFaveToggle={this.props.onFaveToggle} isFave={this.isInFavorites(this.props.restaurant)} favoriteRestaurants={this.props.favoriteRestaurants} />
                             </div>
                         </div>
 
