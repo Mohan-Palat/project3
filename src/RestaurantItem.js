@@ -10,7 +10,7 @@ class RestaurantItem extends Component {
             e.preventDefault()
             const restaurantID = this.props.restaurant.id
 
-            
+            // Invoke the restaurant search on the current restaurant
             this.props.handleRestaurantSearch(this.props.restaurant.id);
         }
         return (

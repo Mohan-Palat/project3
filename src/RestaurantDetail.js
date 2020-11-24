@@ -20,6 +20,7 @@ class RestaurantDetail extends Component {
     componentDidMount() {
         console.log("RestaurantDetail.js componentDidMount executed");
 
+        // Get reviews by the Restaurant ID
         getReviewsByRestaurantID(this.props.restaurant.id)
             .then((response) => {
                 this.setState({
@@ -30,6 +31,7 @@ class RestaurantDetail extends Component {
                 console.log('API ERROR:', error);
             });
 
+        // Get Nearby Restaurants by the Latitude and Longitude of the current restaurant
         getGeoCodeByLatLong(this.props.restaurant.location.latitude, this.props.restaurant.location.longitude)
             .then((response) => {
                 this.setState({
@@ -45,15 +47,20 @@ class RestaurantDetail extends Component {
         let showReviewsValue;
         let showNearbyRestaurants;
 
+        // If the Show Reviews is on and it is clicked, turn off the Reviews View
+        // Keep the Nearby Restaurants View in its current state
         if (this.state.toggleShowReviews) {
             showReviewsValue = false;
             showNearbyRestaurants = this.state.toggleShowNearbyRestaurants
         }
+        // If the Show Reviews is off and it is clicked, turn on the Reviews View
+        // Regardless the state of the Nearby Restaurants View, make sure it is off
         else {
             showReviewsValue = true;
             showNearbyRestaurants = false;
         }
 
+        // If the Show Reviews is turned on, get the reviews for the Restaurant by Restaurant ID
         if (showReviewsValue) {
             getReviewsByRestaurantID(this.props.restaurant.id)
             .then((response) => {

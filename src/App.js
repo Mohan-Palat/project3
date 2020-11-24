@@ -57,21 +57,6 @@ class App extends Component {
     return randRest
   }
 
-  handleCitySearchCriteria = async (searchValue, isRandom) => {
-
-    const results = await getCityID(searchValue);
-
-    const restaurantResults = await getRestaurantsByCityID(results.data.location_suggestions[0].id);
-
-    this.setState({
-      cityID: results.data.location_suggestions[0].id,
-      cityName: results.data.location_suggestions[0].name,
-      restaurantList: restaurantResults.data.restaurants,
-      isRandom: isRandom
-    });
-
-  }
-
   handleRestaurantSearch = async (restaurantID) => {
 
     const results = await getRestaurantsDetails(restaurantID);
@@ -81,21 +66,13 @@ class App extends Component {
       restaurantBody: results.data,
       restaurantName: results.data.name,
     });
-
-    // console.log("handleRestaurantSearch results", results);
-
   }
 
   handleCitySearchCriteria = async (searchValue, isRandom) => {
-    // console.log('Search value in App.js', searchValue);
-
     let restaurantResults = [];
     let cityID = '';
     let cityName = '';
-    let randomRestaurant = '';
-
-    if (searchValue == 'viewFavorites') {
-      // console.log('state in handlecitySearchcriteria', this.state)
+    if (searchValue === 'viewFavorites') {
       restaurantResults = this.state.favoriteRestaurants;
       cityID = 1;
       cityName = 'My Favorites';
@@ -125,20 +102,20 @@ class App extends Component {
     let tempObjectCuisineResultsList = this.clone(this.state.cuisineResultList);
 
     let restaurantResults = [];
-    if (event.target.value == '0') {
+    if (event.target.value === '0') {
       tempObjectCategoryResultsValue = '';
     }
     else {
       tempObjectCategoryResultsValue = event.target.value;
     }
 
-    if (Object.keys(tempObjectCuisineResultsList) == {}) {
+    if (Object.keys(tempObjectCuisineResultsList) === {}) {
       let categoryKeyList = tempObjectCategoryResultsValue;
 
       const restaurantResultsOutput = await getRestaurantsByCityIDAndCategories(this.state.cityID, categoryKeyList);
       restaurantResults = restaurantResultsOutput.data.restaurants;
     }
-    else if (Object.keys(tempObjectCuisineResultsList) != {}) {
+    else if (Object.keys(tempObjectCuisineResultsList) !== {}) {
       let cuisineKeyList = Object.keys(tempObjectCuisineResultsList).join();
 
       let categoryKeyList = tempObjectCategoryResultsValue;
@@ -167,20 +144,20 @@ class App extends Component {
     let tempObjectCategoryResultsValue = this.state.categoryResultValue;
 
     let restaurantResults = [];
-    if (tempObjectCuisineResultsList[event.target.value] == true) {
+    if (tempObjectCuisineResultsList[event.target.value] === true) {
       delete tempObjectCuisineResultsList[event.target.value];
     }
     else {
       tempObjectCuisineResultsList[event.target.value] = true;
     }
 
-    if ((Object.keys(tempObjectCuisineResultsList) != {}) && (Object.keys(tempObjectCategoryResultsValue) == '')) {
+    if ((Object.keys(tempObjectCuisineResultsList) !== {}) && (Object.keys(tempObjectCategoryResultsValue) === '')) {
       let cuisineKeyList = Object.keys(tempObjectCuisineResultsList).join();
 
       const restaurantResultsOutput = await getRestaurantsByCityIDAndCuisines(this.state.cityID, cuisineKeyList);
       restaurantResults = restaurantResultsOutput.data.restaurants;
     }
-    else if ((Object.keys(tempObjectCuisineResultsList) != {}) && (tempObjectCategoryResultsValue != '')) {
+    else if ((Object.keys(tempObjectCuisineResultsList) !== {}) && (tempObjectCategoryResultsValue !== '')) {
       let cuisineKeyList = Object.keys(tempObjectCuisineResultsList).join();
 
       let categoryKeyList = tempObjectCategoryResultsValue;
@@ -203,7 +180,6 @@ class App extends Component {
   }
 
   componentDidMount() {
-
 
     let currentComponent = this;
 
@@ -235,7 +211,7 @@ class App extends Component {
       restaurantBody = newRestaurant
     }
     for (var i = 0; i < this.state.favoriteRestaurants.length; i++) {
-      if (this.state.favoriteRestaurants[i].restaurant.id == restaurantBody.id) {
+      if (this.state.favoriteRestaurants[i].restaurant.id === restaurantBody.id) {
         isFave = true;
         break;
       }
@@ -278,14 +254,14 @@ class App extends Component {
     let cuisine = '';
     let category = '';
 
-    if (this.state.cityID != '') {
+    if (this.state.cityID !== '') {
       cuisine = <Cuisine cityID={this.state.cityID} handleCuisineResultList={this.handleCuisineResultList} />
     }
     else {
       cuisine = <h3></h3>;
     }
 
-    if (this.state.cityID != '') {
+    if (this.state.cityID !== '') {
       category = <Category cityID={this.state.cityID}
         handleCategoryResultList={this.handleCategoryResultList}
         handleCategorySearch={this.handleCategorySearch} />
@@ -306,11 +282,11 @@ class App extends Component {
             currentCity={this.state.currentCity} />
           {category}
           {cuisine}
-          {(this.state.cityName != '') ? <h2 className="city-header">Viewing restaurants around {this.state.cityName}</h2> : <h2></h2>}
+          {(this.state.cityName !== '') ? <h2 className="city-header">Viewing restaurants around {this.state.cityName}</h2> : <h2></h2>}
         </div>
         <a class="waves-effect waves-light btn-large" id="viewFavorites" onClick={this.viewMyFavorites}>View My Favorites</a>
 
-        {(this.state.cityName != '') ? <h2 className="city-header">Viewing restaurants in {this.state.cityName}</h2> : <h2></h2>}
+        {(this.state.cityName !== '') ? <h2 className="city-header">Viewing restaurants in {this.state.cityName}</h2> : <h2></h2>}
 
         {(this.state.restaurantBody != null) ? <RestaurantDetail key={this.state.restaurantID}
           name={this.state.restaurantName}
