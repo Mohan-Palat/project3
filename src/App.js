@@ -57,10 +57,10 @@ class App extends Component {
     // console.log('randRestaurant',restrauntArr[Math.floor(Math.random() * restrauntArr.length)].restaurant )
     // return restrauntArr[Math.floor(Math.random() * restrauntArr.length)].restaurant
     let randRest = restrauntArr[Math.floor(Math.random() * restrauntArr.length)].restaurant
-    // this.setState({
-    //   randRestaurant: randRest,
-    // })
-    return randRest
+    this.setState({
+      randRestaurant: randRest,
+    })
+    // return randRest
   }
 
   handleCitySearchCriteria = async (searchValue, isRandom) => {
@@ -115,13 +115,15 @@ class App extends Component {
   }
 
   handleCitySearchCriteria = async (searchValue, isRandom) => {
-    console.log('Search value in App.js', searchValue);
+    // console.log('Search value in App.js', searchValue);
 
     let restaurantResults = [];
     let cityID = '';
     let cityName = '';
+    let randomRestaurant ='';
+
     if (searchValue == 'viewFavorites') {
-      console.log('state in handlecitySearchcriteria', this.state)
+      // console.log('state in handlecitySearchcriteria', this.state)
       restaurantResults = this.state.favoriteRestaurants;
       cityID = 1;
       cityName = 'My Favorites';
@@ -129,7 +131,7 @@ class App extends Component {
     } else {
       if (searchValue !== '') {
         const results = await getCityID(searchValue);
-        console.log(results.data.location_suggestions[0].id);
+        // console.log(results.data.location_suggestions[0].id);
   
         if (Object.keys(this.state.categoryResultList) == null) {
           const restaurantResultsOutput = await getRestaurantsByCityID(results.data.location_suggestions[0].id);
@@ -139,7 +141,7 @@ class App extends Component {
         }
         else {
           let keylist = Object.keys(this.state.categoryResultList).join();
-          console.log("keylist", keylist);
+          // console.log("keylist", keylist);
   
           const restaurantResultsOutput = await getRestaurantsByCityIDAndCategories(results.data.location_suggestions[0].id, keylist);
           restaurantResults = restaurantResultsOutput.data.restaurants;
@@ -154,13 +156,13 @@ class App extends Component {
       cityID: cityID,
       cityName: cityName,
       restaurantList: restaurantResults,
-      isRandom: isRandom
+      isRandom: isRandom,
     });
   }
 
   handleCategoryResultList = (event) => {
-    console.log('handleCategoryResultList', event.target); 
-    console.log('handleCategoryResultList id', event.target.id);
+    // console.log('handleCategoryResultList', event.target); 
+    // console.log('handleCategoryResultList id', event.target.id);
 
     let tempObject = this.state.categoryResultList;
 
@@ -213,8 +215,8 @@ class App extends Component {
 
 
   closeRestaurantDetail = (event) => {
-    console.log('handleCategoryResultList props', this.props); 
-    console.log('handleCategoryResultList state', this.state);
+    // console.log('handleCategoryResultList props', this.props); 
+    // console.log('handleCategoryResultList state', this.state);
 
     this.setState({
       restaurantBody: null,
@@ -247,14 +249,13 @@ class App extends Component {
     let restaurantComponent = '';
     if (this.state.cityID !== '') {
       if (this.state.isRandom) {
-        // console.log('this.randRestaurant(this.state.restaurantList)', this.randRestaurant(this.state.restaurantList))
+        console.log('Random this.state', this.state)
         const randRest = this.randRestaurant(this.state.restaurantList)
         restaurantComponent = <RestaurantDetail restaurant={randRest}
         // restaurant={this.randRestaurant(this.state.restaurantList)} 
                                                 cityID={this.state.cityID} 
                                                 cityName={this.state.cityName} 
                                                 favoriteRestaurants={this.state.favoriteRestaurants}
-                                                // onFaveToggle={this.handleFaveToggle}
                                                 onFaveToggle={() => this.handleFaveToggle(randRest)}
                                                 isFave={this.searchForFave(randRest)}
                                                 />
@@ -265,7 +266,6 @@ class App extends Component {
                                               favoriteRestaurants={this.state.favoriteRestaurants}
                                               handleRestaurantSearch={this.handleRestaurantSearch}  
                                               onFaveToggle={this.handleFaveToggle}
-                                              // isFave={this.findInFave}
                                               />
       }
 
