@@ -232,8 +232,8 @@ class RestaurantDetail extends Component {
                                 <a class="waves-effect waves-light btn-large" onClick={this.getReviewsToggle}>{(this.state.toggleShowReviews)?"Hide Reviews":"Show Reviews"}</a>
                                 <a class="waves-effect waves-light btn-large" onClick={this.getNearbyRestaurantsToggle}>{(this.state.toggleShowNearbyRestaurants)?"Hide Nearby Restaurants":"Show Nearby Restaurants"}</a>
                                 <a class="waves-effect waves-light btn-large" onClick={this.props.closeRestaurantDetail}>Close</a>
-                                <Favorite onFaveToggle={this.props.onFaveToggle} isFave={this.isInFavorites(this.props.restaurant)} favoriteRestaurants={this.props.favoriteRestaurants} />
                             </div>
+                                <Favorite onFaveToggle={this.props.onFaveToggle} isFave={this.isInFavorites(this.props.restaurant)} favoriteRestaurants={this.props.favoriteRestaurants} />
                         </div>
 
                         {allReviews}

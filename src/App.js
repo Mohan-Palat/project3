@@ -5,9 +5,11 @@ import RestaurantDetail from './RestaurantDetail';
 import RestaurantItem from './RestaurantItem';
 import Cuisine from './Cuisine';
 import Category from './Category';
-import { getCityID, getRestaurantsByCityID, getCategories, 
-  getRestaurantsByCityIDAndCategories, getRestaurantsDetails, 
-  getRestaurantsByCityIDAndCuisines, getRestaurantsByCityIDAndCategoriesAndCuisines } from './api.js';
+import {
+  getCityID, getRestaurantsByCityID, getCategories,
+  getRestaurantsByCityIDAndCategories, getRestaurantsDetails,
+  getRestaurantsByCityIDAndCuisines, getRestaurantsByCityIDAndCategoriesAndCuisines
+} from './api.js';
 
 class App extends Component {
   constructor(props) {
@@ -24,32 +26,32 @@ class App extends Component {
       restaurantBody: null,
       restaurantID: '',
     }
-   
+
   }
   viewMyFavorites = (event) => {
     event.preventDefault()
     // console.log(event)
     this.handleCitySearchCriteria('viewFavorites', true);
-}
-  handleFaveToggle = (restaurant)=>{
-    console.log('favorites',this.state.favoriteRestaurants)
+  }
+  handleFaveToggle = (restaurant) => {
+    console.log('favorites', this.state.favoriteRestaurants)
     console.log('restaurant', restaurant)
-    if (restaurant.hasOwnProperty('cuisines')){
-      let newRestaurant = {'restaurant': restaurant}
+    if (restaurant.hasOwnProperty('cuisines')) {
+      let newRestaurant = { 'restaurant': restaurant }
       restaurant = newRestaurant
     }
     let faves = this.state.favoriteRestaurants;
     console.log('faves', faves)
     let myKeys = faves.filter(key => key.restaurant.id === restaurant.restaurant.id);
     console.log('mykeys', myKeys)
-    if (myKeys.length > 0){
-      console.log('removing restaurant',restaurant.restaurant.name)
+    if (myKeys.length > 0) {
+      console.log('removing restaurant', restaurant.restaurant.name)
       faves = faves.filter(key => key.restaurant.id !== restaurant.restaurant.id);
     } else {
       console.log('adding restaurant', restaurant.restaurant.name)
       faves.push(restaurant);
     }
-    this.setState({ 
+    this.setState({
       favoriteRestaurants: faves,
     })
   }
@@ -67,10 +69,10 @@ class App extends Component {
 
   handleCitySearchCriteria = async (searchValue, isRandom) => {
     console.log('Search value in App.js', searchValue);
-    
+
     // console.log('isRandom value in App.js', isRandom);
     const results = await getCityID(searchValue);
-    
+
     console.log(results.data.location_suggestions[0].id);
 
     const restaurantResults = await getRestaurantsByCityID(results.data.location_suggestions[0].id);
@@ -85,11 +87,11 @@ class App extends Component {
     console.log(results);
   }
 
-  handleRestaurantSearch = async (restaurantID) =>{
+  handleRestaurantSearch = async (restaurantID) => {
     console.log("restaurant ID", restaurantID);
     // console.log('isRandom value in App.js', isRandom);
     const results = await getRestaurantsDetails(restaurantID);
-    
+
     console.log(results);
 
     this.setState({
@@ -99,7 +101,7 @@ class App extends Component {
       // restaurantFave: {"restaurant": results.data}
     });
 
-    console.log("handleRestaurantSearch results",results);
+    console.log("handleRestaurantSearch results", results);
 
   }
 
@@ -107,7 +109,7 @@ class App extends Component {
   //   console.log('handleCategorySearch');
 
   //   const results = await getCategories();
-    
+
   //   console.log("results.data.categories", results.data.categories);
   //   let categories = results.data.categories;
 
@@ -122,7 +124,7 @@ class App extends Component {
     let restaurantResults = [];
     let cityID = '';
     let cityName = '';
-    let randomRestaurant ='';
+    let randomRestaurant = '';
 
     if (searchValue == 'viewFavorites') {
       // console.log('state in handlecitySearchcriteria', this.state)
@@ -134,23 +136,23 @@ class App extends Component {
       if (searchValue !== '') {
         const results = await getCityID(searchValue);
         // console.log(results.data.location_suggestions[0].id);
-  
+
         // if (Object.keys(this.state.categoryResultList) == null) {
-          const restaurantResultsOutput = await getRestaurantsByCityID(results.data.location_suggestions[0].id);
-          restaurantResults = restaurantResultsOutput.data.restaurants;
-          cityID = results.data.location_suggestions[0].id;
-          cityName = results.data.location_suggestions[0].name;
+        const restaurantResultsOutput = await getRestaurantsByCityID(results.data.location_suggestions[0].id);
+        restaurantResults = restaurantResultsOutput.data.restaurants;
+        cityID = results.data.location_suggestions[0].id;
+        cityName = results.data.location_suggestions[0].name;
         // }
         // else {
         //   let keylist = Object.keys(this.state.categoryResultList).join();
         //   console.log("keylist", keylist);
-  
+
         //   const restaurantResultsOutput = await getRestaurantsByCityIDAndCategories(results.data.location_suggestions[0].id, keylist);
         //   restaurantResults = restaurantResultsOutput.data.restaurants;
         //   cityID = results.data.location_suggestions[0].id;
         //   cityName = results.data.location_suggestions[0].name;
         // }
-  
+
       }
     }
 
@@ -158,7 +160,7 @@ class App extends Component {
       cityID: cityID,
       cityName: cityName,
       restaurantList: restaurantResults,
-      cuisineResultList: {}, 
+      cuisineResultList: {},
       isRandom: isRandom,
     });
   }
@@ -183,63 +185,63 @@ class App extends Component {
   //   console.log("tempObject", tempObject);
   // }
 
-    handleCategoryResultList = async (event) => {
-      console.log('handleCuisineResultList event', event); 
+  handleCategoryResultList = async (event) => {
+    console.log('handleCuisineResultList event', event);
 
-      // let tempObjectCuisineResultsList = this.state.cuisineResultList;
-      let tempObjectCategoryResultsValue = this.state.categoryResultValue;
-      let tempObjectCuisineResultsList = this.clone(this.state.cuisineResultList);
+    // let tempObjectCuisineResultsList = this.state.cuisineResultList;
+    let tempObjectCategoryResultsValue = this.state.categoryResultValue;
+    let tempObjectCuisineResultsList = this.clone(this.state.cuisineResultList);
 
-      console.log("tempObjectCategoryResultsValue handleCategoryResultList", tempObjectCategoryResultsValue);
-      console.log("tempObjectCuisineResultsList handleCategoryResultList", tempObjectCuisineResultsList);
-  
-      let restaurantResults = [];
-      if (event.target.value == '0') {
-        tempObjectCategoryResultsValue = '';
-      }
-      else {
-        tempObjectCategoryResultsValue = event.target.value;
-      }
-  
-      if (Object.keys(tempObjectCuisineResultsList) == {}) {
-        let categoryKeyList = tempObjectCategoryResultsValue;
-        console.log("categoryKeyList single", categoryKeyList);
-  
-        const restaurantResultsOutput = await getRestaurantsByCityIDAndCategories(this.state.cityID, categoryKeyList);
-        restaurantResults = restaurantResultsOutput.data.restaurants;
-      }
-      else if (Object.keys(tempObjectCuisineResultsList) != {}) {
-        let cuisineKeyList = Object.keys(tempObjectCuisineResultsList).join();
-        console.log("cuisineKeyList double", cuisineKeyList);
-  
-        let categoryKeyList = tempObjectCategoryResultsValue;
-        console.log("categoryKeyList double", categoryKeyList);
-  
-        const restaurantResultsOutput = await getRestaurantsByCityIDAndCategoriesAndCuisines(this.state.cityID, categoryKeyList, cuisineKeyList);
-        restaurantResults = restaurantResultsOutput.data.restaurants;
-      }
-  
-      console.log("restaurantResults", restaurantResults);
-  
-      this.setState({
-        categoryResultValue: tempObjectCategoryResultsValue,
-        restaurantList: restaurantResults,
-      });
-  
-      console.log("tempObjectCategoryResultsValue", tempObjectCategoryResultsValue);
+    console.log("tempObjectCategoryResultsValue handleCategoryResultList", tempObjectCategoryResultsValue);
+    console.log("tempObjectCuisineResultsList handleCategoryResultList", tempObjectCuisineResultsList);
+
+    let restaurantResults = [];
+    if (event.target.value == '0') {
+      tempObjectCategoryResultsValue = '';
+    }
+    else {
+      tempObjectCategoryResultsValue = event.target.value;
+    }
+
+    if (Object.keys(tempObjectCuisineResultsList) == {}) {
+      let categoryKeyList = tempObjectCategoryResultsValue;
+      console.log("categoryKeyList single", categoryKeyList);
+
+      const restaurantResultsOutput = await getRestaurantsByCityIDAndCategories(this.state.cityID, categoryKeyList);
+      restaurantResults = restaurantResultsOutput.data.restaurants;
+    }
+    else if (Object.keys(tempObjectCuisineResultsList) != {}) {
+      let cuisineKeyList = Object.keys(tempObjectCuisineResultsList).join();
+      console.log("cuisineKeyList double", cuisineKeyList);
+
+      let categoryKeyList = tempObjectCategoryResultsValue;
+      console.log("categoryKeyList double", categoryKeyList);
+
+      const restaurantResultsOutput = await getRestaurantsByCityIDAndCategoriesAndCuisines(this.state.cityID, categoryKeyList, cuisineKeyList);
+      restaurantResults = restaurantResultsOutput.data.restaurants;
+    }
+
+    console.log("restaurantResults", restaurantResults);
+
+    this.setState({
+      categoryResultValue: tempObjectCategoryResultsValue,
+      restaurantList: restaurantResults,
+    });
+
+    console.log("tempObjectCategoryResultsValue", tempObjectCategoryResultsValue);
   }
 
   clone = (obj) => {
     if (null == obj || "object" != typeof obj) return obj;
     var copy = obj.constructor();
     for (var attr in obj) {
-        if (obj.hasOwnProperty(attr)) copy[attr] = obj[attr];
+      if (obj.hasOwnProperty(attr)) copy[attr] = obj[attr];
     }
     return copy;
-}
+  }
 
   handleCuisineResultList = async (event) => {
-    console.log('handleCuisineResultList event', event); 
+    console.log('handleCuisineResultList event', event);
 
     // let tempObjectCuisineResultsList = this.state.cuisineResultList;
     let tempObjectCuisineResultsList = this.clone(this.state.cuisineResultList);
@@ -308,7 +310,7 @@ class App extends Component {
   }
 
 
-  
+
   render() {
     console.log("App.js render");
     console.log("this.state", this.state);
@@ -320,21 +322,21 @@ class App extends Component {
         console.log('Random this.state', this.state)
         const randRest = this.randRestaurant(this.state.restaurantList)
         restaurantComponent = <RestaurantDetail restaurant={randRest}
-        // restaurant={this.randRestaurant(this.state.restaurantList)} 
-                                                cityID={this.state.cityID} 
-                                                cityName={this.state.cityName} 
-                                                favoriteRestaurants={this.state.favoriteRestaurants}
-                                                onFaveToggle={() => this.handleFaveToggle(randRest)}
-                                                isFave={this.searchForFave(randRest)}
-                                                />
+          // restaurant={this.randRestaurant(this.state.restaurantList)} 
+          cityID={this.state.cityID}
+          cityName={this.state.cityName}
+          favoriteRestaurants={this.state.favoriteRestaurants}
+          onFaveToggle={() => this.handleFaveToggle(randRest)}
+          isFave={this.searchForFave(randRest)}
+        />
       } else {
-        restaurantComponent = <RestaurantList restaurantList={this.state.restaurantList} 
-                                              cityID={this.state.cityID} 
-                                              cityName={this.state.cityName} 
-                                              favoriteRestaurants={this.state.favoriteRestaurants}
-                                              handleRestaurantSearch={this.handleRestaurantSearch}  
-                                              onFaveToggle={this.handleFaveToggle}
-                                              />
+        restaurantComponent = <RestaurantList restaurantList={this.state.restaurantList}
+          cityID={this.state.cityID}
+          cityName={this.state.cityName}
+          favoriteRestaurants={this.state.favoriteRestaurants}
+          handleRestaurantSearch={this.handleRestaurantSearch}
+          onFaveToggle={this.handleFaveToggle}
+        />
       }
 
       if (this.state.restaurantBody != null) {
@@ -358,43 +360,43 @@ class App extends Component {
     }
 
     if (this.state.cityID != '') {
-      category = <Category  cityID={this.state.cityID} 
-                            handleCategoryResultList={this.handleCategoryResultList}
-                            handleCategorySearch={this.handleCategorySearch} />
+      category = <Category cityID={this.state.cityID}
+        handleCategoryResultList={this.handleCategoryResultList}
+        handleCategorySearch={this.handleCategorySearch} />
     }
     else {
       category = <h3></h3>;
     }
-    
+
     return (
       <>
-      <div class="header">
-        <h1 className='site-header'>Easy Pickin's</h1>
-        <h3 className="subheader">Picking a restaurant, just got easy</h3>
-         <Search  handleCitySearchCriteria={this.handleCitySearchCriteria} 
-                  handleCategorySearch={this.handleCategorySearch} 
-                  categoryList={this.state.categoryList} 
-                  handleCategoryResultList={this.handleCategoryResultList}/>
-        {category}
-        {cuisine}
-        <h2 className="city-header">{this.state.cityName}</h2>
+        <div class="header">
+          <h1 className='site-header'>Easy Pickin's</h1>
+          <h3 className="subheader">Picking a restaurant, just got easy</h3>
+          <Search handleCitySearchCriteria={this.handleCitySearchCriteria}
+            handleCategorySearch={this.handleCategorySearch}
+            categoryList={this.state.categoryList}
+            handleCategoryResultList={this.handleCategoryResultList} />
+          {category}
+          {cuisine}
+          <h2 className="city-header">{this.state.cityName}</h2>
 
 
-      </div>
-        <a class="waves-effect waves-light btn-large" id="viewFavorites"  onClick={this.viewMyFavorites}>View My Favorites</a>
-        
-        {(this.state.cityName != '')?<h2 className="city-header">Viewing restaurants in {this.state.cityName}</h2>:<h2></h2>}
+        </div>
+        <a class="waves-effect waves-light btn-large" id="viewFavorites" onClick={this.viewMyFavorites}>View My Favorites</a>
 
-      {(this.state.restaurantBody != null)?<RestaurantDetail  key={this.state.restaurantID}
-                                                              name={this.state.restaurantName} 
-                                                              restaurant={this.state.restaurantBody} 
-                                                              closeRestaurantDetail={this.closeRestaurantDetail} 
-                                                              favoriteRestaurants={this.state.favoriteRestaurants}
-                                                              onFaveToggle={() => this.handleFaveToggle(this.state.restaurantBody)}
-                                                              isFave={this.searchForFave(this.state.restaurantBody)}
-                                                              />
-                                          :<h3></h3>}
-      {restaurantComponent}
+        {(this.state.cityName != '') ? <h2 className="city-header">Viewing restaurants in {this.state.cityName}</h2> : <h2></h2>}
+
+        {(this.state.restaurantBody != null) ? <RestaurantDetail key={this.state.restaurantID}
+          name={this.state.restaurantName}
+          restaurant={this.state.restaurantBody}
+          closeRestaurantDetail={this.closeRestaurantDetail}
+          favoriteRestaurants={this.state.favoriteRestaurants}
+          onFaveToggle={() => this.handleFaveToggle(this.state.restaurantBody)}
+          isFave={this.searchForFave(this.state.restaurantBody)}
+        />
+          : <h3></h3>}
+        {restaurantComponent}
       </>
     );
   }
