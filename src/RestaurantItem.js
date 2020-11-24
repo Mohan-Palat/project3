@@ -40,9 +40,9 @@ class RestaurantItem extends Component {
                             </div>
                             {(this.props.restaurant.thumb)?<img border="0" src={this.props.restaurant.thumb} alt="name" className='display-thumb'/>:<img border="0" src='https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png' alt="name" className='display-thumb-unavail'/>}
                             <div class="card-action display-links">
-                                {(this.props.restaurant.menu_url)?<a class ="black-text" href={this.props.restaurant.menu_url} target="_blank">Restaurant Menu</a>:<h3></h3>}
-                                {(this.props.restaurant.photos_url)?<a class ="black-text" href={this.props.restaurant.photos_url} target="_blank">Photos</a>:<h3></h3>}
-                                {(this.props.restaurant.events_url)?<a class ="black-text" href={this.props.restaurant.events_url} target="_blank">Events</a>:<h3></h3>}
+                                {(this.props.restaurant.menu_url)?<a class="red-text" id='links' href={this.props.restaurant.menu_url} target="_blank">Restaurant Menu</a>:<h3></h3>}
+                                {(this.props.restaurant.photos_url)?<a class="red-text" href={this.props.restaurant.photos_url} target="_blank">Photos</a>:<h3></h3>}
+                                {(this.props.restaurant.events_url)?<a class="red-text" href={this.props.restaurant.events_url} target="_blank">Events</a>:<h3></h3>}
                                 <a class="waves-effect waves-light btn-large" onClick={searchRestaurantDetails}>Details</a>
                                 {/* <button onClick={searchRestaurantDetails}>Details</button> */}
                                 

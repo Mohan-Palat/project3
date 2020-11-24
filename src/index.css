@@ -228,3 +228,6 @@ span {
   text-align: center;
 }
 
+#links:hover {
+  color: yellow;
+}
