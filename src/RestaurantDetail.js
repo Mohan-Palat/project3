@@ -18,7 +18,7 @@ class RestaurantDetail extends Component {
     }
 
     componentDidMount() {
-        console.log("RestaurantDetail.js componentDidMount executed");
+        // console.log("RestaurantDetail.js componentDidMount executed");
 
         // Get reviews by the Restaurant ID
         getReviewsByRestaurantID(this.props.restaurant.id)

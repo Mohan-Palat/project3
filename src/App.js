@@ -33,8 +33,6 @@ class App extends Component {
   }
   /// either turn on the favorite toggle or turn it off depending on whether or not the restaurant is already a favorite
   handleFaveToggle = (restaurant) => {
-    console.log('favorites', this.state.favoriteRestaurants)
-    console.log('restaurant', restaurant)
     if (restaurant.hasOwnProperty('cuisines')) {
       let newRestaurant = { 'restaurant': restaurant }
       restaurant = newRestaurant
