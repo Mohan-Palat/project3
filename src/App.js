@@ -428,13 +428,14 @@ class App extends Component {
         {(this.state.cityName != '') ? <h2 className="city-header">Viewing restaurants in {this.state.cityName}</h2> : <h2></h2>}
 
         {(this.state.restaurantBody != null) ? <RestaurantDetail key={this.state.restaurantID}
-                                                                  name={this.state.restaurantName}
-                                                                  restaurant={this.state.restaurantBody}
-                                                                  closeRestaurantDetail={this.closeRestaurantDetail}
-                                                                  favoriteRestaurants={this.state.favoriteRestaurants}
-                                                                  onFaveToggle={() => this.handleFaveToggle(this.state.restaurantBody)}
-                                                                  isFave={this.searchForFave(this.state.restaurantBody)}
-                                              />
+          name={this.state.restaurantName}
+          restaurant={this.state.restaurantBody}
+          closeRestaurantDetail={this.closeRestaurantDetail}
+          favoriteRestaurants={this.state.favoriteRestaurants}
+          onFaveToggle={() => this.handleFaveToggle(this.state.restaurantBody)}
+          isFave={this.searchForFave(this.state.restaurantBody)}
+          handleRestaurantSearch={this.handleRestaurantSearch}
+        />
           : <h3></h3>}
         {restaurantComponent}
       </>

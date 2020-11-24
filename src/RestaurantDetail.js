@@ -183,8 +183,11 @@ class RestaurantDetail extends Component {
             priceRange += this.props.restaurant.currency + ' ';
         }
 
-        let googleString = `https://www.google.com/maps/embed/v1/search?key=AIzaSyCLbDPkMfZuxUVZ3L3-_fxsE6t3g86CaO8&q=${this.props.restaurant.name} allowfullscreen`
-        // console.log('all props', this.props)
+        let restaurantName = this.props.restaurant.name.replace(/&/,'');
+        let queryString = restaurantName + ' ' + (this.props.restaurant.location.city);
+        let googleString = `https://www.google.com/maps/embed/v1/search?key=AIzaSyCLbDPkMfZuxUVZ3L3-_fxsE6t3g86CaO8&q=${queryString} allowfullscreen`
+        
+        console.log('all props', this.props)
         return (
             <div>
                 {/* <h1 className="Detail-Header">{this.props.name}</h1> */}
