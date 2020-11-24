@@ -57,6 +57,11 @@ class Search extends Component {
     };
 
     render() {
+
+        if (this.props.currentCity != '') {
+            this.state.searchValue = this.props.currentCity
+        }
+
         // let allCategories = [];
         // console.log("this.state.categoryList", this.state.categoryList);
         // if (this.state.categoryList.length != 0) {

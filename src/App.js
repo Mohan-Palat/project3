@@ -6,7 +6,7 @@ import RestaurantItem from './RestaurantItem';
 import Cuisine from './Cuisine';
 import Category from './Category';
 import {
-  getCityID, getRestaurantsByCityID, getCategories,
+  getGeoCodeByLatLong, getCityID, getRestaurantsByCityID, getCategories,
   getRestaurantsByCityIDAndCategories, getRestaurantsDetails,
   getRestaurantsByCityIDAndCuisines, getRestaurantsByCityIDAndCategoriesAndCuisines
 } from './api.js';
@@ -18,6 +18,7 @@ class App extends Component {
     this.state = {
       cityID: '',
       cityName: '',
+      currentCity: '',
       restaurantList: [],
       favoriteRestaurants: [],
       categoryList: [],
@@ -26,8 +27,11 @@ class App extends Component {
       restaurantBody: null,
       restaurantID: '',
     }
+    //this.delta = this.delta.bind(this);
+    this.getGeoCodeByLatLong = getGeoCodeByLatLong.bind(this)
 
   }
+
   viewMyFavorites = (event) => {
     event.preventDefault()
     // console.log(event)
@@ -135,7 +139,7 @@ class App extends Component {
     } else {
       if (searchValue !== '') {
         const results = await getCityID(searchValue);
-        // console.log(results.data.location_suggestions[0].id);
+        console.log(results.data.location_suggestions[0].id);
 
         // if (Object.keys(this.state.categoryResultList) == null) {
         const restaurantResultsOutput = await getRestaurantsByCityID(results.data.location_suggestions[0].id);
@@ -160,6 +164,7 @@ class App extends Component {
       cityID: cityID,
       cityName: cityName,
       restaurantList: restaurantResults,
+      currentCity: '',
       cuisineResultList: {},
       isRandom: isRandom,
     });
@@ -285,13 +290,50 @@ class App extends Component {
 
 
   closeRestaurantDetail = (event) => {
-    // console.log('handleCategoryResultList props', this.props); 
-    // console.log('handleCategoryResultList state', this.state);
+    console.log('handleCategoryResultList props', this.props);
+    console.log('handleCategoryResultList state', this.state);
 
     this.setState({
       restaurantBody: null,
     });
   }
+
+  componentDidMount() {
+
+
+    let currentComponent = this;
+
+    navigator.geolocation.getCurrentPosition(function (position) {
+      console.log("Latitude is :", position.coords.latitude);
+      console.log("Longitude is :", position.coords.longitude);
+
+      let userLat = position.coords.latitude
+      let userLong = position.coords.longitude
+
+      console.log(this);
+
+      getGeoCodeByLatLong(userLat, userLong)
+        .then((response) => {
+          console.log('my location is', response.data.location.city_id, response.data.location.city_name);
+
+          const userLocation = response.data.location.city_id;
+          const userCity = response.data.location.city_name
+
+
+          console.log(currentComponent);
+          currentComponent.setState({
+            cityID: userLocation,
+            currentCity: userCity,
+          });
+        })
+        .catch((error) => {
+          console.log('API ERROR:', error);
+        });
+
+
+    });
+  }
+
 
   searchForFave(restaurantBody) {
     var isFave = false;
@@ -326,6 +368,7 @@ class App extends Component {
           cityID={this.state.cityID}
           cityName={this.state.cityName}
           favoriteRestaurants={this.state.favoriteRestaurants}
+          // onFaveToggle={this.handleFaveToggle}
           onFaveToggle={() => this.handleFaveToggle(randRest)}
           isFave={this.searchForFave(randRest)}
         />
@@ -336,6 +379,7 @@ class App extends Component {
           favoriteRestaurants={this.state.favoriteRestaurants}
           handleRestaurantSearch={this.handleRestaurantSearch}
           onFaveToggle={this.handleFaveToggle}
+        // isFave={this.findInFave}
         />
       }
 
@@ -376,12 +420,11 @@ class App extends Component {
           <Search handleCitySearchCriteria={this.handleCitySearchCriteria}
             handleCategorySearch={this.handleCategorySearch}
             categoryList={this.state.categoryList}
-            handleCategoryResultList={this.handleCategoryResultList} />
+            handleCategoryResultList={this.handleCategoryResultList}
+            currentCity={this.state.currentCity} />
           {category}
           {cuisine}
-          <h2 className="city-header">{this.state.cityName}</h2>
-
-
+          {(this.state.cityName != '') ? <h2 className="city-header">Viewing restaurants around {this.state.cityName}</h2> : <h2></h2>}
         </div>
         <a class="waves-effect waves-light btn-large" id="viewFavorites" onClick={this.viewMyFavorites}>View My Favorites</a>
 
@@ -400,7 +443,6 @@ class App extends Component {
       </>
     );
   }
-
 }
 
 
