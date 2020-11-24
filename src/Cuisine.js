@@ -18,7 +18,7 @@ class Cuisine extends Component {
 
         getCuisines(this.props.cityID)
             .then((response) => {
-                console.log('allCuisines', response);
+                // console.log('allCuisines', response);
                 this.setState({
                     cuisineList: response.data.cuisines,
                 });
@@ -33,7 +33,7 @@ class Cuisine extends Component {
 
         getCuisines(this.props.cityID)
             .then((response) => {
-                console.log('allCuisines', response);
+                // console.log('allCuisines', response);
                 this.setState({
                     cuisineList: response.data.cuisines,
                 });
@@ -45,31 +45,34 @@ class Cuisine extends Component {
     
     render() {
         console.log("Cuisine render");
+        let changeCityFlag = false;
         
         if (this.state.cityID != this.props.cityID) {
-            this.setState({
-                toggleShowReviews: false,
+            this.setState({    toggleShowReviews: false,
                 toggleShowNearbyRestaurants: false,
                 cityID: this.props.cityID,
             });
 
             console.log("THIS HAS RUN");
             this.getCusineDetails();
+            changeCityFlag = true;
         }
         
         let allCuisines = [];
-        console.log("this.state.cuisineList", this.state.cuisineList);
+        // console.log("this.state.cuisineList", this.state.cuisineList);
         if (this.state.cuisineList.length != 0) {
             allCuisines = this.state.cuisineList.map((cuisine, index) => {
                 // console.log(index, cuisine);
                 // console.log(index, cuisine.cuisine.cuisine_id);
                 // console.log("category.categories", category.categories);
-                return <CuisineItem key={index} cuisine={cuisine.cuisine} handleCuisineResultList={this.props.handleCuisineResultList}/>
+                return <CuisineItem key={index} cuisine={cuisine.cuisine} handleCuisineResultList={this.props.handleCuisineResultList} changeCityFlag={changeCityFlag}/>
             });
         }
         else {
             allCuisines = <h3></h3>
         }
+
+        changeCityFlag = false;
 
         return (
             <div>

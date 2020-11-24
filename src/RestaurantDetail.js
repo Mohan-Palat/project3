@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Favorite from './Favorite'
 import RestaurantItem from './RestaurantItem';
 import {Route, Link } from 'react-router-dom';
 import Nav from './Nav';
@@ -23,7 +24,7 @@ class RestaurantDetail extends Component {
 
         getReviewsByRestaurantID(this.props.restaurant.id)
             .then((response) => {
-                console.log('allReviews', response);
+                // console.log('allReviews', response);
                 this.setState({
                     reviewList: response.data.user_reviews,
                 });
@@ -107,25 +108,35 @@ class RestaurantDetail extends Component {
             toggleShowReviews: showReviewsValue
         });
     }
-
+    isInFavorites = (restaurant) => {
+        console.log('restaurant', restaurant)
+        let isFave = false
+        let faves = this.props.favoriteRestaurants;
+        let myKeys = faves.filter(key => key.restaurant.id === restaurant.id);
+        if (myKeys.length > 0){
+          isFave = true
+        }
+        return isFave
+      }
     render() {
-        console.log("this.props.restaurant", this.props.restaurant);
+        console.log("this.props.restaurant", this.props);
 
         if (this.state.name != this.props.name) {
             this.setState({
                 toggleShowReviews: false,
                 toggleShowNearbyRestaurants: false,
                 name: this.props.name,
+                
             });
         }
 
         let allReviews = [];
-        console.log("this.state.reviewList", this.state.reviewList);
+        // console.log("this.state.reviewList", this.state.reviewList);
 
         if ((this.state.reviewList != null) && (this.state.toggleShowReviews)) {
             allReviews = this.state.reviewList.map((review, index) => {
-                console.log(index, "review", review);
-                console.log(index, "review.review.review_text", review.review.review_text);
+                // console.log(index, "review", review);
+                // console.log(index, "review.review.review_text", review.review.review_text);
                 let indextemp = index + 1;
                 return (
                 <div class="card lighten-1">
@@ -163,8 +174,13 @@ class RestaurantDetail extends Component {
             return (<li>- {highlight}</li>)
         });
 
-        let googleString = `https://www.google.com/maps/embed/v1/search?key=AIzaSyCLbDPkMfZuxUVZ3L3-_fxsE6t3g86CaO8&q=${this.props.restaurant.name} allowfullscreen`
+        let priceRange = '';
+        for (let i=0; i<this.props.restaurant.price_range; i++) {
+            priceRange += this.props.restaurant.currency + ' ';
+        }
 
+        let googleString = `https://www.google.com/maps/embed/v1/search?key=AIzaSyCLbDPkMfZuxUVZ3L3-_fxsE6t3g86CaO8&q=${this.props.restaurant.name} allowfullscreen`
+        console.log('all props', this.props)
         return (
             <div>
                 {/* <h1 className="Detail-Header">{this.props.name}</h1> */}
@@ -182,13 +198,17 @@ class RestaurantDetail extends Component {
                                 <div>Rating Text: {this.props.restaurant.user_rating.rating_text}</div>
                             </div>
                             <br/>
-                            <div>{this.props.restaurant.location.address}</div>
-                            {(!this.props.restaurant.location.address.includes(this.props.restaurant.location.city))?<div>{this.props.restaurant.location.city}</div>:<div></div>}
-                            <div>{this.props.restaurant.phone_numbers}</div>
+                            <div class="card-action" class="address">
+                                <div>Address:</div>
+                                <div>{this.props.restaurant.location.address}</div>
+                                {(!this.props.restaurant.location.address.includes(this.props.restaurant.location.city))?<div>{this.props.restaurant.location.city}</div>:<div></div>}
+                                <div>{this.props.restaurant.phone_numbers}</div>
+                            </div>
                             <br/>
                             <div class="card-action" class="cuisines">
-                                <div>Cuisines: {this.props.restaurant.cuisines}</div>
+                                <div>Price Rating: {priceRange}</div>
                                 <div>Average Cost for Two: {this.props.restaurant.currency}{this.props.restaurant.average_cost_for_two}</div>
+                                <div>Cuisines: {this.props.restaurant.cuisines}</div>
                                 <br/>
                             </div>
                             <div class="card-action" class="highlights">
@@ -206,12 +226,14 @@ class RestaurantDetail extends Component {
                             <div class="card-action flex-container">
                                 {(this.props.restaurant.menu_url)?<a class ="black-text" href={this.props.restaurant.menu_url} target="_blank">Restaurant Menu</a>:<h3></h3>}
                                 {(this.props.restaurant.photos_url)?<a class ="black-text" href={this.props.restaurant.photos_url} target="_blank">Photos</a>:<h3></h3>}
+                                {(this.props.restaurant.events_url)?<a class ="black-text" href={this.props.restaurant.events_url} target="_blank">Events</a>:<h3></h3>}
                             </div>
                             <div class="card-action flex-container">
                                 <a class="waves-effect waves-light btn-large" onClick={this.getReviewsToggle}>{(this.state.toggleShowReviews)?"Hide Reviews":"Show Reviews"}</a>
                                 <a class="waves-effect waves-light btn-large" onClick={this.getNearbyRestaurantsToggle}>{(this.state.toggleShowNearbyRestaurants)?"Hide Nearby Restaurants":"Show Nearby Restaurants"}</a>
                                 <a class="waves-effect waves-light btn-large" onClick={this.props.closeRestaurantDetail}>Close</a>
                             </div>
+                            <Favorite onFaveToggle={this.props.onFaveToggle} isFave={this.isInFavorites(this.props.restaurant)} favoriteRestaurants={this.props.favoriteRestaurants} />
                         </div>
 
                         {allReviews}
