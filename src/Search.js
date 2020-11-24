@@ -94,6 +94,7 @@ class Search extends Component {
                                 <a class="waves-effect waves-light btn-large" onClick={this.searchCity}>Search</a>
                                 <a class="waves-effect waves-light btn-large" onClick={this.clearPanel}>Clear</a>
                                 <a class="waves-effect waves-light btn-large" onClick={this.setRandom}>I'm Feeling Lucky</a>
+                                <a class="waves-effect waves-light btn-large" onClick={this.viewMyFavorites}>View My Favorites</a>
                                 </div>
                             </div>
                         </div>
@@ -101,9 +102,10 @@ class Search extends Component {
                 </div>
                 <br></br>
                 <div class="row s24 m12">
-                    <div class="col s24 m12 categories">
-                        <div class="card yellow lighten-1">
+                    <div class="col s24 m12 categories category-checkboxes">
+                        <div class="card lighten-1">
                             <div class="card-content black-text">
+                                <h5>Categories</h5>
                                 {allCategories}
                             </div>
                         </div>

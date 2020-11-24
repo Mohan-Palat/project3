@@ -10,7 +10,7 @@ class Favorite extends Component {
     }
     
     render() {
-        // console.log('fave props', this.props)
+        console.log('fave props', this.props)
         // localStorage.set('myFavoriteRestaurants', this.props.favoriteRestaurants)
         // const isFave = (this.props.isFave) ? 'remove_from_queue' : 'add_to_queue'
         const isFave = (this.props.isFave)
