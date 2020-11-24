@@ -119,7 +119,7 @@ class RestaurantDetail extends Component {
         return isFave
       }
     render() {
-        console.log("this.props.restaurant", this.props);
+        // console.log("this.props.restaurant", this.props);
 
         if (this.state.name != this.props.name) {
             this.setState({
@@ -149,12 +149,12 @@ class RestaurantDetail extends Component {
         }
 
         let allNearbyRestaurants = [];
-        console.log("this.state.nearbyRestaurantList", this.state.nearbyRestaurantList);
+        // console.log("this.state.nearbyRestaurantList", this.state.nearbyRestaurantList);
 
         if ((this.state.nearbyRestaurantList != null) && (this.state.toggleShowNearbyRestaurants)) {
             allNearbyRestaurants = this.state.nearbyRestaurantList.map((nearbyRestaurant, index) => {
-                console.log(index, "nearbyRestaurant", nearbyRestaurant);
-                console.log(index, "nearbyRestaurant.restaurant", nearbyRestaurant.restaurant);
+                // console.log(index, "nearbyRestaurant", nearbyRestaurant);
+                // console.log(index, "nearbyRestaurant.restaurant", nearbyRestaurant.restaurant);
                 let indextemp = index + 1;
                 
                 return (
@@ -162,6 +162,7 @@ class RestaurantDetail extends Component {
                             restaurant={nearbyRestaurant.restaurant} 
                             isFave={this.props.favoriteRestaurants.includes(nearbyRestaurant)}
                             onFaveToggle={() => this.props.onFaveToggle(nearbyRestaurant)}
+                            favoriteRestaurants={this.props.favoriteRestaurants}
                             handleRestaurantSearch={this.props.handleRestaurantSearch}
                     />)
             });
@@ -180,7 +181,7 @@ class RestaurantDetail extends Component {
         }
 
         let googleString = `https://www.google.com/maps/embed/v1/search?key=AIzaSyCLbDPkMfZuxUVZ3L3-_fxsE6t3g86CaO8&q=${this.props.restaurant.name} allowfullscreen`
-        console.log('all props', this.props)
+        // console.log('all props', this.props)
         return (
             <div>
                 {/* <h1 className="Detail-Header">{this.props.name}</h1> */}
