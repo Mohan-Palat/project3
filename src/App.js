@@ -38,16 +38,16 @@ class App extends Component {
     this.handleCitySearchCriteria('viewFavorites', true);
   }
   handleFaveToggle = (restaurant) => {
-    // console.log('favorites', this.state.favoriteRestaurants)
-    // console.log('restaurant', restaurant)
+    console.log('favorites', this.state.favoriteRestaurants)
+    console.log('restaurant', restaurant)
     if (restaurant.hasOwnProperty('cuisines')) {
       let newRestaurant = { 'restaurant': restaurant }
       restaurant = newRestaurant
     }
     let faves = this.state.favoriteRestaurants;
-    // console.log('faves', faves)
+    console.log('faves', faves)
     let myKeys = faves.filter(key => key.restaurant.id === restaurant.restaurant.id);
-    // console.log('mykeys', myKeys)
+    console.log('mykeys', myKeys)
     if (myKeys.length > 0) {
       // console.log('removing restaurant', restaurant.restaurant.name)
       faves = faves.filter(key => key.restaurant.id !== restaurant.restaurant.id);

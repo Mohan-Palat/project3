@@ -17,7 +17,7 @@ class RestaurantList extends Component {
         return isFave
     }
     render() {
-        // console.log("RestaurantList render this.props", this.props);
+        console.log("RestaurantList render this.props", this.props);
         ///////
         // console.log('Updated favorites this.state.favoriteRestaurants',this.state.favoriteRestaurants )
 

@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 
 class Favorite extends Component {
     handleClick = (e) => {
-        // console.log('fave click')
+        console.log('fave click', this.props)
+
         e.stopPropagation()
         this.props.onFaveToggle()
     }

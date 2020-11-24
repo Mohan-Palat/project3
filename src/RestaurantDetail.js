@@ -109,11 +109,13 @@ class RestaurantDetail extends Component {
         });
     }
     isInFavorites = (restaurant) => {
-        console.log('restaurant', restaurant)
+        console.log('in favorites restaurant', restaurant)
+        console.log("this.props.favoriteRestaurants",this.props.favoriteRestaurants)
         let isFave = false
         let faves = this.props.favoriteRestaurants;
         let myKeys = faves.filter(key => key.restaurant.id === restaurant.id);
         if (myKeys.length > 0){
+            console.log('is in favorites')
           isFave = true
         }
         return isFave
@@ -153,15 +155,16 @@ class RestaurantDetail extends Component {
 
         if ((this.state.nearbyRestaurantList != null) && (this.state.toggleShowNearbyRestaurants)) {
             allNearbyRestaurants = this.state.nearbyRestaurantList.map((nearbyRestaurant, index) => {
-                // console.log(index, "nearbyRestaurant", nearbyRestaurant);
-                // console.log(index, "nearbyRestaurant.restaurant", nearbyRestaurant.restaurant);
+                console.log('Details PROPS', this.props)
+                console.log(index, "nearbyRestaurant", nearbyRestaurant);
+                console.log(index, "nearbyRestaurant.restaurant", nearbyRestaurant.restaurant);
                 let indextemp = index + 1;
                 
                 return (
                     <RestaurantItem key={index} 
                             restaurant={nearbyRestaurant.restaurant} 
-                            isFave={this.props.favoriteRestaurants.includes(nearbyRestaurant)}
-                            onFaveToggle={() => this.props.onFaveToggle(nearbyRestaurant)}
+                            isFave={this.isInFavorites(nearbyRestaurant)}
+                            onFaveToggle={this.props.onFaveToggle}
                             favoriteRestaurants={this.props.favoriteRestaurants}
                             handleRestaurantSearch={this.props.handleRestaurantSearch}
                     />)
