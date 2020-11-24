@@ -102,6 +102,7 @@ class RestaurantDetail extends Component {
             toggleShowReviews: showReviewsValue
         });
     }
+    // compare the restaurant to the array of current favorites and toggle the favorite button accordingly
     isInFavorites = (restaurant) => {
         let isFave = false
         let faves = this.props.favoriteRestaurants;

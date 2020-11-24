@@ -5,6 +5,8 @@ class RestaurantList extends Component {
     constructor(props) {
         super(props);
     }
+        
+// compare the restaurant to the array of current favorites and toggle the favorite button accordingly
     isInFavorites = (restaurant) => {
         let isFave = false
         let faves = this.props.favoriteRestaurants;

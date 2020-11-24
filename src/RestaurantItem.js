@@ -1,18 +1,8 @@
-<<<<<<< HEAD
-
-=======
->>>>>>> af8d6c657e02e7f6705ed1d2814f41f4357736a9
 import React, { Component } from 'react';
 import Favorite from './Favorite.js';
 
 
 class RestaurantItem extends Component {
-<<<<<<< HEAD
-    render() {
-        const searchRestaurantDetails = (e) => {
-            e.preventDefault()
-            const restaurantID = this.props.restaurant.id
-=======
     
     render() {         
         
@@ -21,7 +11,6 @@ class RestaurantItem extends Component {
             const restaurantID = this.props.restaurant.id
 
             
->>>>>>> af8d6c657e02e7f6705ed1d2814f41f4357736a9
             this.props.handleRestaurantSearch(this.props.restaurant.id);
         }
         return (
@@ -36,12 +25,6 @@ class RestaurantItem extends Component {
                             <div class="card-action" class="cuisines">
                                 <div>Cuisines: {this.props.restaurant.cuisines}</div>
                             </div>
-<<<<<<< HEAD
-                            <br />
-                            <div class="card-action" class={this.props.restaurant.user_rating.rating_text}>
-                                <div>Rating: {this.props.restaurant.user_rating.aggregate_rating}</div>
-                                <div>{this.props.restaurant.user_rating.rating_text}</div>
-=======
                             {(this.props.restaurant.thumb)?<img border="0" src={this.props.restaurant.thumb} alt="name" className='display-thumb'/>:<img border="0" src='https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png' alt="name" className='display-thumb-unavail'/>}
                             <div class="card-action display-links">
                                 {(this.props.restaurant.menu_url)?<a class="red-text" id='links' href={this.props.restaurant.menu_url} target="_blank">Restaurant Menu</a>:<h3></h3>}
@@ -49,17 +32,8 @@ class RestaurantItem extends Component {
                                 {(this.props.restaurant.events_url)?<a class="red-text" href={this.props.restaurant.events_url} target="_blank">Events</a>:<h3></h3>}
                                 <a class="waves-effect waves-light btn-large" onClick={searchRestaurantDetails}>Details</a>                                
                                 <Favorite onFaveToggle={this.props.onFaveToggle} isFave={this.props.isFave} favoriteRestaurants={this.props.favoriteRestaurants} />
->>>>>>> af8d6c657e02e7f6705ed1d2814f41f4357736a9
                             </div>
                             <br />
-                        </div>
-                        {(this.props.restaurant.thumb) ? <img border="0" src={this.props.restaurant.thumb} alt="name" className='display-thumb' /> : <img border="0" src='https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png' alt="name" className='display-thumb-unavail' />}
-                        <div class="card-action display-links">
-                            {(this.props.restaurant.menu_url) ? <a class="red-text" id='links' href={this.props.restaurant.menu_url} target="_blank">Restaurant Menu</a> : <h3></h3>}
-                            {(this.props.restaurant.photos_url) ? <a class="red-text" href={this.props.restaurant.photos_url} target="_blank">Photos</a> : <h3></h3>}
-                            {(this.props.restaurant.events_url) ? <a class="red-text" href={this.props.restaurant.events_url} target="_blank">Events</a> : <h3></h3>}
-                            <a class="waves-effect waves-light btn-large" onClick={searchRestaurantDetails}>Details</a>
-                            <Favorite onFaveToggle={this.props.onFaveToggle} isFave={this.props.isFave} favoriteRestaurants={this.props.favoriteRestaurants} />
                         </div>
                     </div>
                 </div>

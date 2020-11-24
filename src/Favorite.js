@@ -5,7 +5,7 @@ class Favorite extends Component {
         e.stopPropagation()
         this.props.onFaveToggle()
     }
-
+/// change the appearance of the favorite button when it has been clicked
     render() {
         const isFave = (this.props.isFave)
         if (isFave) {

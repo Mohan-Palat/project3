@@ -26,10 +26,12 @@ class App extends Component {
 
   }
 
+// manipulate the restaurant list to display the list of favorites
   viewMyFavorites = (event) => {
     event.preventDefault()
     this.handleCitySearchCriteria('viewFavorites', true);
   }
+  /// either turn on the favorite toggle or turn it off depending on whether or not the restaurant is already a favorite
   handleFaveToggle = (restaurant) => {
     console.log('favorites', this.state.favoriteRestaurants)
     console.log('restaurant', restaurant)
@@ -49,7 +51,7 @@ class App extends Component {
     })
   }
 
-
+/// return a random restaurant from the restaurant list
   randRestaurant = (restrauntArr) => {
     let randRest = restrauntArr[Math.floor(Math.random() * restrauntArr.length)].restaurant
     return randRest
@@ -225,6 +227,7 @@ class App extends Component {
     });
   }
 
+  // determine if the restaurant is in the array of current Favorites so the favorites button can be toggled "on" if it is
   searchForFave(restaurantBody) {
     var isFave = false;
     if (!restaurantBody.hasOwnProperty('cuisines')) {
