@@ -41,7 +41,7 @@ const getRestaurantsByCityIDAndCategories = (cityID, categoryList) => {
       // Alter defaults after instance has been created
       instance.defaults.headers.common['user-key'] = `${process.env.REACT_APP_ZOMATO_API_KEY}`;
 
-    return instance.get(`${process.env.REACT_APP_ZOMATO_BASE_URL}/search?entity_id=${cityID}&entity_type=city&category=${categoryList}`);
+    return instance.get(`${process.env.REACT_APP_ZOMATO_BASE_URL}/search?entity_id=${cityID}&entity_type=city&category=${categoryList}&order=desc`);
 }
 
 const getCategories = () => {
@@ -99,5 +99,17 @@ const getRestaurantsByCityIDAndCuisines = (cityID, cuisineList) => {
     return instance.get(`${process.env.REACT_APP_ZOMATO_BASE_URL}/search?entity_id=${cityID}&entity_type=city&cuisines=${cuisineList}&order=desc`);
 }
 
+const getRestaurantsByCityIDAndCategoriesAndCuisines = (cityID, categoryList, cuisineList) => {
+
+  const instance = axios.create({
+      baseURL: `${process.env.REACT_APP_ZOMATO_BASE_URL}`
+    });
+    // Alter defaults after instance has been created
+    instance.defaults.headers.common['user-key'] = `${process.env.REACT_APP_ZOMATO_API_KEY}`;
+
+  return instance.get(`${process.env.REACT_APP_ZOMATO_BASE_URL}/search?entity_id=${cityID}&entity_type=city&category=${categoryList}&cuisines=${cuisineList}&order=desc`);
+}
+
 export {getCityID, getRestaurantsByCityID, getCategories, getRestaurantsByCityIDAndCategories, 
-    getRestaurantsDetails, getReviewsByRestaurantID, getGeoCodeByLatLong, getCuisines, getRestaurantsByCityIDAndCuisines};
+    getRestaurantsDetails, getReviewsByRestaurantID, getGeoCodeByLatLong, getCuisines, 
+    getRestaurantsByCityIDAndCuisines, getRestaurantsByCityIDAndCategoriesAndCuisines};

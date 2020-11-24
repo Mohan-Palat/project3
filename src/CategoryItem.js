@@ -5,7 +5,7 @@ export default function CategoryItem (props) {
     return (
             <>
                 <label className="category-label" htmlFor={props.category.name} for={props.category.id}>
-                    <input type="checkbox" onClick={props.handleCategoryResultList} name={props.category.name} id={props.category.id} value={props.category.id} />
+                    <input type="radio" onClick={props.handleCategoryResultList} name="group1" id={props.category.id} value={props.category.id} />
                     <span>{props.category.name}</span>
                 </label>
             </>

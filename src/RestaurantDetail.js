@@ -174,6 +174,11 @@ class RestaurantDetail extends Component {
             return (<li>- {highlight}</li>)
         });
 
+        let priceRange = '';
+        for (let i=0; i<this.props.restaurant.price_range; i++) {
+            priceRange += this.props.restaurant.currency + ' ';
+        }
+
         let googleString = `https://www.google.com/maps/embed/v1/search?key=AIzaSyCLbDPkMfZuxUVZ3L3-_fxsE6t3g86CaO8&q=${this.props.restaurant.name} allowfullscreen`
         console.log('all props', this.props)
         return (
@@ -193,13 +198,17 @@ class RestaurantDetail extends Component {
                                 <div>Rating Text: {this.props.restaurant.user_rating.rating_text}</div>
                             </div>
                             <br/>
-                            <div>{this.props.restaurant.location.address}</div>
-                            {(!this.props.restaurant.location.address.includes(this.props.restaurant.location.city))?<div>{this.props.restaurant.location.city}</div>:<div></div>}
-                            <div>{this.props.restaurant.phone_numbers}</div>
+                            <div class="card-action" class="address">
+                                <div>Address:</div>
+                                <div>{this.props.restaurant.location.address}</div>
+                                {(!this.props.restaurant.location.address.includes(this.props.restaurant.location.city))?<div>{this.props.restaurant.location.city}</div>:<div></div>}
+                                <div>{this.props.restaurant.phone_numbers}</div>
+                            </div>
                             <br/>
                             <div class="card-action" class="cuisines">
-                                <div>Cuisines: {this.props.restaurant.cuisines}</div>
+                                <div>Price Rating: {priceRange}</div>
                                 <div>Average Cost for Two: {this.props.restaurant.currency}{this.props.restaurant.average_cost_for_two}</div>
+                                <div>Cuisines: {this.props.restaurant.cuisines}</div>
                                 <br/>
                             </div>
                             <div class="card-action" class="highlights">
@@ -217,6 +226,7 @@ class RestaurantDetail extends Component {
                             <div class="card-action">
                                 {(this.props.restaurant.menu_url)?<a class ="black-text" href={this.props.restaurant.menu_url} target="_blank">Restaurant Menu</a>:<h3></h3>}
                                 {(this.props.restaurant.photos_url)?<a class ="black-text" href={this.props.restaurant.photos_url} target="_blank">Photos</a>:<h3></h3>}
+                                {(this.props.restaurant.events_url)?<a class ="black-text" href={this.props.restaurant.events_url} target="_blank">Events</a>:<h3></h3>}
                             </div>
                             <div class="card-action">
                                 <a class="waves-effect waves-light btn-large" onClick={this.getReviewsToggle}>{(this.state.toggleShowReviews)?"Hide Reviews":"Show Reviews"}</a>

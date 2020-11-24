@@ -45,16 +45,17 @@ class Cuisine extends Component {
     
     render() {
         console.log("Cuisine render");
+        let changeCityFlag = false;
         
         if (this.state.cityID != this.props.cityID) {
-            this.setState({
-                toggleShowReviews: false,
+            this.setState({    toggleShowReviews: false,
                 toggleShowNearbyRestaurants: false,
                 cityID: this.props.cityID,
             });
 
             console.log("THIS HAS RUN");
             this.getCusineDetails();
+            changeCityFlag = true;
         }
         
         let allCuisines = [];
@@ -64,12 +65,14 @@ class Cuisine extends Component {
                 // console.log(index, cuisine);
                 // console.log(index, cuisine.cuisine.cuisine_id);
                 // console.log("category.categories", category.categories);
-                return <CuisineItem key={index} cuisine={cuisine.cuisine} handleCuisineResultList={this.props.handleCuisineResultList}/>
+                return <CuisineItem key={index} cuisine={cuisine.cuisine} handleCuisineResultList={this.props.handleCuisineResultList} changeCityFlag={changeCityFlag}/>
             });
         }
         else {
             allCuisines = <h3></h3>
         }
+
+        changeCityFlag = false;
 
         return (
             <div>
