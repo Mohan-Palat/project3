@@ -6,6 +6,8 @@ class RestaurantItem extends Component {
     
     render() {         
         
+        // This function uses the function passed from RestaurantDetail or RestaurantList
+        // and searches on the restaurant ID.
         const searchRestaurantDetails = (e) =>{
             e.preventDefault()
             const restaurantID = this.props.restaurant.id

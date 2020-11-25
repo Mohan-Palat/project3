@@ -43,6 +43,7 @@ class RestaurantDetail extends Component {
             });
     };
 
+    // Function call to toggle the view of the Reviews Page
     getReviewsToggle = () => {
         let showReviewsValue;
         let showNearbyRestaurants;
@@ -61,6 +62,7 @@ class RestaurantDetail extends Component {
         }
 
         // If the Show Reviews is turned on, get the reviews for the Restaurant by Restaurant ID
+        // Invoke the getReviewsByRestaurantID method and store the results in this.state.reviewsList
         if (showReviewsValue) {
             getReviewsByRestaurantID(this.props.restaurant.id)
             .then((response) => {
@@ -79,10 +81,13 @@ class RestaurantDetail extends Component {
         });
     }
 
+    // Function call to toggle the view of the Nearby Restaurants Page
     getNearbyRestaurantsToggle = () => {
         let showReviewsValue;
         let showNearbyRestaurants;
 
+        // If the Show NearbyRestaurants page is on and it is clicked, turn off the Nearby Restaurants View
+        // Keep the Reviews View in its current state
         if (this.state.toggleShowNearbyRestaurants) {
             showNearbyRestaurants = false;
             showReviewsValue = this.state.toggleShowReviews
@@ -92,6 +97,9 @@ class RestaurantDetail extends Component {
             showReviewsValue = false;
         }
 
+        // If the Nearby Restaurants Reviews is turned on, get the Nearby Restaurants for the Restaurant by Restaurant ID
+        // Invoke the getGeoCodeByLatLong to get a list of Nearby Restaurants method 
+        // and store the results in this.state.nearbyRestaurantList
         if (showNearbyRestaurants) {
             getGeoCodeByLatLong(this.props.restaurant.location.latitude, this.props.restaurant.location.longitude)
             .then((response) => {
@@ -109,6 +117,7 @@ class RestaurantDetail extends Component {
             toggleShowReviews: showReviewsValue
         });
     }
+
     isInFavorites = (restaurant) => {
         let isFave = false
         let faves = this.props.favoriteRestaurants;
@@ -118,17 +127,21 @@ class RestaurantDetail extends Component {
         }
         return isFave
       }
+
     render() {
 
+        // This method checks to see if the name of the city has changed.
+        // If the name of the city has changed, the views are turned off.
         if (this.state.name != this.props.name) {
             this.setState({
                 toggleShowReviews: false,
                 toggleShowNearbyRestaurants: false,
-                name: this.props.name,
-                
+                name: this.props.name,               
             });
         }
 
+        // This code builds a map of the Review Components if the list is not null
+        // This code shows the Review Components if the Show Reviews Toggle is on
         let allReviews = [];
 
         if ((this.state.reviewList != null) && (this.state.toggleShowReviews)) {
@@ -144,6 +157,8 @@ class RestaurantDetail extends Component {
             allReviews = <h3></h3>
         }
 
+        // This code builds a map of the Nearby Restaurants Components if the list is not null
+        // This code shows the Nearby Restaurants Components if the Show Nearby Restaurants Toggle is on
         let allNearbyRestaurants = [];
 
         if ((this.state.nearbyRestaurantList != null) && (this.state.toggleShowNearbyRestaurants)) {
@@ -163,15 +178,20 @@ class RestaurantDetail extends Component {
             allNearbyRestaurants = <h3></h3>
         }
 
+        // The list of highlights are constructed from the restaurants.highlights field
+        // on the restaurant object.
         const allHighlights = this.props.restaurant.highlights.map((highlight, index) => {        
             return (<li>- {highlight}</li>)
         });
 
+        // The price range string of currency is constructed from the price_range field
+        // on the restaurant object.  (i.e. $ $ $ $)
         let priceRange = '';
         for (let i=0; i<this.props.restaurant.price_range; i++) {
             priceRange += this.props.restaurant.currency + ' ';
         }
 
+        // This string constructs the Google query for Google Maps with the restaurant name and city location
         let restaurantName = this.props.restaurant.name.replace(/&/,'');
         let queryString = restaurantName + ' ' + (this.props.restaurant.location.city);
         let googleString = `https://www.google.com/maps/embed/v1/search?key=AIzaSyCLbDPkMfZuxUVZ3L3-_fxsE6t3g86CaO8&q=${queryString} allowfullscreen`

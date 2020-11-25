@@ -13,6 +13,7 @@ class Cuisine extends Component {
         }
       }
     
+    // The cuisine details gets a list of the cuisines based on the City ID.
     getCusineDetails = () => {
 
         getCuisines(this.props.cityID)
@@ -26,6 +27,8 @@ class Cuisine extends Component {
             });
     }
     
+    // The cuisine details gets a list of the cuisines based on the City ID.
+    // This is run when the component is first rendered.
     componentDidMount() {
 
         getCuisines(this.props.cityID)
@@ -40,6 +43,9 @@ class Cuisine extends Component {
     };
     
     render() {
+
+        // This code checks to see if the city changed.  If the city changed,
+        // then the cuisines need to be retrieved for the new city.
         let changeCityFlag = false;
         
         if (this.state.cityID != this.props.cityID) {
@@ -51,6 +57,8 @@ class Cuisine extends Component {
             changeCityFlag = true;
         }
         
+        // If the cuisine list is not empty, then build each Cuisine Item (i.e. checkbox).
+        // If the city is new, then the checkboxes are all set to an "unchecked" state.
         let allCuisines = [];
 
         if (this.state.cuisineList.length != 0) {
@@ -63,6 +71,7 @@ class Cuisine extends Component {
             allCuisines = <h3></h3>
         }
 
+        // Set the flag back to false after the Cuisine Items are all unchecked.
         changeCityFlag = false;
 
         return (

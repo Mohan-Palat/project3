@@ -10,22 +10,28 @@ class Search extends Component {
         }
       }
 
+    // The Search Value gets updated as the user types in the field.
     onTextBoxChange = (event) => {
         this.setState({
             searchValue: event.target.value,
         });
     }
+ 
     setRandom = (event) => {
         event.preventDefault();
 
         this.props.handleCitySearchCriteria(this.state.searchValue, true);
     }
+
+    // This function is passed from App.js and is used to search for a city
+    // based on the value in the state.searchValue field (i.e. entered by user)
     searchCity = (event) => {
         event.preventDefault();
 
         this.props.handleCitySearchCriteria(this.state.searchValue, false);
     }
 
+    // The clear panel button sets the value of the search value to null.
     clearPanel = (event) => {
         event.preventDefault();
 
@@ -40,7 +46,6 @@ class Search extends Component {
         if (this.props.currentCity != '') {
             this.state.searchValue = this.props.currentCity
         }
-
 
         return (
             <div>

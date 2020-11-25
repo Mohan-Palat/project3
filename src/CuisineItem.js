@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 class CuisineItem extends Component {
     render () {
 
+        // If the city has been changed, then all the checkboxes are set to an "unchecked" state.
         const id = "cuisine" + this.props.cuisine.cuisine_id;
         const name = "cuisine" + this.props.cuisine.cuisine_name;
 

@@ -1,6 +1,10 @@
 import React from 'react';
 
 export default function ReviewItem (props) { 
+    
+    // The exclamation point is removed from the rating text if it exists.
+    // Any spaces are removed from the rating text.
+    // This rating text value, rating, is used to correspond to the color in the CSS file.
     const rating = props.review.review.rating_text.replace(/!/,'').replace(/ /,'');
     return (
             <div class={rating}>

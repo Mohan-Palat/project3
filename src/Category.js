@@ -14,6 +14,9 @@ class Category extends Component {
 
     componentDidMount() {
 
+        // This function gets a list of the categories.
+        // This function adds the selection of "None" and sets the ID to 0 (i.e. zero).
+        // The "None" option is added to the beginning of the categoryList array.
         getCategories()
             .then((response) => {
                 let categoryList = response.data.categories;

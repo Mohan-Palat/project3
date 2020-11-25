@@ -5,6 +5,7 @@ class RestaurantList extends Component {
     constructor(props) {
         super(props);
       }
+
       isInFavorites = (restaurant) => {
         let isFave = false
         let faves = this.props.favoriteRestaurants;
@@ -14,6 +15,7 @@ class RestaurantList extends Component {
         }
         return isFave
       }
+      
     render() {
         const allRestaurants = this.props.restaurantList.map((entry, index) => {
                 return <RestaurantItem  key={index} 
