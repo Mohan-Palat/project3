@@ -85,8 +85,6 @@ class App extends Component {
       restaurantName: results.data.name,
     });
 
-    console.log("handleRestaurantSearch results", results);
-
   }
 
   handleCitySearchCriteria = async (searchValue, isRandom) => {
@@ -206,14 +204,14 @@ class App extends Component {
 
   componentDidMount() {
 
-
+    //this is where we grab the users locations if permission is given 
     let currentComponent = this;
 
     navigator.geolocation.getCurrentPosition(function (position) {
-
+      //users longitute and latitude coordinates 
       let userLat = position.coords.latitude
       let userLong = position.coords.longitude
-
+      //api uses these cooridnates to retrieve city name
       getGeoCodeByLatLong(userLat, userLong)
         .then((response) => {
           const userLocation = response.data.location.city_id;

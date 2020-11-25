@@ -36,7 +36,7 @@ class Search extends Component {
     }
 
     render() {
-
+        //update search box to user's location when they first get to page
         if (this.props.currentCity != '') {
             this.state.searchValue = this.props.currentCity
         }
