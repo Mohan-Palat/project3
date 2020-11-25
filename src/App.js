@@ -207,11 +207,7 @@ class App extends Component {
     });
   }
 
-<<<<<<< HEAD
   // If the user closes the Restaurant Detail card, then set the restaurant body to null.
-=======
-// close out of the restaurant detail page and return back to the restaurant list
->>>>>>> 9afaa40b65848be0b28dc74d536b47f00b2fb597
   closeRestaurantDetail = (event) => {
     this.setState({
       restaurantBody: null,
@@ -220,10 +216,7 @@ class App extends Component {
 
   componentDidMount() {
 
-<<<<<<< HEAD
-=======
     //this is where we grab the users locations if permission is given 
->>>>>>> 9afaa40b65848be0b28dc74d536b47f00b2fb597
     let currentComponent = this;
 
     navigator.geolocation.getCurrentPosition(function (position) {
@@ -264,10 +257,7 @@ class App extends Component {
   }
 
   render() {
-<<<<<<< HEAD
     // If the City ID is NOT empty, then build a list of the restaurants.
-=======
->>>>>>> 9afaa40b65848be0b28dc74d536b47f00b2fb597
     let restaurantComponent = '';
     if (this.state.cityID !== '') {
       if (this.state.isRandom) {
