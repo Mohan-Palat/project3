@@ -15,20 +15,18 @@ class Search extends Component {
             searchValue: event.target.value,
         });
     }
+    // event for the 'i'm feeling lucky' button, sets isRandom flag to true
     setRandom = (event) => {
         event.preventDefault();
-
         this.props.handleCitySearchCriteria(this.state.searchValue, true);
     }
     searchCity = (event) => {
         event.preventDefault();
-
         this.props.handleCitySearchCriteria(this.state.searchValue, false);
     }
 
     clearPanel = (event) => {
         event.preventDefault();
-
         this.props.handleCitySearchCriteria('');
         this.setState({
             searchValue: '',
@@ -40,8 +38,6 @@ class Search extends Component {
         if (this.props.currentCity != '') {
             this.state.searchValue = this.props.currentCity
         }
-
-
         return (
             <div>
                 <div class="row search">
