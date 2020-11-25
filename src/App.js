@@ -123,14 +123,14 @@ class App extends Component {
     }
 
     // If the cusine list is empty, we need to use the getRestaurantsByCityIDAndCategories() function.
-    if (Object.keys(tempObjectCuisineResultsList) === {}) {
+    if (Object.keys(tempObjectCuisineResultsList) == {}) {
       let categoryKeyList = tempObjectCategoryResultsValue;
 
       const restaurantResultsOutput = await getRestaurantsByCityIDAndCategories(this.state.cityID, categoryKeyList);
       restaurantResults = restaurantResultsOutput.data.restaurants;
     }
     // If the cusine list is NOT empty, we need to use the getRestaurantsByCityIDAndCategoriesAndCuisines() function.
-    else if (Object.keys(tempObjectCuisineResultsList) !== {}) {
+    else if (Object.keys(tempObjectCuisineResultsList) != {}) {
       let cuisineKeyList = Object.keys(tempObjectCuisineResultsList).join();
 
       let categoryKeyList = tempObjectCategoryResultsValue;
@@ -183,7 +183,7 @@ class App extends Component {
 
     // If the cuisine list is NOT empty and the category is set to blank (i.e. Zero or "None"),
     // then use the getRestaurantsByCityIDAndCuisines function to get a list of matching restaurants.
-    if ((Object.keys(tempObjectCuisineResultsList) !== {}) && (Object.keys(tempObjectCategoryResultsValue) === '')) {
+    if ((Object.keys(tempObjectCuisineResultsList) != {}) && (Object.keys(tempObjectCategoryResultsValue) == '')) {
       let cuisineKeyList = Object.keys(tempObjectCuisineResultsList).join();
 
       const restaurantResultsOutput = await getRestaurantsByCityIDAndCuisines(this.state.cityID, cuisineKeyList);
@@ -191,7 +191,7 @@ class App extends Component {
     }
     // If the cuisine list is NOT empty and the category is NOT set to blank (i.e. Zero or "None"),
     // then use the getRestaurantsByCityIDAndCategoriesAndCuisines function to get a list of matching restaurants.
-    else if ((Object.keys(tempObjectCuisineResultsList) !== {}) && (tempObjectCategoryResultsValue !== '')) {
+    else if ((Object.keys(tempObjectCuisineResultsList) != {}) && (tempObjectCategoryResultsValue != '')) {
       let cuisineKeyList = Object.keys(tempObjectCuisineResultsList).join();
 
       let categoryKeyList = tempObjectCategoryResultsValue;
