@@ -55,6 +55,7 @@ class App extends Component {
     return randRest
   }
 
+  // use api to get back detailed information about a restaurant using the restrauntID
   handleRestaurantSearch = async (restaurantID) => {
 
     const results = await getRestaurantsDetails(restaurantID);
@@ -65,7 +66,8 @@ class App extends Component {
       restaurantName: results.data.name,
     });
   }
-
+/// use api to search cityID using the keyed in value for the city, 
+/// then search for the restraunts using the cityID
   handleCitySearchCriteria = async (searchValue, isRandom) => {
     let restaurantResults = [];
     let cityID = '';
@@ -170,7 +172,7 @@ class App extends Component {
     });
   }
 
-
+// close out of the restaurant detail page and return back to the restaurant list
   closeRestaurantDetail = (event) => {
     this.setState({
       restaurantBody: null,
@@ -219,7 +221,6 @@ class App extends Component {
   }
 
   render() {
-
     let restaurantComponent = '';
     if (this.state.cityID !== '') {
       if (this.state.isRandom) {
