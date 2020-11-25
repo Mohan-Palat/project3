@@ -1,5 +1,11 @@
 # Project 3
 
+## Easy Pickin's
+
+https://easy-pickins-project3.herokuapp.com/
+
+A website that you can use to find a restaurant near you. The website gives you the information you need to make the best deicision on where to eat. You can filter on cuisines and atmosphere. There is also a feature to get you a random restaurant in the area to make choosing easy! 
+
 # User Stories
 
 ## MVP
@@ -17,13 +23,18 @@
 
 ## Stretch Goals
 
-* As a user, I should be able to select my city from a validated drop down 
 * As a user, I should be able to connect to GoogleMaps to get directions to a restaurant
-* As a user, I should be presented with any available collections that are available for the city I have searched for
-* As a user, I should be able to reload and not lose my favorites 
 * As a user, I should experience portfolio-quality styling
 * As a user, my location should be used to begin giving reccommendations 
-* As a user, I should be able to connect through Uber for a ride share 
+
+## Technologies Used 
+
+* Zomato API https://developers.zomato.com/api
+* Google Maps API https://developers.google.com/maps/documentation
+* React
+* Axios
+* Materialize 
+* User Coordinates 
 
 # Getting Started with Create React App
 
