@@ -26,27 +26,22 @@ class App extends Component {
 
   }
 
+// manipulate the restaurant list to display the list of favorites
   viewMyFavorites = (event) => {
     event.preventDefault()
     this.handleCitySearchCriteria('viewFavorites', true);
   }
-
+  /// either turn on the favorite toggle or turn it off depending on whether or not the restaurant is already a favorite
   handleFaveToggle = (restaurant) => {
-    console.log('favorites', this.state.favoriteRestaurants)
-    console.log('restaurant', restaurant)
     if (restaurant.hasOwnProperty('cuisines')) {
       let newRestaurant = { 'restaurant': restaurant }
       restaurant = newRestaurant
     }
     let faves = this.state.favoriteRestaurants;
-    console.log('faves', faves)
     let myKeys = faves.filter(key => key.restaurant.id === restaurant.restaurant.id);
-    console.log('mykeys', myKeys)
     if (myKeys.length > 0) {
-      console.log('removing restaurant', restaurant.restaurant.name)
       faves = faves.filter(key => key.restaurant.id !== restaurant.restaurant.id);
     } else {
-      console.log('adding restaurant', restaurant.restaurant.name)
       faves.push(restaurant);
     }
     this.setState({
@@ -54,12 +49,13 @@ class App extends Component {
     })
   }
 
-
+/// return a random restaurant from the restaurant list
   randRestaurant = (restrauntArr) => {
     let randRest = restrauntArr[Math.floor(Math.random() * restrauntArr.length)].restaurant
     return randRest
   }
 
+  // use api to get back detailed information about a restaurant using the restrauntID
   handleRestaurantSearch = async (restaurantID) => {
 
     const results = await getRestaurantsDetails(restaurantID);
@@ -70,18 +66,14 @@ class App extends Component {
       restaurantName: results.data.name,
     });
 
-    console.log("handleRestaurantSearch results", results);
-
   }
-
+/// use api to search cityID using the keyed in value for the city, 
+/// then search for the restraunts using the cityID
   handleCitySearchCriteria = async (searchValue, isRandom) => {
-    console.log('Search value in App.js', searchValue);
-
     let restaurantResults = [];
     let cityID = '';
     let cityName = '';
     if (searchValue === 'viewFavorites') {
-      console.log('state in handlecitySearchcriteria', this.state)
       restaurantResults = this.state.favoriteRestaurants;
       cityID = 1;
       cityName = 'My Favorites';
@@ -100,9 +92,9 @@ class App extends Component {
       cityID: cityID,
       cityName: cityName,
       restaurantList: restaurantResults,
-      isRandom: isRandom,
       currentCity: '',
       cuisineResultList: {},
+      isRandom: isRandom,
     });
   }
 
@@ -215,7 +207,11 @@ class App extends Component {
     });
   }
 
+<<<<<<< HEAD
   // If the user closes the Restaurant Detail card, then set the restaurant body to null.
+=======
+// close out of the restaurant detail page and return back to the restaurant list
+>>>>>>> 9afaa40b65848be0b28dc74d536b47f00b2fb597
   closeRestaurantDetail = (event) => {
     this.setState({
       restaurantBody: null,
@@ -224,13 +220,17 @@ class App extends Component {
 
   componentDidMount() {
 
+<<<<<<< HEAD
+=======
+    //this is where we grab the users locations if permission is given 
+>>>>>>> 9afaa40b65848be0b28dc74d536b47f00b2fb597
     let currentComponent = this;
 
     navigator.geolocation.getCurrentPosition(function (position) {
-
+      //users longitute and latitude coordinates 
       let userLat = position.coords.latitude
       let userLong = position.coords.longitude
-
+      //api uses these cooridnates to retrieve city name
       getGeoCodeByLatLong(userLat, userLong)
         .then((response) => {
           const userLocation = response.data.location.city_id;
@@ -246,6 +246,7 @@ class App extends Component {
     });
   }
 
+  // determine if the restaurant is in the array of current Favorites so the favorites button can be toggled "on" if it is
   searchForFave(restaurantBody) {
     var isFave = false;
     if (!restaurantBody.hasOwnProperty('cuisines')) {
@@ -263,7 +264,10 @@ class App extends Component {
   }
 
   render() {
+<<<<<<< HEAD
     // If the City ID is NOT empty, then build a list of the restaurants.
+=======
+>>>>>>> 9afaa40b65848be0b28dc74d536b47f00b2fb597
     let restaurantComponent = '';
     if (this.state.cityID !== '') {
       if (this.state.isRandom) {
@@ -273,7 +277,6 @@ class App extends Component {
           cityName={this.state.cityName}
           favoriteRestaurants={this.state.favoriteRestaurants}
           onFaveToggle={() => this.handleFaveToggle(randRest)}
-          isFave={this.searchForFave(randRest)}
         />
       } else {
         restaurantComponent = <RestaurantList restaurantList={this.state.restaurantList}

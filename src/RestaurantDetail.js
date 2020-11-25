@@ -18,7 +18,7 @@ class RestaurantDetail extends Component {
     }
 
     componentDidMount() {
-        console.log("RestaurantDetail.js componentDidMount executed");
+        // console.log("RestaurantDetail.js componentDidMount executed");
 
         // Get reviews by the Restaurant ID
         getReviewsByRestaurantID(this.props.restaurant.id)
@@ -117,12 +117,17 @@ class RestaurantDetail extends Component {
             toggleShowReviews: showReviewsValue
         });
     }
+<<<<<<< HEAD
 
+=======
+    // compare the restaurant to the array of current favorites and toggle the favorite button accordingly
+>>>>>>> 9afaa40b65848be0b28dc74d536b47f00b2fb597
     isInFavorites = (restaurant) => {
         let isFave = false
         let faves = this.props.favoriteRestaurants;
         let myKeys = faves.filter(key => key.restaurant.id === restaurant.id);
         if (myKeys.length > 0){
+            console.log('is in favorites')
           isFave = true
         }
         return isFave
@@ -168,8 +173,9 @@ class RestaurantDetail extends Component {
                 return (
                     <RestaurantItem key={index} 
                             restaurant={nearbyRestaurant.restaurant} 
-                            isFave={this.props.favoriteRestaurants.includes(nearbyRestaurant)}
-                            onFaveToggle={() => this.props.onFaveToggle(nearbyRestaurant)}
+                            isFave={this.isInFavorites(nearbyRestaurant)}
+                            onFaveToggle={this.props.onFaveToggle}
+                            favoriteRestaurants={this.props.favoriteRestaurants}
                             handleRestaurantSearch={this.props.handleRestaurantSearch}
                     />)
             });

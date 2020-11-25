@@ -16,10 +16,13 @@ class Search extends Component {
             searchValue: event.target.value,
         });
     }
+<<<<<<< HEAD
  
+=======
+    // event for the 'i'm feeling lucky' button, sets isRandom flag to true
+>>>>>>> 9afaa40b65848be0b28dc74d536b47f00b2fb597
     setRandom = (event) => {
         event.preventDefault();
-
         this.props.handleCitySearchCriteria(this.state.searchValue, true);
     }
 
@@ -27,14 +30,12 @@ class Search extends Component {
     // based on the value in the state.searchValue field (i.e. entered by user)
     searchCity = (event) => {
         event.preventDefault();
-
         this.props.handleCitySearchCriteria(this.state.searchValue, false);
     }
 
     // The clear panel button sets the value of the search value to null.
     clearPanel = (event) => {
         event.preventDefault();
-
         this.props.handleCitySearchCriteria('');
         this.setState({
             searchValue: '',
@@ -42,11 +43,14 @@ class Search extends Component {
     }
 
     render() {
-
+        //update search box to user's location when they first get to page
         if (this.props.currentCity != '') {
             this.state.searchValue = this.props.currentCity
         }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 9afaa40b65848be0b28dc74d536b47f00b2fb597
         return (
             <div>
                 <div class="row search">
